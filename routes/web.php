@@ -20,6 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/translate', 'TranslateController@show')->name('translate');
+Route::get('/translate', 'TranslateController@show')->name('translate.show');
+Route::post('/translate/add', 'TranslateController@add')->name('translate.add');
 
 

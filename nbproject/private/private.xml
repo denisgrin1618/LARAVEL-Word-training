@@ -2,6 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/home/denis/Projects/LARAVEL-Word-Training/database/migrations/2020_03_10_142436_create_words_table.php</file>
+            <file>file:/home/denis/Projects/LARAVEL-Word-Training/database/migrations/2020_03_10_151427_create_translates_table.php</file>
+            <file>file:/home/denis/Projects/LARAVEL-Word-Training/app/Word.php</file>
+            <file>file:/home/denis/Projects/LARAVEL-Word-Training/app/User.php</file>
+            <file>file:/home/denis/Projects/LARAVEL-Word-Training/app/Http/Controllers/TranslateController.php</file>
+            <file>file:/home/denis/Projects/LARAVEL-Word-Training/resources/views/translate.blade.php</file>
+            <file>file:/home/denis/Projects/LARAVEL-Word-Training/app/Language.php</file>
+            <file>file:/home/denis/Projects/LARAVEL-Word-Training/routes/web.php</file>
+        </group>
     </open-files>
 </project-private>
