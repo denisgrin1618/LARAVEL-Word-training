@@ -179,9 +179,6 @@
 			
 		};
 		
-		
-		
-		
 		// + Denis
 		$.fn.ResizeSecondaryElement = function(dest) {
 			var resizeInt = null;
@@ -214,7 +211,6 @@
 			});
 
 		};
-
 		// - Denis
 		
 
