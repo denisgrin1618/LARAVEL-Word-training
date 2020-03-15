@@ -15,7 +15,7 @@ class CreateTranslatesTable extends Migration
     {
         Schema::create('translates', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            //$table->string('name');
             //$table->foreignId('word_id')->constrained()->onDelete('cascade');
             
             $table->unsignedBigInteger('word1_id');

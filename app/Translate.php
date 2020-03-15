@@ -6,8 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Translate extends Model
 {
-     public function show()
+    public function word1()
     {
-        return view('translate');
+        return $this->hasOne('App\Word', 'id', 'word1_id');
+    }
+    
+    public function word2()
+    {
+        return $this->hasOne('App\Word', 'id', 'word2_id');
     }
 }

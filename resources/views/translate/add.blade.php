@@ -13,56 +13,57 @@
 
     <main role="main" class="container" >
 
-        <div class="row justify-content-md-center">
 
-            <form action="{{route('translate.add')}}" method="POST" >
-                @csrf
+        <form action="{{route('translate.add')}}" method="POST" >
+            @csrf
+
+            <div class="row justify-content-md-center">
 
                 <table >
                     <tr>
                         <td>
                             <div class="form-group float-left" id="boxLanguageWord1">
-                                <select class="form-control" id="languageWord1">
-                                    <option>ru</option>
-                                    <option>en</option>
+                                <select class="form-control" id="languageWord1" name="languageWord1" >
+
+                                    @foreach ($languages as $language)
+                                    <option>{{ $language->name }}</option>
+                                    @endforeach
+
                                 </select>
                             </div>
                         </td>
                         <td>
                             <div class="form-group float-left" id="boxLanguageWord2">
-                                <select class="form-control" id="languageWord2">
-                                    <option>ru</option>
-                                    <option>en</option>
+                                <select class="form-control" id="languageWord2" name="languageWord2">
+                                    @foreach ($languages as $language)
+                                    <option>{{ $language->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <textarea class="form-control" aria-label="With textarea" id="word1" > перевод слова </textarea>
+                            <textarea class="form-control" aria-label="With textarea" id="word1" name="word1"> перевод слова </textarea>
                         </td>
                         <td>
-                            <textarea class="form-control" aria-label="With textarea" id="word2" > перевод слова </textarea>
+                            <textarea class="form-control" aria-label="With textarea" id="word2" name="word2"> перевод слова </textarea>
                         </td>
                     </tr>
 
                 </table>
 
-            </form>
+            </div>
 
-        </div>
+            <div class="row justify-content-md-center">
+                <div class="col-md-1 center-block">
+                    <button id="singlebutton" name="singlebutton" class="btn btn-success center-block">
+                        Finish
+                    </button>
+                </div>  
+            </div>
 
-
-
-        <div class="row justify-content-md-center">
-            <div class="col-md-1 center-block">
-                <button id="singlebutton" name="singlebutton" class="btn btn-success center-block">
-                    Finish
-                </button>
-            </div>  
-        </div>
-
-
+        </form>
 
     </main>
 

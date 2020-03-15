@@ -12,5 +12,6 @@ class Word extends Model
     {
         return $this->belongsTo('App\Language');
     }
+    
 
 }
