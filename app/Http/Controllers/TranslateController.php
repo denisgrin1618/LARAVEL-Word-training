@@ -25,6 +25,7 @@ class TranslateController extends Controller {
     
     public function postAdd(TranslateFormRequest $request) {
 
+        dd($request->post());
         $language1 = Language::where('name', $request->post('languageWord1'))->first();
         $word1 = Word::where('name', $request->post('word1'))
                 ->where('language_id', $language1->id)
