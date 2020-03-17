@@ -5,6 +5,7 @@
         <group>
             <file>file:/home/denis/Projects/LARAVEL-Word-Training/resources/views/translate/add.blade.php</file>
             <file>file:/home/denis/Projects/LARAVEL-Word-Training/app/Http/Controllers/TranslateController.php</file>
+            <file>file:/home/denis/Projects/LARAVEL-Word-Training/resources/views/translate/show.blade.php</file>
             <file>file:/home/denis/Projects/LARAVEL-Word-Training/routes/web.php</file>
         </group>
     </open-files>

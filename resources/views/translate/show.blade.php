@@ -22,6 +22,10 @@
                     <th style="width: 40%" scope="col">Слово</th>
                     <th style="width: 40%" scope="col">Перевод</th>
                     <th style="width: 15%" scope="col"></th>
+                    <th style="width: 0%"  scope="col" class="d-none"></th>
+                    <th style="width: 0%"  scope="col" class="d-none"></th>
+                    <th style="width: 0%"  scope="col" class="d-none"></th>
+
                 </tr>
             </thead>
             <tbody>
@@ -32,20 +36,26 @@
                     <td><input class="form-control" type="text" placeholder="search"></td>
                     <td><input class="form-control" type="text" placeholder="search"></td>
                     <td align="right">    
-                        <button type="button" class="btn btn-success  ml-1 mt-1 bt_edit" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">New</button>
+                        <button type="button" class="btn btn-success  ml-1 mt-1 bt_edit" data-toggle="modal" data-target="#translateAddModal" data-whatever="@mdo">New</button>
                     </td>
+                    <td class="d-none"> </td>
+                    <td class="d-none"> </td>
+                    <td class="d-none"> </td>
                 </tr>
 
 
                 @foreach ($translates as $translate)
                 <tr>
-                    <th scope="row" >1</th>
+                    <th scope="row" >{{ $loop->iteration }}</th>
                     <td >{{ $translate->word1->language->name }} - {{ $translate->word2->language->name }}</td>
-                    <td  class="tdWordOrigin">{{ $translate->word1->name }}</td>
-                    <td  class="tdWordTranslate" >{{ $translate->word2->name }}</td>
+                    <td  id="translate_word1_name">{{ $translate->word1->name }}</td>
+                    <td  id="translate_word2_name" >{{ $translate->word2->name }}</td>
                     <td  align="right">
-                        <button type="button" class="btn btn-primary  ml-1 mt-1 bt_edit" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Edit</button>
+                        <button type="button" class="btn btn-primary  ml-1 mt-1 bt_edit" data-toggle="modal" data-target="#translateAddModal" data-whatever="@mdo">Edit</button>
                     </td>
+                    <td class="d-none" id="translate_word1_id"> {{ $translate->word1->id }}</td>
+                    <td class="d-none" id="translate_word2_id"> {{ $translate->word2->id }}</td>
+                    <td class="d-none" id="translate_id"> {{ $translate->id }}</td>
                 </tr>
                 @endforeach
 
@@ -118,9 +128,11 @@
 
     <div >
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+        <div class="modal fade" id="translateAddModal" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
             <div class="modal-dialog" role="document">
-                <div class="modal-content">
+                <div class="modal-content" id="modal-content-div">
+
+
 
                     <!--
                     <div class="modal-header">
@@ -128,42 +140,43 @@
                     </div>
                     -->
                     <div class="modal-body">
-                        <form action="{{route('translate.add')}}" method="POST" >
-                            @csrf
-                            <div class="form-group">
-                                <div class="form-group float-left" id="boxLanguageWord1">
-                                    <select class="form-control" id="languageWord1" name="languageWord1" >
 
-                                        @foreach ($languages as $language)
-                                        <option>{{ $language->name }}</option>
-                                        @endforeach
+                        <div class="form-group">
+                            <div class="form-group float-left" id="boxLanguageWord1">
+                                <select class="form-control" id="languageWord1" name="languageWord1" >
 
-                                    </select>
-                                </div>
-                                <textarea class="form-control" id="modal-word-1" name="word1"></textarea>
+                                    @foreach ($languages as $language)
+                                    <option>{{ $language->name }}</option>
+                                    @endforeach
+
+                                </select>
                             </div>
-                            <div class="form-group">
-                                <div class="form-group float-left" id="boxLanguageWord2">
-                                    <select class="form-control" id="languageWord2" name="languageWord1" >
+                            <textarea class="form-control" id="word1" name="word1"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group float-left" id="boxLanguageWord2">
+                                <select class="form-control" id="languageWord2" name="languageWord1" >
 
-                                        @foreach ($languages as $language)
-                                        <option>{{ $language->name }}</option>
-                                        @endforeach
+                                    @foreach ($languages as $language)
+                                    <option>{{ $language->name }}</option>
+                                    @endforeach
 
-                                    </select>
-                                </div>
-                                <textarea class="form-control" id="modal-word-2" name="word2"></textarea>
+                                </select>
                             </div>
-                            <button  class="btn btn-success" data-dismiss="modal" id="ModalButSave">Сохранить</button>
+                            <textarea class="form-control" id="word2" name="word2"></textarea>
+                        </div>
+                        <button  class="btn btn-success" data-dismiss="modal" id="translateAddModalButSave">Сохранить</button>
 
-                          
-                        </form>
+
+
                     </div>
                     <!--
                     <div class="modal-footer">
                         
                     </div>
                     -->
+
+
                 </div>
             </div>
         </div>
@@ -178,17 +191,118 @@
 
     $(function ()
     {
-        // при изменении размера textarea при наборе текста, будем менять размер зависимых елементов
-        $('#word1').autoResize({elCopyResize: $("#word2")});
-        $('#word2').autoResize({elCopyResize: $("#word1")});
+        //// при изменении размера textarea при наборе текста, будем менять размер зависимых елементов
+        //$('#word1').autoResize({elCopyResize: $("#word2")});
+        //$('#word2').autoResize({elCopyResize: $("#word1")});
 
-        // при ручном растягивании textarea, будем менять размер зависимых елементов
-        $("#word1").ResizeSecondaryElement($("#word2"));
-        $("#word2").ResizeSecondaryElement($("#word1"));
+        //// при ручном растягивании textarea, будем менять размер зависимых елементов
+        //$("#word1").ResizeSecondaryElement($("#word2"));
+        //$("#word2").ResizeSecondaryElement($("#word1"));
 
-        $(window).resize(function () {
-            $('#word1').autoResize({elCopyResize: $("#word2")});
-            $("#word1").ResizeSecondaryElement($("#word2"));
+        //$(window).resize(function () {
+        //    $('#word1').autoResize({elCopyResize: $("#word2")});
+        //    $("#word1").ResizeSecondaryElement($("#word2"));
+        //});
+
+
+
+
+
+        var curent_table_tr;
+
+        $('.bt_edit').on("click", function (event) {
+
+            
+//            var modal = $(this);
+            var button = $(event.target) // Кнопка, что спровоцировало модальное окно  
+
+            console.log(button);
+
+            curent_table_tr = button.parent().parent();
+            var word1 = curent_table_tr.find('#translate_word1_name').text();
+            var word2 = curent_table_tr.find('#translate_word2_name').text();
+
+            
+
+            $('#translateAddModal').find('#word1').val(word1).autoResize();
+            $('#translateAddModal').find('#word2').val(word2).autoResize();
+
+            // Если необходимо, вы могли бы начать здесь AJAX-запрос (и выполните обновление в обратного вызова).  
+            // Обновление модальное окно Контента. Мы будем использовать jQuery здесь, но вместо него можно использовать привязки данных библиотеки или других методов.  
+
+            //var recipient = button.data('whatever') // Извлечение информации из данных-* атрибутов  
+            //modal.find('.modal-title').text('New message to ' + recipient)
+
+//            var number = button.parent().siblings('th').text();
+//            modal.find('.modal-title').text('Строка ' + number);
+
+        });
+
+        $('#translateAddModal').on('shown.bs.modal', function (event) {
+            console.log('shown');
+            var modal = $(this);
+            modal.find('#word1').autoResize();
+            modal.find('#word2').autoResize();
+        });
+
+        $('#translateAddModalButSave').on("click", function () {
+            console.log('click');
+            var word1 = $('#translateAddModal').find('#word1').val();
+            var word2 = $('#translateAddModal').find('#word2').val();
+
+
+            curent_table_tr.find('#translate_word1_name').text(word1);
+            curent_table_tr.find('#translate_word2_name').text(word2);
+
+            //console.log( '#translateAddModalButSave  click' );
+            //console.log( Curent_tdWordTranslate );
+
+//            curent_table_tr.addClass("table-success");
+
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        console.log("redy");
+
+        $('#translateAddModalButSave').click(function (e) {
+
+            e.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: "/translate/add",
+                //data: $('#modal-content-div').serialize(),
+                data: {
+                    "_token": $('meta[name="csrf-token"]').attr('content'),
+                    "languageWord1": $('#languageWord1').val(),
+                    "languageWord2": $('#languageWord2').val(),
+                    "word1": $('#translate_word1_name').val(),
+                    "word2": $('#translate_word2_name').val(),
+                },
+
+                success: function (data) {
+
+                    console.log(data);
+
+                },
+                error: function () {
+                    console.log("ERROR");
+                }
+            });
         });
     });
 

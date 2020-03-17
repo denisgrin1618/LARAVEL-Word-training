@@ -25,7 +25,13 @@ class TranslateController extends Controller {
     
     public function postAdd(TranslateFormRequest $request) {
 
-        dd($request->post());
+//        return response()->json([
+//            'name' => 'Abigail',
+//            'state' => 'CA'
+//        ]);
+        
+        return $request->post();
+        
         $language1 = Language::where('name', $request->post('languageWord1'))->first();
         $word1 = Word::where('name', $request->post('word1'))
                 ->where('language_id', $language1->id)
@@ -69,8 +75,15 @@ class TranslateController extends Controller {
         //flash('translate created!')->success();
         //return redirect()->route('translate.show');
         
-        $languages = Language::all();
-        return view('translate.add')->with('languages', $languages);
+        //$languages = Language::all();
+        //return view('translate.add')->with('languages', $languages);
+        
+        
+        
+        return response()->json([
+            'name' => 'Abigail',
+            'state' => 'CA'
+        ]);
     }
 
 }
