@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Translate extends Model
 {
+    
+//    protected $primaryKey = 'id'; 
+    
     public function word1()
     {
         return $this->hasOne('App\Word', 'id', 'word1_id');

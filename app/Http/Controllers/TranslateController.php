@@ -18,28 +18,27 @@ class TranslateController extends Controller {
                 ->with('translates',$translates);
     }
 
-    public function add(){
-        $languages = Language::all();
-        return view('translate.add') ->with('languages', $languages);
-    }
-    
-    public function postAdd(TranslateFormRequest $request) {
 
-//        return response()->json([
-//            'name' => 'Abigail',
-//            'state' => 'CA'
-//        ]);
+    
+    public function add(TranslateFormRequest $request) {
+
+//        return $request->post();
+//       
+//        $language1 = Translate::with("word1")->with("word2")->find(1);
+//        return $language1->toJson();
         
-        return $request->post();
         
-        $language1 = Language::where('name', $request->post('languageWord1'))->first();
-        $word1 = Word::where('name', $request->post('word1'))
+        
+        
+        
+        $language1 = Language::where('name', $request->post('word1_language_name'))->first();
+        $word1 = Word::where('name', $request->post('word1_name'))
                 ->where('language_id', $language1->id)
                 ->get();
 
         if ($word1->isEmpty()) {
             $word1 = new Word;
-            $word1->name = $request->post('word1');
+            $word1->name = $request->post('word1_name');
             $word1->language()->associate($language1);
             $word1->save();
         }else{
@@ -47,14 +46,14 @@ class TranslateController extends Controller {
         }
 
 
-        $language2 = Language::where('name', $request->post('languageWord2'))->first();
-        $word2 = Word::where('name', $request->post('word2'))
+        $language2 = Language::where('name', $request->post('word2_language_name'))->first();
+        $word2 = Word::where('name', $request->post('word2_name'))
                 ->where('language_id', $language2->id)
                 ->get();
 
         if ($word2->isEmpty()) {
             $word2 = new Word;
-            $word2->name = $request->post('word2');
+            $word2->name = $request->post('word2_name');
             $word2->language()->associate($language2);
             $word2->save();
         }else{
@@ -71,19 +70,44 @@ class TranslateController extends Controller {
             $translate->save();
         }
 
-
+//        return $translate->toJson();
+        
+        
         //flash('translate created!')->success();
-        //return redirect()->route('translate.show');
+        return redirect()->route('translate.show');
         
         //$languages = Language::all();
         //return view('translate.add')->with('languages', $languages);
         
+
+    }
+
+    public function edit(TranslateFormRequest $request) {
+       
+        
+        try {
+            
+            $word1 = Word::findOrFail($request->post('translate_word1_id'));
+            $word1->name = $request->post('translate_word1_name');
+            $word1->save();
+            
+            $word2 = Word::findOrFail($request->post('translate_word2_id'));
+            $word2->name = $request->post('translate_word2_name');
+            $word2->save();
+            
+            $translate = Translate::findOrFail($request->post('translate_id'));
+            
+            
+        } catch(Exception $e) {
+            dd($e);
+        }
         
         
-        return response()->json([
-            'name' => 'Abigail',
-            'state' => 'CA'
-        ]);
+       return $request->post();
+        
+        
+        return $translate->toJson();
+        
     }
 
 }

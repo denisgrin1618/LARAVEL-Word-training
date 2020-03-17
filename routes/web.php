@@ -19,9 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/translate', 'TranslateController@show')->name('translate.show');
-Route::get('/translate/add', 'TranslateController@add')->name('translate.add');
 Route::get('/', 'TranslateController@show');
 
-Route::post('/translate/add', 'TranslateController@postAdd')->name('translate.add');
+Route::post('/translate/add', 'TranslateController@add')->name('translate.add');
+Route::post('/translate/edit', 'TranslateController@edit')->name('translate.edit');
 
 
