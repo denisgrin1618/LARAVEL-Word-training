@@ -12,10 +12,10 @@
             <thead>
                 <tr>
                     <!-- <th style="width: 3%" scope="col">#</th> -->
-                    <th style="width: 10%" scope="col">Язык</th>
-                    <th style="width: 35%" scope="col">Слово</th>
-                    <th style="width: 10%" scope="col">Язык</th>
-                    <th style="width: 35%" scope="col">Перевод</th>
+                    <th style="width: 10%" scope="col">Language</th>
+                    <th style="width: 35%" scope="col">Word</th>
+                    <th style="width: 10%" scope="col">Language</th>
+                    <th style="width: 35%" scope="col">Translate</th>
                     <th style="width: 10%" scope="col"></th>
                     <th style="width: 0%"  scope="col" class="d-none"></th>
                     <th style="width: 0%"  scope="col" class="d-none"></th>
@@ -55,6 +55,39 @@
                 </tr>
 
 
+                <tr id="tr_blank" class="d-none">                  
+                    <td id='translate_word1_language_name'> </td>
+                    <td id="translate_word1_name"></td>
+                    <td id='translate_word2_language_name'></td>
+                    <td id="translate_word2_name" ></td>
+                    <td align="right" >
+                        <button type="button" class="btn btn-primary  ml-1 mt-1 bt_edit" data-toggle="modal" data-target="#translateAddModal" data-whatever="@mdo">Edit</button>
+                    </td>
+                    <td class="d-none" id="translate_word1_id"> </td>
+                    <td class="d-none" id="translate_word2_id"> </td>
+                    <td class="d-none" id="translate_id">test_id</td>
+                    <td class="d-none" id="translate_word1_language_id"> </td>
+                    <td class="d-none" id="translate_word2_language_id"> </td>
+
+                </tr>
+                
+                <tr class="d-none">                  
+                    <td id='translate_word1_language_name'> </td>
+                    <td id="translate_word1_name"></td>
+                    <td id='translate_word2_language_name'></td>
+                    <td id="translate_word2_name" ></td>
+                    <td align="right" >
+                        <button type="button" class="btn btn-primary  ml-1 mt-1 bt_edit" data-toggle="modal" data-target="#translateAddModal" data-whatever="@mdo">Edit</button>
+                    </td>
+                    <td class="d-none" id="translate_word1_id"> </td>
+                    <td class="d-none" id="translate_word2_id"> </td>
+                    <td class="d-none" id="translate_id">test_id</td>
+                    <td class="d-none" id="translate_word1_language_id"> </td>
+                    <td class="d-none" id="translate_word2_language_id"> </td>
+
+                </tr>
+                
+                
                 @foreach ($translates as $translate)
                 <tr>
                     <!--<th scope="row" >{{ $loop->iteration }}</th> -->
@@ -75,21 +108,7 @@
                 @endforeach
 
 
-                <tr id="tr_blank" class="d-none">                  
-                    <td id='translate_word1_language_name'> </td>
-                    <td id="translate_word1_name"></td>
-                    <td id='translate_word2_language_name'></td>
-                    <td id="translate_word2_name" ></td>
-                    <td align="right" >
-                        <button type="button" class="btn btn-primary  ml-1 mt-1 bt_edit" data-toggle="modal" data-target="#translateAddModal" data-whatever="@mdo">Edit</button>
-                    </td>
-                    <td class="d-none" id="translate_word1_id"> </td>
-                    <td class="d-none" id="translate_word2_id"> </td>
-                    <td class="d-none" id="translate_id">test_id</td>
-                    <td class="d-none" id="translate_word1_language_id"> </td>
-                    <td class="d-none" id="translate_word2_language_id"> </td>
-
-                </tr>
+                
 
 
             </tbody>

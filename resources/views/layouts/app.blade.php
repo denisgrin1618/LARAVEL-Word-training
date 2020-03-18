@@ -26,9 +26,6 @@
     <body>
         <div id="app">
 
-
-
-
             <nav class="navbar navbar-expand-lg navbar-light  " style="background-color: #4ebdad;">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -46,14 +43,6 @@
                         <li class="nav-item">
                             <a class="nav-link disabled" href="#" style="color: rgb(255,255,255)">Statistics</a>
                         </li>	  
-                    </ul>
-                </div>
-
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -88,22 +77,13 @@
                         </li>
                         @endguest
                     </ul>
-                </div>
 
+                </div>
             </nav>
 
 
-
-
-
             <main class="py-4">
-                
-                
-                    @yield('content')   
-                
-
-
-                
+                @yield('content')   
             </main>
         </div>
     </body>
