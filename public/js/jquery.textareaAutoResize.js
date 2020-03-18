@@ -59,7 +59,7 @@
 
 					.replace(/\n/g, '<br />');
 
-			$copy.html(text + '<br /><br />');
+			$copy.html(text + '<br />');
 
 			//console.log($textarea.val());
 			
@@ -84,7 +84,7 @@
 						.replace('\'', '&apos;')
 						.replace(/\n/g, '<br />');
 
-				$copy.html(text2 + '<br /><br />');
+				$copy.html(text2 + '<br />');
 				var newHeight2 = $copy.css('height');
 			}
 			else{

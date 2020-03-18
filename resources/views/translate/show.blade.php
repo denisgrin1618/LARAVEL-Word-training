@@ -64,13 +64,14 @@
                 </form>
         -->
 
-        <table class="table table-striped">
+        <table class="table-responsive table-striped w-100 d-block d-md-table">
             <thead>
                 <tr>
-                    <th style="width: 5%" scope="col">#</th>
-                    <th style="width: 17%" scope="col">ИмяСловаря</th>
-                    <th style="width: 34%" scope="col">Слово</th>
-                    <th style="width: 34%" scope="col">Перевод</th>
+                    <!-- <th style="width: 3%" scope="col">#</th> -->
+                    <th style="width: 10%" scope="col">Язык</th>
+                    <th style="width: 35%" scope="col">Слово</th>
+                    <th style="width: 10%" scope="col">Язык</th>
+                    <th style="width: 35%" scope="col">Перевод</th>
                     <th style="width: 10%" scope="col"></th>
                     <th style="width: 0%"  scope="col" class="d-none"></th>
                     <th style="width: 0%"  scope="col" class="d-none"></th>
@@ -83,9 +84,23 @@
             <tbody>
 
                 <tr >
-                    <th scope="row" ></th>
+                    
+                    <td>
+                        
+                        <select class="form-control" id="search_word1_language_name">
+                            @foreach ($languages as $language)
+                            <option>{{ $language->name }}</option>
+                            @endforeach
+                        </select>
+                    </td>
                     <td><input class="form-control" type="text" placeholder="search"></td>
-                    <td><input class="form-control" type="text" placeholder="search"></td>
+                    <td>
+                        <select class="form-control" id="search_word2_language_name">
+                            @foreach ($languages as $language)
+                            <option>{{ $language->name }}</option>
+                            @endforeach
+                        </select>
+                    </td>
                     <td><input class="form-control" type="text" placeholder="search"></td>
                     <td align="right"> 
                         <button type="button" class="btn btn-secondary  ml-1 mt-1" >Search</button>
@@ -100,9 +115,10 @@
 
                 @foreach ($translates as $translate)
                 <tr>
-                    <th scope="row" >{{ $loop->iteration }}</th>
-                    <td >{{ $translate->word1->language->name }} - {{ $translate->word2->language->name }}</td>
+                    <!--<th scope="row" >{{ $loop->iteration }}</th> -->
+                    <td >{{ $translate->word1->language->name }} </td>
                     <td  id="translate_word1_name">{{ $translate->word1->name }}</td>
+                    <td >{{ $translate->word2->language->name }}</td>
                     <td  id="translate_word2_name" >{{ $translate->word2->name }}</td>
                     <td  align="right" >
                         <button type="button" class="btn btn-primary  ml-1 mt-1 bt_edit" data-toggle="modal" data-target="#translateAddModal" data-whatever="@mdo">Edit</button>
@@ -116,18 +132,14 @@
                 </tr>
                 @endforeach
 
-
-
-
-
             </tbody>
         </table>
 
-        <table class="table table-striped" id='table_translate_new'>
+        <table class="table-responsive table-striped w-100 d-block d-md-table" id='table_translate_new'>
 
             <tbody>
 
-                <tr >
+                <tr>
                     <th scope="row" ></th>
                     <td style="width: 10%">
                         <select class="form-control" id="new_word1_language_name">
@@ -137,7 +149,7 @@
                         </select>
                     </td>
                     <td style="width: 35%">
-                        <textarea  id="new_word1_name" class="form-control" type="text" placeholder="слово" ></textarea>
+                        <textarea style="resize: none; " id="new_word1_name" class="form-control" type="text" placeholder="слово" ></textarea>
                     </td>
                     <td style="width: 10%">
                         <select class="form-control" id="new_word2_language_name">
@@ -147,7 +159,7 @@
                         </select>
                     </td>
                     <td style="width: 35%">
-                        <textarea  id="new_word2_name" class="form-control" type="text" placeholder="перевод"></textarea> 
+                        <textarea style="resize: none; " id="new_word2_name" class="form-control" type="text" placeholder="перевод"></textarea> 
                     </td>
                     <td style="width: 10%" align="right"> 
                         <button type="button" class="btn btn-success  ml-1 mt-1" id='button_translate_new'>New</button>
