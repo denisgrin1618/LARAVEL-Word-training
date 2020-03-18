@@ -59,13 +59,16 @@ class TranslateController extends Controller {
             $translate->save();
         }
 
-        return $translate->toJson();
-
-
-        //flash('translate created!')->success();
+        return $translate->load('word1','word2','word1.language','word2.language')->toJson();
+        
+//        return $request->post();
+//        return $translate->fresh()->with('word1')->with('word2')->first()->toJson();       
+//        return $translate->toJson();
+//        return new JsonResponse($translate);
+//        flash('translate created!')->success();
 //        return redirect()->route('translate.show');
-        //$languages = Language::all();
-        //return view('translate.add')->with('languages', $languages);
+//        $languages = Language::all();
+//        return view('translate.add')->with('languages', $languages);
     }
 
     public function edit(TranslateFormRequest $request) {

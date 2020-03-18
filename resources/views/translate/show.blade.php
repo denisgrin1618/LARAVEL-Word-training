@@ -4,65 +4,9 @@
 @section('content')
 
 
-
-
-
 <div class="container">
 
     <main role="main" class="container" >
-
-        <!--
-                <form action="{{route('translate.add')}}" method="POST" >
-                    @csrf
-        
-                    <div class="row justify-content-md-center">
-        
-                        <table>
-                            <tr>
-                                <td>
-                                    <div class="form-group float-left" id="boxLanguageWord1">
-                                        <select class="form-control" id="word1_language_name" name="word1_language_name" >
-        
-                                            @foreach ($languages as $language)
-                                            <option>{{ $language->name }}</option>
-                                            @endforeach
-        
-                                        </select>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group float-left" id="boxLanguageWord2">
-                                        <select class="form-control" id="word2_language_name" name="word2_language_name">
-                                            @foreach ($languages as $language)
-                                            <option>{{ $language->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <textarea class="form-control" aria-label="With textarea" id="word1_name" name="word1_name"> перевод слова </textarea>
-                                </td>
-                                <td>
-                                    <textarea class="form-control" aria-label="With textarea" id="word2_name" name="word2_name"> перевод слова </textarea>
-                                </td>
-                            </tr>
-        
-                        </table>
-        
-                    </div>
-        
-                    <div class="row justify-content-md-center">
-                        <div class="col-md-1 center-block">
-                            <button id="singlebutton" name="singlebutton" class="btn btn-success center-block">
-                                Add
-                            </button>
-                        </div>  
-                    </div>
-        
-                </form>
-        -->
 
         <table class="table-responsive table-striped w-100 d-block d-md-table">
             <thead>
@@ -81,12 +25,10 @@
 
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="table_translates">
 
-                <tr >
-                    
+                <tr>
                     <td>
-                        
                         <select class="form-control" id="search_word1_language_name">
                             @foreach ($languages as $language)
                             <option>{{ $language->name }}</option>
@@ -105,32 +47,50 @@
                     <td align="right"> 
                         <button type="button" class="btn btn-secondary  ml-1 mt-1" >Search</button>
                     </td>
-                    <td class="d-none"> </td>
-                    <td class="d-none"> </td>
-                    <td class="d-none"> </td>
-                    <td class="d-none"> </td>
-                    <td class="d-none"> </td>
+                    <td class="d-none"></td>
+                    <td class="d-none"></td>
+                    <td class="d-none"></td>
+                    <td class="d-none"></td>
+                    <td class="d-none"></td>
                 </tr>
 
 
                 @foreach ($translates as $translate)
                 <tr>
                     <!--<th scope="row" >{{ $loop->iteration }}</th> -->
-                    <td >{{ $translate->word1->language->name }} </td>
-                    <td  id="translate_word1_name">{{ $translate->word1->name }}</td>
-                    <td >{{ $translate->word2->language->name }}</td>
-                    <td  id="translate_word2_name" >{{ $translate->word2->name }}</td>
-                    <td  align="right" >
+                    <td id='translate_word1_language_name'>{{ $translate->word1->language->name }} </td>
+                    <td id="translate_word1_name">{{ $translate->word1->name }}</td>
+                    <td id='translate_word2_language_name'>{{ $translate->word2->language->name }}</td>
+                    <td id="translate_word2_name" >{{ $translate->word2->name }}</td>
+                    <td align="right" >
                         <button type="button" class="btn btn-primary  ml-1 mt-1 bt_edit" data-toggle="modal" data-target="#translateAddModal" data-whatever="@mdo">Edit</button>
                     </td>
-                    <td class="d-none" id="translate_word1_id"> {{ $translate->word1->id }}</td>
-                    <td class="d-none" id="translate_word2_id"> {{ $translate->word2->id }}</td>
-                    <td class="d-none" id="translate_id"> {{ $translate->id }}</td>
-                    <td class="d-none" id="translate_word1_language_id"> {{ $translate->word1->language->id }}</td>
-                    <td class="d-none" id="translate_word2_language_id"> {{ $translate->word2->language->id }}</td>
+                    <td class="d-none" id="translate_word1_id">{{ $translate->word1->id }}</td>
+                    <td class="d-none" id="translate_word2_id">{{ $translate->word2->id }}</td>
+                    <td class="d-none" id="translate_id">{{ $translate->id }}</td>
+                    <td class="d-none" id="translate_word1_language_id">{{ $translate->word1->language->id }}</td>
+                    <td class="d-none" id="translate_word2_language_id">{{ $translate->word2->language->id }}</td>
 
                 </tr>
                 @endforeach
+
+
+                <tr id="tr_blank" class="d-none">                  
+                    <td id='translate_word1_language_name'> </td>
+                    <td id="translate_word1_name"></td>
+                    <td id='translate_word2_language_name'></td>
+                    <td id="translate_word2_name" ></td>
+                    <td align="right" >
+                        <button type="button" class="btn btn-primary  ml-1 mt-1 bt_edit" data-toggle="modal" data-target="#translateAddModal" data-whatever="@mdo">Edit</button>
+                    </td>
+                    <td class="d-none" id="translate_word1_id"> </td>
+                    <td class="d-none" id="translate_word2_id"> </td>
+                    <td class="d-none" id="translate_id">test_id</td>
+                    <td class="d-none" id="translate_word1_language_id"> </td>
+                    <td class="d-none" id="translate_word2_language_id"> </td>
+
+                </tr>
+
 
             </tbody>
         </table>
@@ -235,17 +195,16 @@
 //            var modal = $(this);
             var button = $(event.target) // Кнопка, что спровоцировало модальное окно  
 
-            console.log(button);
-
+            
             curent_table_tr = button.parent().parent();
-            var translate_word1_name = curent_table_tr.find('#translate_word1_name').text();
-            var translate_word2_name = curent_table_tr.find('#translate_word2_name').text();
-//            var translate_word1_language_id = curent_table_tr.find('#translate_word1_language_id').text();
-//            var translate_word2_language_id = curent_table_tr.find('#translate_word2_language_id').text();
-            var translate_word1_id = curent_table_tr.find('#translate_word1_id').text();
-            var translate_word2_id = curent_table_tr.find('#translate_word2_id').text();
-            var translate_id = curent_table_tr.find('#translate_id').text();
+            var translate_word1_name    = curent_table_tr.find('#translate_word1_name').text();
+            var translate_word2_name    = curent_table_tr.find('#translate_word2_name').text();
+            var translate_word1_id      = curent_table_tr.find('#translate_word1_id').text();
+            var translate_word2_id      = curent_table_tr.find('#translate_word2_id').text();
+            var translate_id            = curent_table_tr.find('#translate_id').text();
 
+            console.log(button);
+            console.log(translate_id);
 
 
             $('#translateAddModal').find('#translate_word1_name').val(translate_word1_name).autoResize();
@@ -300,7 +259,7 @@
 
         $('#button_translate_new').click(function (e) {
 
-            e.preventDefault();
+            e.preventDefault();   
 
             $.ajax({
                 type: 'POST',
@@ -315,7 +274,27 @@
                 },
 
                 success: function (data) {
-                    console.log(data);
+                    
+//                    console.log(data);
+                    var obj = $.parseJSON(data);
+                    
+                    var tr = $("#tr_blank").clone(true);
+                    tr.removeAttr("id").removeAttr("class");
+                    tr.find('#translate_word1_language_name').text(obj.word1.language.name);
+                    tr.find('#translate_word2_language_name').text(obj.word2.language.name);
+                    tr.find('#translate_word1_name').text(obj.word1.name);
+                    tr.find('#translate_word2_name').text(obj.word2.name);                  
+                    tr.find('#translate_word1_id').text(obj.word1.id);
+                    tr.find('#translate_word2_id').text(obj.word2.id);
+                    tr.find('#translate_id').text(obj.id);
+                    tr.find('#translate_word1_language_id').text(obj.word1.language.id);
+                    tr.find('#translate_word2_language_id').text(obj.word2.language.id);
+                    tr.appendTo("#table_translates");
+
+
+                    $("#new_word1_name").val('');
+                    $("#new_word2_name").val('');
+
                 },
                 error: function () {
                     console.log("ERROR");
@@ -324,7 +303,7 @@
         });
 
     });
-    
+
 </script>
 
 
