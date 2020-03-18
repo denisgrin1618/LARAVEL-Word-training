@@ -18,10 +18,11 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/translate', 'TranslateController@show')->name('translate.show');
 Route::get('/', 'TranslateController@show');
 
+Route::get('/translate', 'TranslateController@show')->name('translate.show');
 Route::post('/translate/add', 'TranslateController@add')->name('translate.add');
 Route::post('/translate/edit', 'TranslateController@edit')->name('translate.edit');
+Route::post('/translate/delete/{id}', 'TranslateController@destroy')->name('translate.destroy');
 
 

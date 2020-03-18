@@ -93,4 +93,24 @@ class TranslateController extends Controller {
         return $translate->toJson();
     }
 
+    public function destroy($id){
+        
+        $resalt =false;
+        $trabslate = Translate::find($id);
+        if(is_null($trabslate)){
+            $resalt = false;
+        }else{
+            $resalt = Translate::find($id)->delete();
+        }
+  
+            
+        if($resalt){
+            $response = ['status' => 'success'];
+        }else{
+            $response = ['status' => 'error'];
+        }
+        
+        return response()->json($response);
+    }
+    
 }

@@ -161,8 +161,16 @@
                         <textarea class="form-control d-none" id="translate_word1_language_id" name="translate_word1_language_id"></textarea>
                         <textarea class="form-control d-none" id="translate_word2_language_id" name="translate_word2_language_id"></textarea>
 
-                        <button  class="btn btn-success" data-dismiss="modal" id="modal_dialog_button_save">Сохранить</button>
-
+                        <div>
+                            <!--
+                            {{Form::open(array('method'=>'delete', 'route'=>['translate.destroy', 'route_param_translate_id']))}}
+                                <button  class="btn btn-danger" data-dismiss="modal" id="modal_dialog_button_delete">Delete</button>                         
+                            {{Form::close()}}
+                            -->
+    
+                            <button  class="btn btn-danger" data-dismiss="modal" id="modal_dialog_button_delete">Delete</button>                         
+                            <button  class="btn btn-success" data-dismiss="modal" id="modal_dialog_button_save">Save</button>
+                        </div>
                     </div>
                     <!--
                     <div class="modal-footer">
@@ -175,6 +183,10 @@
         </div>
     </div>
 
+    
+    
+    
+    
 
 </div>
 
@@ -250,6 +262,32 @@
 
                 success: function (data) {
                     console.log(data);
+                },
+                error: function () {
+                    console.log("ERROR");
+                }
+            });
+        });
+
+        $('#modal_dialog_button_delete').click(function (e) {
+
+            e.preventDefault();
+
+            console.log('click delete');
+
+            var translate_id = $('#translateAddModal').find('#translate_id').val();
+            
+            $.ajax({
+                type: 'POST',
+                url: "/translate/delete/"+translate_id,
+                data: {
+                    "_token": $('meta[name="csrf-token"]').attr('content')
+                },
+
+                success: function (data) {
+                    console.log(data);
+//                    $('#table_translates').find('#translate_id').eq(translate_id).remove();
+                    curent_table_tr.remove();
                 },
                 error: function () {
                     console.log("ERROR");
