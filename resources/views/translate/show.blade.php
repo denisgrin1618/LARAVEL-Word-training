@@ -278,7 +278,7 @@
             var translate_id = $('#translateAddModal').find('#translate_id').val();
             
             $.ajax({
-                type: 'POST',
+                type: 'DELETE',
                 url: "/translate/delete/"+translate_id,
                 data: {
                     "_token": $('meta[name="csrf-token"]').attr('content')

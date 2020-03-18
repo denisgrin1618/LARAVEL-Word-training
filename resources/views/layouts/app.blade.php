@@ -38,13 +38,13 @@
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#" style="color: rgb(255,255,255)">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{ route('home') }}" style="color: rgb(255,255,255)">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" style="color: rgb(255,255,255)">Словарь</a>
+                            <a class="nav-link" href="{{ route('translate.show') }}" style="color: rgb(255,255,255)">Vocabulary</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="#" style="color: rgb(255,255,255)">Статистика</a>
+                            <a class="nav-link disabled" href="#" style="color: rgb(255,255,255)">Statistics</a>
                         </li>	  
                     </ul>
                 </div>
@@ -97,7 +97,13 @@
 
 
             <main class="py-4">
-                @yield('content')
+                
+                
+                    @yield('content')   
+                
+
+
+                
             </main>
         </div>
     </body>

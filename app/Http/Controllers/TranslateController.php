@@ -6,16 +6,29 @@ use App\Http\Requests\TranslateFormRequest;
 use App\Language;
 use App\Word;
 use App\Translate;
+use Illuminate\Support\Facades\Auth;
 
 class TranslateController extends Controller {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function show() {
         $languages = Language::all();
         $translates = Translate::all();
 
-        return view('translate.show')
+        
+//        if(Auth::check()){
+            return view('translate.show')
                         ->with('languages', $languages)
                         ->with('translates', $translates);
+//        }else{
+//            return redirect()->route('home');
+//        }
+        
+        
     }
 
     public function add(TranslateFormRequest $request) {
