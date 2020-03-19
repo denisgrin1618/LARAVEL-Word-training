@@ -18,4 +18,9 @@ class Translate extends Model
     {
         return $this->hasOne('App\Word', 'id', 'word2_id');
     }
+    
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

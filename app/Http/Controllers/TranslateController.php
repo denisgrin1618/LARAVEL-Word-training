@@ -19,10 +19,10 @@ class TranslateController extends Controller {
 //        $translates = Translate::all();
 
         
-        $translates = Translate::paginate(7);
+        $translates = Translate::where('user_id', Auth::user()->id)->paginate(7);
         
         
-            return view('translate.show')
+        return view('translate.show')
                         ->with('languages', $languages)
                         ->with('translates', $translates);
 
@@ -30,15 +30,18 @@ class TranslateController extends Controller {
 
     public function add(TranslateFormRequest $request) {
 
+        $user = Auth::user();
         $language1 = Language::where('name', $request->post('word1_language_name'))->first();
         $word1 = Word::where('name', $request->post('word1_name'))
                 ->where('language_id', $language1->id)
+                ->where('user_id', $user->id)
                 ->get();
 
         if ($word1->isEmpty()) {
             $word1 = new Word;
             $word1->name = $request->post('word1_name');
             $word1->language()->associate($language1);
+            $word1->user()->associate($user);
             $word1->save();
         } else {
             $word1 = $word1->first();
@@ -48,12 +51,14 @@ class TranslateController extends Controller {
         $language2 = Language::where('name', $request->post('word2_language_name'))->first();
         $word2 = Word::where('name', $request->post('word2_name'))
                 ->where('language_id', $language2->id)
+                ->where('user_id', $user->id)
                 ->get();
 
         if ($word2->isEmpty()) {
             $word2 = new Word;
             $word2->name = $request->post('word2_name');
             $word2->language()->associate($language2);
+            $word2->user()->associate($user);
             $word2->save();
         } else {
             $word2 = $word2->first();
@@ -66,6 +71,7 @@ class TranslateController extends Controller {
             $translate = new Translate;
             $translate->word1_id = $word1->id;
             $translate->word2_id = $word2->id;
+            $translate->user()->associate($user);
             $translate->save();
         }
 
