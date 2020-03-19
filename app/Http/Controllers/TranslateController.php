@@ -16,18 +16,16 @@ class TranslateController extends Controller {
     
     public function show() {
         $languages = Language::all();
-        $translates = Translate::all();
+//        $translates = Translate::all();
 
         
-//        if(Auth::check()){
+        $translates = Translate::paginate(7);
+        
+        
             return view('translate.show')
                         ->with('languages', $languages)
                         ->with('translates', $translates);
-//        }else{
-//            return redirect()->route('home');
-//        }
-        
-        
+
     }
 
     public function add(TranslateFormRequest $request) {

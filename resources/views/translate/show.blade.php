@@ -12,9 +12,9 @@
             <thead>
                 <tr>
                     <!-- <th style="width: 3%" scope="col">#</th> -->
-                    <th style="width: 10%" scope="col">Language</th>
+                    <th style="width: 10%" scope="col"></th>
                     <th style="width: 35%" scope="col">Word</th>
-                    <th style="width: 10%" scope="col">Language</th>
+                    <th style="width: 10%" scope="col"></th>
                     <th style="width: 35%" scope="col">Translate</th>
                     <th style="width: 10%" scope="col"></th>
                     <th style="width: 0%"  scope="col" class="d-none"></th>
@@ -114,6 +114,8 @@
             </tbody>
         </table>
 
+        
+        
         <table class="table-responsive table-striped w-100 d-block d-md-table" id='table_translate_new'>
 
             <tbody>
@@ -149,6 +151,13 @@
             </tbody>
         </table>
 
+        <br/>
+        
+        <div class="d-flex justify-content-center">
+            {{ $translates->links() }}
+        </div>
+        
+        
     </main>
 
 
