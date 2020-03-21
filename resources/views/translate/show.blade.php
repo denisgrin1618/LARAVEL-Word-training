@@ -27,25 +27,27 @@
             </thead>
             <tbody id="table_translates">
 
+                {{ Form::open(array('route' => 'translate.search', 'method' => 'get')) }}
                 <tr>
                     <td>
-                        <select class="form-control" id="search_word1_language_name">
+                        <select class="form-control" name="language1">
                             @foreach ($languages as $language)
                             <option>{{ $language->name }}</option>
                             @endforeach
                         </select>
                     </td>
-                    <td><input class="form-control" type="text" placeholder="search"></td>
+                    <td><input class="form-control" type="text" placeholder="search" name="word1"></td>
                     <td>
-                        <select class="form-control" id="search_word2_language_name">
+                        <select class="form-control" name="language2">
                             @foreach ($languages as $language)
                             <option>{{ $language->name }}</option>
                             @endforeach
                         </select>
                     </td>
-                    <td><input class="form-control" type="text" placeholder="search"></td>
+                    <td><input class="form-control" type="text" placeholder="search" name="word2"></td>
                     <td align="right"> 
-                        <button type="button" class="btn btn-secondary  ml-1 mt-1" >Search</button>
+                        <!-- <button type="button" class="btn btn-secondary  ml-1 mt-1" >Search</button>  -->
+                        {{ Form::submit('Search',['class'=>'btn btn-secondary  ml-1 mt-1']) }}
                     </td>
                     <td class="d-none"></td>
                     <td class="d-none"></td>
@@ -53,7 +55,7 @@
                     <td class="d-none"></td>
                     <td class="d-none"></td>
                 </tr>
-
+                {{ Form::close() }}
 
                 <tr id="tr_blank" class="d-none">                  
                     <td id='translate_word1_language_name'> </td>
@@ -114,7 +116,7 @@
             </tbody>
         </table>
 
-        
+        <br>
         
         <table class="table-responsive table-striped w-100 d-block d-md-table" id='table_translate_new'>
 
@@ -154,7 +156,9 @@
         <br/>
         
         <div class="d-flex justify-content-center">
-            {{ $translates->links() }}
+            <!-- {{ $translates->links() }} -->
+            
+            {{ $translates->appends(request()->query())->links() }}
         </div>
         
         

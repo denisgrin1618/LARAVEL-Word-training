@@ -23,4 +23,16 @@ class Translate extends Model
     {
         return $this->belongsTo('App\User');
     }
+    
+    public function scopeWithWord1Name($query, $name){
+        return $query->whereHas(['word1' => function($q) use($name){
+            $q->where('name','LIKE', '%$name%');
+        }]);
+
+        //        return $query->where('word1_id','>', $name);
+    }
+    
+
+    
+    
 }

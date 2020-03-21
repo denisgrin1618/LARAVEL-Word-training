@@ -23,6 +23,7 @@ Route::get('/', 'HomeController@index');
 Route::get('/translate', 'TranslateController@show')->name('translate.show');
 Route::post('/translate/add', 'TranslateController@add')->name('translate.add');
 Route::post('/translate/edit', 'TranslateController@edit')->name('translate.edit');
+Route::get('/translate/search', 'TranslateController@search')->name('translate.search');
 Route::delete('/translate/delete/{id}', 'TranslateController@destroy')->name('translate.destroy');
 
 

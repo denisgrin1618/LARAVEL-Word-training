@@ -7,25 +7,25 @@ use App\Language;
 use App\Word;
 use App\Translate;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TranslateController extends Controller {
 
-    public function __construct(){
+    public function __construct() {
         $this->middleware('auth');
     }
-    
+
     public function show() {
         $languages = Language::all();
 //        $translates = Translate::all();
 
-        
+
         $translates = Translate::where('user_id', Auth::user()->id)->paginate(7);
-        
-        
+
+//        dd($translates);
         return view('translate.show')
                         ->with('languages', $languages)
                         ->with('translates', $translates);
-
     }
 
     public function add(TranslateFormRequest $request) {
@@ -75,8 +75,8 @@ class TranslateController extends Controller {
             $translate->save();
         }
 
-        return $translate->load('word1','word2','word1.language','word2.language')->toJson();
-        
+        return $translate->load('word1', 'word2', 'word1.language', 'word2.language')->toJson();
+
 //        return $request->post();
 //        return $translate->fresh()->with('word1')->with('word2')->first()->toJson();       
 //        return $translate->toJson();
@@ -109,24 +109,71 @@ class TranslateController extends Controller {
         return $translate->toJson();
     }
 
-    public function destroy($id){
-        
-        $resalt =false;
+    public function destroy($id) {
+
+        $resalt = false;
         $trabslate = Translate::find($id);
-        if(is_null($trabslate)){
+        if (is_null($trabslate)) {
             $resalt = false;
-        }else{
+        } else {
             $resalt = Translate::find($id)->delete();
         }
-  
-            
-        if($resalt){
+
+
+        if ($resalt) {
             $response = ['status' => 'success'];
-        }else{
+        } else {
             $response = ['status' => 'error'];
         }
-        
+
         return response()->json($response);
     }
-    
+
+    public function search(TranslateFormRequest $request) {
+
+//        https://dev.to/mehdifathi/making-the-advanced-query-filter-with-eloquent-filter-in-laravel-3m5l
+
+
+
+
+        $word1 = $request->word1;
+        $word2 = $request->word2;
+        $language1 = $request->language1;
+        $language2 = $request->language2;
+        $user_is = Auth::user()->id;
+
+        $languages = Language::all();
+
+
+        $translates = Translate::
+//            ->where('user_id', Auth::user()->id)
+
+                join('users', function($join) use ($user_is) {
+                    $join->on('translates.user_id', '=', 'users.id')->where('users.id', $user_is);
+                })
+                ->when($word1, function ($query, $word1) use ($language1) {
+
+                    return $query->join('words as word1', 'translates.word1_id', '=', 'word1.id')
+                            ->where('word1.name', 'like', '%' . $word1 . '%')
+                            ->join('languages as language1', 'word1.language_id', '=', 'language1.id')
+                            ->where('language1.name', $language1);
+                })
+                ->when($word2, function ($query, $word2) use ($language2) {
+                    return $query->join('words as word2', function($join) use ($word2) {
+                                $join->on('translates.word2_id', '=', 'word2.id')
+                                ->where('word2.name', 'like', '%' . $word2 . '%')
+                                ->join('languages as language2', 'word2.language_id', '=', 'language2.id')
+                                ->where('language2.name', $language2);
+                            });
+                })
+                ->paginate(7)
+                ->appends(request()->query());
+        ;
+
+
+        return view('translate.show')
+                        ->with('languages', $languages)
+                        ->with('translates', $translates);
+    }
+
 }
