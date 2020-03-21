@@ -17,15 +17,13 @@ class TranslateController extends Controller {
 
     public function show() {
         $languages = Language::all();
-//        $translates = Translate::all();
-
 
         $translates = Translate::where('user_id', Auth::user()->id)->paginate(7);
 
-//        dd($translates);
         return view('translate.show')
                         ->with('languages', $languages)
-                        ->with('translates', $translates);
+                        ->with('translates', $translates)
+                        ->with('search_input', []);
     }
 
     public function add(TranslateFormRequest $request) {
@@ -77,14 +75,6 @@ class TranslateController extends Controller {
 
         return $translate->load('word1', 'word2', 'word1.language', 'word2.language')->toJson();
 
-//        return $request->post();
-//        return $translate->fresh()->with('word1')->with('word2')->first()->toJson();       
-//        return $translate->toJson();
-//        return new JsonResponse($translate);
-//        flash('translate created!')->success();
-//        return redirect()->route('translate.show');
-//        $languages = Language::all();
-//        return view('translate.add')->with('languages', $languages);
     }
 
     public function edit(TranslateFormRequest $request) {
@@ -131,11 +121,7 @@ class TranslateController extends Controller {
 
     public function search(TranslateFormRequest $request) {
 
-//        https://dev.to/mehdifathi/making-the-advanced-query-filter-with-eloquent-filter-in-laravel-3m5l
-
-
-
-
+        
         $word1 = $request->word1;
         $word2 = $request->word2;
         $language1 = $request->language1;
@@ -146,34 +132,38 @@ class TranslateController extends Controller {
 
 
         $translates = Translate::
-//            ->where('user_id', Auth::user()->id)
-
                 join('users', function($join) use ($user_is) {
                     $join->on('translates.user_id', '=', 'users.id')->where('users.id', $user_is);
                 })
-                ->when($word1, function ($query, $word1) use ($language1) {
+                ->when($language1, function ($query, $language1) use($word1){
 
                     return $query->join('words as word1', 'translates.word1_id', '=', 'word1.id')
-                            ->where('word1.name', 'like', '%' . $word1 . '%')
+                            
+                            ->when($word1, function ($query, $word1){
+                                return $query->where('word1.name', 'like', '%' . $word1 . '%');
+                            })
                             ->join('languages as language1', 'word1.language_id', '=', 'language1.id')
                             ->where('language1.name', $language1);
-                })
-                ->when($word2, function ($query, $word2) use ($language2) {
-                    return $query->join('words as word2', function($join) use ($word2) {
-                                $join->on('translates.word2_id', '=', 'word2.id')
-                                ->where('word2.name', 'like', '%' . $word2 . '%')
-                                ->join('languages as language2', 'word2.language_id', '=', 'language2.id')
-                                ->where('language2.name', $language2);
-                            });
-                })
+                })   
+                ->when($language2, function ($query, $language2) use($word2){
+
+                    return $query->join('words as word2', 'translates.word2_id', '=', 'word2.id')
+                            
+                            ->when($word2, function ($query, $word2){
+                                return $query->where('word2.name', 'like', '%' . $word2 . '%');
+                            })
+                            ->join('languages as language2', 'word2.language_id', '=', 'language2.id')
+                            ->where('language2.name', $language2);
+                })   
                 ->paginate(7)
                 ->appends(request()->query());
-        ;
+        
 
 
         return view('translate.show')
                         ->with('languages', $languages)
-                        ->with('translates', $translates);
+                        ->with('translates', $translates)
+                        ->with('search_input', $request->input());
     }
 
 }

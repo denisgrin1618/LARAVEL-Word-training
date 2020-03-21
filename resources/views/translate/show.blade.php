@@ -31,20 +31,35 @@
                 <tr>
                     <td>
                         <select class="form-control" name="language1">
+                            <option></option>
                             @foreach ($languages as $language)
-                            <option>{{ $language->name }}</option>
+                                @if ($language->name ===  ($search_input['language1'] ?? ""))
+                                    <option selected>{{ $language->name }}</option>
+                                @else
+                                    <option>{{ $language->name }}</option>
+                                @endif
                             @endforeach
                         </select>
                     </td>
-                    <td><input class="form-control" type="text" placeholder="search" name="word1"></td>
+                    <td>
+                        <input class="form-control" type="text" placeholder="search" name="word1" value="{{$search_input['word1'] ?? ''}}">
+                    </td>
                     <td>
                         <select class="form-control" name="language2">
-                            @foreach ($languages as $language)
-                            <option>{{ $language->name }}</option>
+                            <option></option>
+                            @foreach ($languages as $language) 
+                                @if ($language->name ===  ($search_input['language2'] ?? ""))
+                                    <option selected>{{ $language->name }}</option>
+                                @else
+                                    <option>{{ $language->name }}</option>
+                                @endif
                             @endforeach
+                            
                         </select>
                     </td>
-                    <td><input class="form-control" type="text" placeholder="search" name="word2"></td>
+                    <td>
+                        <input class="form-control" type="text" placeholder="search" name="word2" value="{{$search_input['word2'] ?? ''}}">
+                    </td>
                     <td align="right"> 
                         <!-- <button type="button" class="btn btn-secondary  ml-1 mt-1" >Search</button>  -->
                         {{ Form::submit('Search',['class'=>'btn btn-secondary  ml-1 mt-1']) }}
@@ -156,8 +171,7 @@
         <br/>
         
         <div class="d-flex justify-content-center">
-            <!-- {{ $translates->links() }} -->
-            
+            <!-- {{ $translates->links() }} -->     
             {{ $translates->appends(request()->query())->links() }}
         </div>
         
@@ -350,6 +364,8 @@
                     
                     var tr = $("#tr_blank").clone(true);
                     tr.removeAttr("id").removeAttr("class");
+                   // tr.addClass("bg-success").css('color', '#fff');
+                    tr.addClass("text-success");
                     tr.find('#translate_word1_language_name').text(obj.word1.language.name);
                     tr.find('#translate_word2_language_name').text(obj.word2.language.name);
                     tr.find('#translate_word1_name').text(obj.word1.name);
