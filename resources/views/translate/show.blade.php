@@ -31,7 +31,7 @@
                 <tr>
                     <td>
                         <select class="form-control" name="language1">
-                            <option></option>
+                            
                             @foreach ($languages as $language)
                                 @if ($language->name ===  ($search_input['language1'] ?? ""))
                                     <option selected>{{ $language->name }}</option>
@@ -46,7 +46,7 @@
                     </td>
                     <td>
                         <select class="form-control" name="language2">
-                            <option></option>
+                            
                             @foreach ($languages as $language) 
                                 @if ($language->name ===  ($search_input['language2'] ?? ""))
                                     <option selected>{{ $language->name }}</option>

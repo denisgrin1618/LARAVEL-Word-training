@@ -22,6 +22,7 @@
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/word-training.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/sticky-footer.css') }}" rel="stylesheet">
     </head>
     <body>
         <div id="app">
@@ -86,5 +87,12 @@
                 @yield('content')   
             </main>
         </div>
+
+        <footer class="footer">
+            <div class="container">
+                <span class="text-muted">Denis.grin1618@gmail.com</span>
+            </div>
+        </footer>
+
     </body>
 </html>
