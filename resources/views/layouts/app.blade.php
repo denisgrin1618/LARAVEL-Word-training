@@ -88,9 +88,20 @@
             </main>
         </div>
 
-        <footer class="footer">
+        <br>
+        <footer class="footer mt-10">
             <div class="container">
-                <span class="text-muted">Denis.grin1618@gmail.com</span>
+                <h5 class="text-muted mt-2">Word traning</h5>
+
+                <ul class="list-unstyled">
+                    <li>
+                        <span class="text-muted">Email: Denis.grin1618@gmail.com</span>
+                    </li>
+                    <li>
+                        <span class="text-muted">Phone: +38(093)909-22-45</span>
+                    </li>
+                </ul>
+
             </div>
         </footer>
 
