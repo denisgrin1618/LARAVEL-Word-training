@@ -17,6 +17,9 @@
                     You are logged in!
                 </div>
             </div>
+            
+            
+            <a class="navbar-brand" href="{{ route('home') }}"><img src="{{ URL::to('/img/start_training.png') }}" ></a>
         </div>
     </div>
 </div>
