@@ -91,7 +91,7 @@
         <br>
         <footer class="footer mt-10">
             <div class="container">
-                <h5 class="text-muted mt-2">Word traning</h5>
+                <h5 class="text-muted mt-2">Word training</h5>
 
                 <ul class="list-unstyled">
                     <li>

@@ -5,12 +5,24 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Start new quiz</div>
+                <div class="card-header font-weight-bold">
+                    Start new quiz
+                </div>
+
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
 
                 <div class="card-body">
 
-                    {{ Form::open(array('route' => 'quiz.start', 'method' => 'get')) }}
-                            
+                    {{ Form::open(array('route' => 'quiz.store', 'method' => 'post')) }}
+
                     <table class="table-responsive w-100 d-block d-md-table">
                         <thead>
                             <tr>
@@ -25,32 +37,54 @@
                                     <p>language word</p>
                                 </td>
                                 <td>
-                                    <input class="form-control" type="text" placeholder="search" >
+                                   
+                                    <select class="form-control" name="word_language">
+                            
+                                        @foreach ($languages as $language) 
+                                            @if ($language->name ===  ($search_input['language2'] ?? ""))
+                                                <option selected>{{ $language->name }}</option>
+                                            @else
+                                                <option>{{ $language->name }}</option>
+                                            @endif
+                                        @endforeach
+
+                                    </select>
+                                    
                                 </td>
                             </tr>    
-                            
+
                             <tr>
                                 <td>
                                     <p>language translate</p>
                                 </td>
                                 <td>
-                                    <input class="form-control" type="text" placeholder="search" >
+                                    <select class="form-control" name="translate_language">
+                            
+                                        @foreach ($languages as $language) 
+                                            @if ($language->name ===  ($search_input['language2'] ?? ""))
+                                                <option selected>{{ $language->name }}</option>
+                                            @else
+                                                <option>{{ $language->name }}</option>
+                                            @endif
+                                        @endforeach
+
+                                    </select>
                                 </td>
                             </tr>  
-                            
+
                             <tr>
                                 <td>
                                     <p>quantity of words</p>
                                 </td>
                                 <td>
-                                    <input class="form-control" type="text" placeholder="search" >
+                                    <input class="form-control" type="number" name="quantity_of_words">
                                 </td>
                             </tr>    
                         </tbody>
                     </table>
-                    
-                    <button type="button" class="btn btn-success  ml-1 mt-1 float-right">Start</button>
-                    
+
+                    {{ Form::submit('Start',['class'=>'btn btn-success  ml-1 mt-1 float-right']) }}
+
                     {{ Form::close() }}
                 </div>
 
