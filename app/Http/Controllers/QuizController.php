@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 use App\Language;
-
+use App\Translate;
+use App\Quiz;
+use App\QuizTranslations;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class QuizController extends Controller {
 
@@ -18,11 +23,27 @@ class QuizController extends Controller {
             'translate_language' => ['required', 'string', 'max:2', 'min:2'],
             'quantity_of_words' => ['required', 'integer'],
         ]);
-        //dd($validatedData);
+        
+        $string_time_now    = Carbon::now()->toDateTimeString();
+        $user_id            = Auth::user()->id;
+        $translates         = Translate::where('user_id', $user_id)
+                                        ->take($request->post('quantity_of_words'))->get();
+             
+        $quiz = new Quiz;
+        $quiz->name     = 'test '.$string_time_now;
+        $quiz->user_id  = $user_id;
+        $quiz->save();
+        
+        foreach ($translates as $translate ){
+            $quizzes_translations = new QuizTranslations;
+            $quizzes_translations->quiz_id      = $quiz->id;
+            $quizzes_translations->translate_id = $translate->id;
+            $quizzes_translations->save();
+        }
+      
 
-
-        //flash('Quiz started!')->success();
-
+        dd($quiz->load('translations'));
+        
         return view('quiz.show');
     }
     
