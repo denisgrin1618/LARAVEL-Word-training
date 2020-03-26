@@ -42,7 +42,7 @@ class QuizController extends Controller {
         }
       
 
-        dd($quiz->load('translations'));
+        dd($quiz->load('translations')->toJson(JSON_PRETTY_PRINT));
         
         return view('quiz.show');
     }
@@ -56,7 +56,15 @@ class QuizController extends Controller {
 
     public function show($id) {
 
-        return view('quiz.show');
+        $quiz = Quiz::with('translations')
+                ->with('translations.word1')
+                ->with('translations.word2')
+                ->where('id', $id)
+                ->where('user_id', Auth::user()->id)
+                ->first();
+        
+//        dd($quiz->toJson(JSON_PRETTY_PRINT));
+        return view('quiz.show')->with('quiz', $quiz);
     }
 
 }

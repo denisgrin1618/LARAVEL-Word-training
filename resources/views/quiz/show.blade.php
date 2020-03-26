@@ -3,40 +3,65 @@
 
 @section('content')
 
-<main role="main" class="container" >
+<div class="container">
+    <main role="main" class="container" >
 
-    <br/>
+        <br/>
 
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
 
+                <div class="row justify-content-md-center">
 
-            <div class="row justify-content-md-center">
-
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend" id="word_box" >
-                        <p class="input-group-text" id="p_word_box" style="word-wrap: break-all; white-space: normal;"></p>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend" id="word_box" >
+                            <p class="input-group-text" id="p_word_box" style="word-wrap: break-all; white-space: normal;"></p>
+                        </div>
+                        <textarea class="form-control" aria-label="With textarea" id="translate_box" placeholder="Введите перевод">  </textarea>
                     </div>
-                    <textarea class="form-control" aria-label="With textarea" id="translate_box" placeholder="Введите перевод">  </textarea>
+
                 </div>
 
-            </div>
 
+                <button class="btn btn-primary float-left" id="button_back">
+                    Back
+                </button>
 
+                <button class="btn btn-primary float-right" id="button_next">
+                    Next
+                </button>
 
-            <div class="row justify-content-md-center">
-                <div class="col-md-1 center-block">
-                    <button id="singlebutton" name="singlebutton" class="btn btn-primary center-block">
-                        Next
-                    </button>
-                </div>  
             </div>
         </div>
-    </div>
+
+        <div class="row justify-content-center">
+            <table class="table-responsive table-striped w-100 d-block d-md-table" id="table_quiz">
+                <thead>
+                    <tr>
+                        <th style="width: 10%" scope="col"></th>
+                        <th style="width: 30%" scope="col">Word</th>
+                        <th style="width: 30%" scope="col">Your translation</th>
+                        <th style="width: 30%" scope="col">Correct translation</th>
+                    </tr>
+                </thead>
+                <tbody id="table_translates">
+
+                    @foreach ($quiz->translations as $translate)
+                    <tr>
+                        <td id="index_{{ $loop->iteration }}">{{ $loop->iteration }}</td>
+                        <td id='word'>{{ $translate->word1->name }} </td>
+                        <td id="translate_word_user"></td>
+                        <td id='translate_word_correct'>{{ $translate->word2->name }}</td>
+                    </tr>
+                    @endforeach
+
+                </tbody>
+            </table>
+        </div>
 
 
-</main>
-
+    </main>
+</div>
 
 <script type="text/javascript">
 
@@ -58,12 +83,9 @@
 
     ResizeElements();
 
-   
 
-
-
-
-    ///////////////////////////////////////////////////////////////////////////
+    var table_quiz_row_index = 1;
+    var table_translates_rows_count = $('#table_translates tr').length;
 
     $(function ()
     {
@@ -80,12 +102,55 @@
         });
 
 
+        $('#button_next').click(function (e) {
+
+            if (table_translates_rows_count > table_quiz_row_index) {
+                
+                $('#index_' + table_quiz_row_index)
+                        .parent()
+                        .find('#translate_word_user')
+                        .text($('#translate_box').val());
+                
+                console.log($('#translate_box').val());
+
+                table_quiz_row_index++;
+                var word = $('#index_' + table_quiz_row_index).parent().find('#word');
+                var translate_correct = $('#index_' + table_quiz_row_index).parent().find('#translate_word_correct');
+                var translate_user = $('#index_' + table_quiz_row_index).parent().find('#translate_word_user');
+                
+                $('#p_word_box').text(word.text());
+                $('#translate_box').val(translate_user.text());
+            }
+
+            if (table_translates_rows_count == table_quiz_row_index) {
+                $(this).text('Finish').removeClass('btn-primary').addClass('btn-success');
+            }
+            
+            
+            
+        });
         
+        $('#button_back').click(function (e) {
+
+            if (table_quiz_row_index > 1) {
+      
+                table_quiz_row_index--;
+                var word = $('#index_' + table_quiz_row_index).parent().find('#word').text();
+                var translate = $('#index_' + table_quiz_row_index).parent().find('#translate_word_user').text();
+                //console.log(word);
+
+                $('#p_word_box').text(word);
+                $('#translate_box').val(translate);
+                
+                $('#button_next').text('Next').removeClass('btn-success').addClass('btn-primary');
+            }
+
+        });
+
+
 
     });
 
-
-    //////////////////////////////////////////////////////////////////////////////////
 
 </script>
 
