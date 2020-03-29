@@ -8,7 +8,7 @@
 
         <br/>
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" id="div_quiz">
             <div class="col-md-8">
 
                 <div class="row justify-content-md-center">
@@ -34,7 +34,10 @@
             </div>
         </div>
 
-        <div class="row justify-content-center">
+
+        <div class="row justify-content-center invisible" id="div_result">
+            <h5 id="result">RESULT 0%</h5>
+            <br/>
             <table class="table-responsive table-striped w-100 d-block d-md-table" id="table_quiz">
                 <thead>
                     <tr>
@@ -57,6 +60,7 @@
 
                 </tbody>
             </table>
+
         </div>
 
 
@@ -84,7 +88,7 @@
     ResizeElements();
 
 
-    var table_quiz_row_index = 1;
+    var table_quiz_row_index = 0;
     var table_translates_rows_count = $('#table_translates tr').length;
 
     $(function ()
@@ -104,50 +108,100 @@
 
         $('#button_next').click(function (e) {
 
-            if (table_translates_rows_count > table_quiz_row_index) {
-                
-                $('#index_' + table_quiz_row_index)
-                        .parent()
-                        .find('#translate_word_user')
-                        .text($('#translate_box').val());
-                
-                console.log($('#translate_box').val());
 
-                table_quiz_row_index++;
-                var word = $('#index_' + table_quiz_row_index).parent().find('#word');
-                var translate_correct = $('#index_' + table_quiz_row_index).parent().find('#translate_word_correct');
-                var translate_user = $('#index_' + table_quiz_row_index).parent().find('#translate_word_user');
-                
-                $('#p_word_box').text(word.text());
-                $('#translate_box').val(translate_user.text());
+            if(table_translates_rows_count == table_quiz_row_index){
+                $('#div_result').removeClass('invisible');
+                $('#div_quiz').addClass('invisible');
             }
+            
+            
+            
+            var index = table_quiz_row_index;
+            var tr = $('#index_' + index).parent();
+            var word = tr.find('#word');
+            var translate_correct = tr.find('#translate_word_correct');
+            var translate_user = tr.find('#translate_word_user');
+
+            translate_user.text($('#translate_box').val());
+            if (translate_user.text() == translate_correct.text()) {
+                translate_user.removeClass('text-danger').addClass('text-success');
+            } else {
+                translate_user.removeClass('text-success').addClass('text-danger');
+            }
+
+            if (table_quiz_row_index < table_translates_rows_count) {
+                table_quiz_row_index++;
+            }
+
+            console.log(table_quiz_row_index);
+
+            var index = table_quiz_row_index;
+            var tr = $('#index_' + index).parent();
+            var word = tr.find('#word');
+            var translate_user = tr.find('#translate_word_user');
+            console.log(translate_user.text());
+            $('#p_word_box').text(word.text());
+            $('#translate_box').val(translate_user.text());
 
             if (table_translates_rows_count == table_quiz_row_index) {
                 $(this).text('Finish').removeClass('btn-primary').addClass('btn-success');
             }
-            
-            
+
+
+
+            //подсчитаем результат
+            var result_persant = 0;
+            var count_correct = 0;
+            var count_error = 0;
+
+            $("#table_translates tr").each(function (index) {
+                var correct = $(this).find('#translate_word_correct').text();
+                var user = $(this).find('#translate_word_user').text();
+                if (correct == user) {
+                    count_correct++;
+                } else {
+                    count_error++;
+                }
+
+            });
+
+            result_persant = count_correct * 100 / (count_correct + count_error);
+            $('#result').text("RESULT " + result_persant + "%");
             
         });
-        
+
         $('#button_back').click(function (e) {
 
-            if (table_quiz_row_index > 1) {
-      
-                table_quiz_row_index--;
-                var word = $('#index_' + table_quiz_row_index).parent().find('#word').text();
-                var translate = $('#index_' + table_quiz_row_index).parent().find('#translate_word_user').text();
-                //console.log(word);
+            var index = table_quiz_row_index;
+            var tr = $('#index_' + index).parent();
+            var word = tr.find('#word');
+            var translate_correct = tr.find('#translate_word_correct');
+            var translate_user = tr.find('#translate_word_user');
 
-                $('#p_word_box').text(word);
-                $('#translate_box').val(translate);
-                
-                $('#button_next').text('Next').removeClass('btn-success').addClass('btn-primary');
+            translate_user.text($('#translate_box').val());
+            if (translate_user.text() == translate_correct.text()) {
+                translate_user.removeClass('text-danger').addClass('text-success');
+            } else {
+                translate_user.removeClass('text-success').addClass('text-danger');
             }
 
+            if (table_quiz_row_index > 0) {
+                table_quiz_row_index--;
+            }
+
+            console.log(table_quiz_row_index);
+
+            var index = table_quiz_row_index;
+            var tr = $('#index_' + index).parent();
+            var word = tr.find('#word');
+            var translate_user = tr.find('#translate_word_user');
+            console.log(translate_user.text());
+            $('#p_word_box').text(word.text());
+            $('#translate_box').val(translate_user.text());
+
+            $('#button_next').text('Next').removeClass('btn-success').addClass('btn-primary');
+
         });
-
-
 
     });
 

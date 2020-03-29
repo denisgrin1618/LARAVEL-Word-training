@@ -42,9 +42,10 @@ class QuizController extends Controller {
         }
       
 
-        dd($quiz->load('translations')->toJson(JSON_PRETTY_PRINT));
+//        dd($quiz->load('translations')->toJson(JSON_PRETTY_PRINT));
         
-        return view('quiz.show');
+        $quiz->load('translations')->load('translations.word1')->load('translations.word2');
+        return view('quiz.show')->with('quiz', $quiz);
     }
     
     public function start() {
