@@ -26,9 +26,35 @@ class QuizController extends Controller {
         
         $string_time_now    = Carbon::now()->toDateTimeString();
         $user_id            = Auth::user()->id;
-        $translates         = Translate::where('user_id', $user_id)
-                                        ->take($request->post('quantity_of_words'))->get();
-             
+//        $translates         = Translate::with('word1')
+//                                        ->with('word2')
+//                                        ->where('user_id', $user_id)
+//                                        ->take($request->post('quantity_of_words'))->get();
+        
+//         $translates   = Translate::
+//                 join('words as word1', 'translates.word1_id', '=', 'word1.id')
+//                 ->join('languages as language1', 'word1.language_id', '=', 'language1.id')
+//                 ->where('translates.user_id', $user_id)
+//                 ->where('language1.name', 'ru')
+//                 ->take($request->post('quantity_of_words'))
+//                 ->get();
+
+         $translates   = DB::table('translates')
+                 ->join('words as word1', 'translates.word1_id', '=', 'word1.id')
+                 ->join('languages as language1', 'word1.language_id', '=', 'language1.id')
+                 ->join('words as word2', 'translates.word2_id', '=', 'word2.id')
+                 ->join('languages as language2', 'word2.language_id', '=', 'language2.id')
+                 ->where('translates.user_id', $user_id)
+                 ->where('language1.name', $request->post('word_language'))
+                 ->where('language2.name', $request->post('translate_language'))
+                 ->select('translates.id')
+                 ->take($request->post('quantity_of_words'))
+                 ->get();
+         
+//        dd($translates);
+        
+         
+         
         $quiz = new Quiz;
         $quiz->name     = 'test '.$string_time_now;
         $quiz->user_id  = $user_id;
@@ -44,8 +70,11 @@ class QuizController extends Controller {
 
 //        dd($quiz->load('translations')->toJson(JSON_PRETTY_PRINT));
         
-        $quiz->load('translations')->load('translations.word1')->load('translations.word2');
-        return view('quiz.show')->with('quiz', $quiz);
+//        $quiz->load('translations')->load('translations.word1')->load('translations.word2');
+        
+        return redirect()->route('quiz.id', ['id' => $quiz->id]);
+//        return view('quiz.show')->with('quiz', $quiz);
+        
     }
     
     public function start() {

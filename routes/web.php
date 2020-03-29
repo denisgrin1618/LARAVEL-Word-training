@@ -30,5 +30,5 @@ Route::delete('/translate/delete/{id}', 'TranslateController@destroy')->name('tr
 
 Route::get('/quiz', 'QuizController@start')->name('quiz.start');
 Route::post('/quiz/store', 'QuizController@store')->name('quiz.store');
-Route::get('/quiz/{id}', 'QuizController@show');
+Route::get('/quiz/{id}', 'QuizController@show')->name('quiz.id');
 

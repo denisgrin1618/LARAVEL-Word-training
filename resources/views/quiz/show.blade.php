@@ -111,7 +111,7 @@
 
             if(table_translates_rows_count == table_quiz_row_index){
                 $('#div_result').removeClass('invisible');
-                $('#div_quiz').addClass('invisible');
+                $('#div_quiz').addClass('d-none');
             }
             
             
@@ -165,7 +165,7 @@
 
             });
 
-            result_persant = count_correct * 100 / (count_correct + count_error);
+            result_persant = Math.round(count_correct * 100 / (count_correct + count_error));
             $('#result').text("RESULT " + result_persant + "%");
             
         });
