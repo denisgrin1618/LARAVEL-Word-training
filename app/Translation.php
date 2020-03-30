@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Translate extends Model
+class Translation extends Model
 {
     
 //    protected $primaryKey = 'id'; 
@@ -22,6 +22,11 @@ class Translate extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+    
+    public function statistics()
+    {
+        return $this->hasMany('App\TranslationStatistics');
     }
     
     public function scopeWithWord1Name($query, $name){

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TranslateFormRequest;
 use App\Language;
 use App\Word;
-use App\Translate;
+use App\Translation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -18,7 +18,7 @@ class TranslateController extends Controller {
     public function show() {
         $languages = Language::all();
 
-        $translates = Translate::where('user_id', Auth::user()->id)->paginate(7);
+        $translates = Translation::where('user_id', Auth::user()->id)->paginate(7);
 
         return view('translate.show')
                         ->with('languages', $languages)
@@ -64,9 +64,9 @@ class TranslateController extends Controller {
 
 
 
-        $translate = Translate::where('word1_id', $word1->id)->where('word2_id', $word2->id)->get();
+        $translate = Translation::where('word1_id', $word1->id)->where('word2_id', $word2->id)->get();
         if ($translate->isEmpty()) {
-            $translate = new Translate;
+            $translate = new Translation;
             $translate->word1_id = $word1->id;
             $translate->word2_id = $word2->id;
             $translate->user()->associate($user);
@@ -90,7 +90,7 @@ class TranslateController extends Controller {
             $word2->name = $request->post('translate_word2_name');
             $word2->save();
 
-            $translate = Translate::findOrFail($request->post('translate_id'));
+            $translate = Translation::findOrFail($request->post('translate_id'));
         } catch (Exception $e) {
             dd($e);
         }
@@ -102,11 +102,11 @@ class TranslateController extends Controller {
     public function destroy($id) {
 
         $resalt = false;
-        $trabslate = Translate::find($id);
+        $trabslate = Translation::find($id);
         if (is_null($trabslate)) {
             $resalt = false;
         } else {
-            $resalt = Translate::find($id)->delete();
+            $resalt = Translation::find($id)->delete();
         }
 
 
@@ -131,13 +131,13 @@ class TranslateController extends Controller {
         $languages = Language::all();
 
 
-        $translates = Translate::
+        $translates = Translation::
                 join('users', function($join) use ($user_is) {
-                    $join->on('translates.user_id', '=', 'users.id')->where('users.id', $user_is);
+                    $join->on('translations.user_id', '=', 'users.id')->where('users.id', $user_is);
                 })
                 ->when($language1, function ($query, $language1) use($word1){
 
-                    return $query->join('words as word1', 'translates.word1_id', '=', 'word1.id')
+                    return $query->join('words as word1', 'translations.word1_id', '=', 'word1.id')
                             
                             ->when($word1, function ($query, $word1){
                                 return $query->where('word1.name', 'like', '%' . $word1 . '%');
@@ -147,7 +147,7 @@ class TranslateController extends Controller {
                 })   
                 ->when($language2, function ($query, $language2) use($word2){
 
-                    return $query->join('words as word2', 'translates.word2_id', '=', 'word2.id')
+                    return $query->join('words as word2', 'translations.word2_id', '=', 'word2.id')
                             
                             ->when($word2, function ($query, $word2){
                                 return $query->where('word2.name', 'like', '%' . $word2 . '%');

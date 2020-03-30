@@ -21,6 +21,9 @@ class CreateWordsTable extends Migration
             //$table->unsignedBigInteger('language_id');
             //$table->foreign('language_id')->references('id')->on('languages');
             
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            
             $table->foreignId('language_id')->constrained()->onDelete('cascade');
             
             $table->timestamps();

@@ -20,7 +20,7 @@ class CreateQuizzesTranslationsTable extends Migration
             $table->foreign('quiz_id')->references('id')->on('quizzes')->onDelete('cascade');
             
             $table->unsignedBigInteger('translate_id');
-            $table->foreign('translate_id')->references('id')->on('translates')->onDelete('cascade');
+            $table->foreign('translate_id')->references('id')->on('translations')->onDelete('cascade');
             
             $table->timestamps();
         });

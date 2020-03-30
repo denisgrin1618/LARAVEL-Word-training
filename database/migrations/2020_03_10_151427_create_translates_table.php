@@ -13,10 +13,13 @@ class CreateTranslatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('translates', function (Blueprint $table) {
+        Schema::create('translations', function (Blueprint $table) {
             $table->id();
             //$table->string('name');
             //$table->foreignId('word_id')->constrained()->onDelete('cascade');
+            
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             
             $table->unsignedBigInteger('word1_id');
             $table->foreign('word1_id')->references('id')->on('words')->onDelete('cascade');
@@ -36,6 +39,6 @@ class CreateTranslatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('translates');
+        Schema::dropIfExists('translations');
     }
 }

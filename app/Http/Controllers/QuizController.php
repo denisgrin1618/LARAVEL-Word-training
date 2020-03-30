@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Language;
-use App\Translate;
+use App\Translation;
 use App\Quiz;
 use App\QuizTranslations;
 use Carbon\Carbon;
@@ -39,15 +39,15 @@ class QuizController extends Controller {
 //                 ->take($request->post('quantity_of_words'))
 //                 ->get();
 
-         $translates   = DB::table('translates')
-                 ->join('words as word1', 'translates.word1_id', '=', 'word1.id')
+         $translates   = DB::table('translations')
+                 ->join('words as word1', 'translations.word1_id', '=', 'word1.id')
                  ->join('languages as language1', 'word1.language_id', '=', 'language1.id')
-                 ->join('words as word2', 'translates.word2_id', '=', 'word2.id')
+                 ->join('words as word2', 'translations.word2_id', '=', 'word2.id')
                  ->join('languages as language2', 'word2.language_id', '=', 'language2.id')
-                 ->where('translates.user_id', $user_id)
+                 ->where('translations.user_id', $user_id)
                  ->where('language1.name', $request->post('word_language'))
                  ->where('language2.name', $request->post('translate_language'))
-                 ->select('translates.id')
+                 ->select('translations.id')
                  ->take($request->post('quantity_of_words'))
                  ->get();
          
