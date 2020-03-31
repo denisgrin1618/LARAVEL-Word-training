@@ -14,7 +14,7 @@
     <main role="main" class="container" >
 
 
-        <form action="{{route('translate.add')}}" method="POST" >
+        <form action="{{route('translation.add')}}" method="POST" >
             @csrf
 
             <div class="row justify-content-md-center">

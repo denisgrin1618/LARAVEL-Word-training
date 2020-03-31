@@ -30,6 +30,10 @@
                 <button class="btn btn-primary float-right" id="button_next">
                     Next
                 </button>
+                
+                <button class="btn btn-success float-right d-none" id="button_finish">
+                    Finish
+                </button>
 
             </div>
         </div>
@@ -45,6 +49,7 @@
                         <th style="width: 30%" scope="col">Word</th>
                         <th style="width: 30%" scope="col">Your translation</th>
                         <th style="width: 30%" scope="col">Correct translation</th>
+                        <th style="width: 0%" scope="col" class="d-none"></th>
                     </tr>
                 </thead>
                 <tbody id="table_translates">
@@ -55,6 +60,7 @@
                         <td id='word'>{{ $translate->word1->name }} </td>
                         <td id="translate_word_user"></td>
                         <td id='translate_word_correct'>{{ $translate->word2->name }}</td>
+                        <td id='translate_id' class="d-none">{{ $translate->id }}</td>
                     </tr>
                     @endforeach
 
@@ -105,14 +111,51 @@
             $("#translate_box").ResizeSecondaryElement($("#p_word_box"));
         });
 
+        $('#button_finish').click(function (e) {
+
+            $("#button_next").trigger("click");
+            $('#div_result').removeClass('invisible');
+            $('#div_quiz').addClass('d-none');
+                
+                var data =[];
+                $("#table_translates tr").each(function (index) {
+                    var correct = $(this).find('#translate_word_correct').text();
+                    var user    = $(this).find('#translate_word_user').text();
+                    var id      = $(this).find("#translate_id").text();
+                    
+                    var row_data = new Object();
+                    row_data.translation_id = id;
+                    row_data.correct_answer = (correct == user);
+                    data.push(row_data);
+                });
+                console.log(JSON.stringify(data));
+                
+                $.ajax({
+                    type: 'POST',
+                    url: "/statistics/store",
+                    data: {
+                        "_token": $('meta[name="csrf-token"]').attr('content'),
+                        "data": JSON.stringify(data)
+                    },
+
+                    success: function (data) {
+                        console.log("DATA /statistics/store ->");
+                        console.log(data);
+                    },
+                    error: function () {
+                        console.log("ERROR /statistics/store");
+                    }
+                });
+
+        });
 
         $('#button_next').click(function (e) {
 
-
-            if(table_translates_rows_count == table_quiz_row_index){
-                $('#div_result').removeClass('invisible');
-                $('#div_quiz').addClass('d-none');
-            }
+            //нажали кнопку финиш
+//            if(table_translates_rows_count == table_quiz_row_index){
+//                $('#div_result').removeClass('invisible');
+//                $('#div_quiz').addClass('d-none');  
+//            }
             
             
             
@@ -144,7 +187,9 @@
             $('#translate_box').val(translate_user.text());
 
             if (table_translates_rows_count == table_quiz_row_index) {
-                $(this).text('Finish').removeClass('btn-primary').addClass('btn-success');
+//                $(this).text('Finish').removeClass('btn-primary').addClass('btn-success');
+                $('#button_finish').removeClass('d-none');
+                $('#button_next').addClass('d-none');  
             }
 
 
@@ -154,19 +199,25 @@
             var count_correct = 0;
             var count_error = 0;
 
+            
             $("#table_translates tr").each(function (index) {
                 var correct = $(this).find('#translate_word_correct').text();
-                var user = $(this).find('#translate_word_user').text();
+                var user    = $(this).find('#translate_word_user').text();
+                var id      = $(this).find("#translate_id").text();
                 if (correct == user) {
                     count_correct++;
                 } else {
                     count_error++;
                 }
-
+                
+               
             });
 
             result_persant = Math.round(count_correct * 100 / (count_correct + count_error));
             $('#result').text("RESULT " + result_persant + "%");
+            
+            
+      
             
         });
 

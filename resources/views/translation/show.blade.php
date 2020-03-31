@@ -27,7 +27,7 @@
             </thead>
             <tbody id="table_translates">
 
-                {{ Form::open(array('route' => 'translate.search', 'method' => 'get')) }}
+                {{ Form::open(array('route' => 'translation.search', 'method' => 'get')) }}
                 <tr>
                     <td>
                         <select class="form-control" name="language1">
@@ -209,7 +209,7 @@
 
                         <div>
                             <!--
-                            {{Form::open(array('method'=>'delete', 'route'=>['translate.destroy', 'route_param_translate_id']))}}
+                            {{Form::open(array('method'=>'delete', 'route'=>['translation.destroy', 'route_param_translate_id']))}}
                                 <button  class="btn btn-danger" data-dismiss="modal" id="modal_dialog_button_delete">Delete</button>                         
                             {{Form::close()}}
                             -->
@@ -295,7 +295,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: "/translate/edit",
+                url: "/translation/edit",
                 data: {
                     "_token": $('meta[name="csrf-token"]').attr('content'),
                     "translate_word1_id": $('#translateAddModal').find('#translate_word1_id').val(),
@@ -325,7 +325,7 @@
             
             $.ajax({
                 type: 'DELETE',
-                url: "/translate/delete/"+translate_id,
+                url: "/translation/delete/"+translate_id,
                 data: {
                     "_token": $('meta[name="csrf-token"]').attr('content')
                 },
@@ -347,7 +347,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: "/translate/add",
+                url: "/translation/add",
                 data: {
                     "_token": $('meta[name="csrf-token"]').attr('content'),
                     "word1_language_name": $('#table_translate_new').find('#new_word1_language_name').val(),

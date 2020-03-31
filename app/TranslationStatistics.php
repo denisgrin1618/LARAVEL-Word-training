@@ -11,7 +11,7 @@ class TranslationStatistics extends Model
     
     public function translation()
     {
-        return $this->belongsTo('App\Translate');
+        return $this->belongsTo('App\Translation');
     }
     
    

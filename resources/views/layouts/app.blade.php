@@ -39,7 +39,7 @@
                             <a class="nav-link" href="{{ route('home') }}" style="color: rgb(255,255,255)">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('translate.show') }}" style="color: rgb(255,255,255)">Vocabulary</a>
+                            <a class="nav-link" href="{{ route('translation.show') }}" style="color: rgb(255,255,255)">Vocabulary</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link disabled" href="#" style="color: rgb(255,255,255)">Statistics</a>

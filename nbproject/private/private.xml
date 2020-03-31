@@ -5,12 +5,7 @@
         <group>
             <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/app/Http/Controllers/QuizController.php</file>
             <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/resources/views/quiz/show.blade.php</file>
-            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/app/Word.php</file>
-            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/routes/web.php</file>
-            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/app/Http/Controllers/TranslateController.php</file>
-            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/resources/views/quiz/start.blade.php</file>
-            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/app/Translate.php</file>
-            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/app/Quiz.php</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/database/migrations/2020_03_30_123656_create_translation_statistics_table.php</file>
         </group>
     </open-files>
 </project-private>

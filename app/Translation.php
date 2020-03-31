@@ -26,7 +26,7 @@ class Translation extends Model
     
     public function statistics()
     {
-        return $this->hasMany('App\TranslationStatistics');
+        return $this->hasOne('App\TranslationStatistics', 'translation_id', 'id');
     }
     
     public function scopeWithWord1Name($query, $name){

@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TranslateFormRequest;
+//use App\Http\Requests\TranslateFormRequest;
+use Illuminate\Http\Request;
 use App\Language;
 use App\Word;
 use App\Translation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class TranslateController extends Controller {
+class TranslationController extends Controller {
 
     public function __construct() {
         $this->middleware('auth');
@@ -20,13 +21,13 @@ class TranslateController extends Controller {
 
         $translates = Translation::where('user_id', Auth::user()->id)->paginate(7);
 
-        return view('translate.show')
+        return view('translation.show')
                         ->with('languages', $languages)
                         ->with('translates', $translates)
                         ->with('search_input', []);
     }
 
-    public function add(TranslateFormRequest $request) {
+    public function add(Request $request) {
 
         $user = Auth::user();
         $language1 = Language::where('name', $request->post('word1_language_name'))->first();
@@ -77,7 +78,7 @@ class TranslateController extends Controller {
 
     }
 
-    public function edit(TranslateFormRequest $request) {
+    public function edit(Request $request) {
 
 
         try {
@@ -119,7 +120,7 @@ class TranslateController extends Controller {
         return response()->json($response);
     }
 
-    public function search(TranslateFormRequest $request) {
+    public function search(Request $request) {
 
         
         $word1 = $request->word1;
@@ -160,7 +161,7 @@ class TranslateController extends Controller {
         
 
 
-        return view('translate.show')
+        return view('translation.show')
                         ->with('languages', $languages)
                         ->with('translates', $translates)
                         ->with('search_input', $request->input());

@@ -14,7 +14,7 @@ class Quiz extends Model
     
     public function translations()
     {
-        return $this->hasManyThrough('App\Translate', 'App\QuizTranslations', 'quiz_id',  'id', 'id', 'translate_id');
+        return $this->hasManyThrough('App\Translation', 'App\QuizTranslations', 'quiz_id',  'id', 'id', 'translate_id');
     }
 
 }

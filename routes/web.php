@@ -22,13 +22,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'QuizController@start');
 
 
-Route::get('/translate', 'TranslateController@show')->name('translate.show');
-Route::post('/translate/add', 'TranslateController@add')->name('translate.add');
-Route::post('/translate/edit', 'TranslateController@edit')->name('translate.edit');
-Route::get('/translate/search', 'TranslateController@search')->name('translate.search');
-Route::delete('/translate/delete/{id}', 'TranslateController@destroy')->name('translate.destroy');
+Route::get('/translation', 'TranslationController@show')->name('translation.show');
+Route::post('/translation/add', 'TranslationController@add')->name('translation.add');
+Route::post('/translation/edit', 'TranslationController@edit')->name('translation.edit');
+Route::get('/translation/search', 'TranslationController@search')->name('translation.search');
+Route::delete('/translation/delete/{id}', 'TranslationController@destroy')->name('translation.destroy');
 
 Route::get('/quiz', 'QuizController@start')->name('quiz.start');
 Route::post('/quiz/store', 'QuizController@store')->name('quiz.store');
 Route::get('/quiz/{id}', 'QuizController@show')->name('quiz.id');
 
+Route::post('/statistics/store', 'StatisticsController@store')->name('statistics.store');
