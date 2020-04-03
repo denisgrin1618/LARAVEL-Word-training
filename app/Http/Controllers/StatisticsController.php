@@ -8,9 +8,12 @@ use Illuminate\Http\Request;
 
 class StatisticsController extends Controller {
 
+    
+//    https://drivemarketing.ca/en/blog/connecting-laravel-to-a-google-sheet/
+    
     public function store(Request $request) {
 
-        //dd($request->post());
+//        return $request->post('data');
 
         $data = $request->post('data');
         foreach (json_decode($data) as $data_row) {
@@ -35,19 +38,9 @@ class StatisticsController extends Controller {
             }
             
             $translation_statistics->save();
-
-
-//            $translation = Translation::find($data_row->id)->with('statistics')->first();
-//            if($data_row->correct_answer){
-//                $translation->statistics()->count_success+1;
-//            }else{
-//                $translation->statistics()->count_error+1;
-//            }
-//            
-//            $translation->save();
-            
-            return true;
         }
+        
+        return true;
     }
 
 }

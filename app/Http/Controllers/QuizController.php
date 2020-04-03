@@ -48,6 +48,7 @@ class QuizController extends Controller {
                  ->where('language1.name', $request->post('word_language'))
                  ->where('language2.name', $request->post('translate_language'))
                  ->select('translations.id')
+                 ->inRandomOrder()
                  ->take($request->post('quantity_of_words'))
                  ->get();
          

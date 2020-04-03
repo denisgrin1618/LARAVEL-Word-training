@@ -128,7 +128,7 @@
                     row_data.correct_answer = (correct == user);
                     data.push(row_data);
                 });
-                console.log(JSON.stringify(data));
+//                console.log(JSON.stringify(data));
                 
                 $.ajax({
                     type: 'POST',
@@ -139,11 +139,11 @@
                     },
 
                     success: function (data) {
-                        console.log("DATA /statistics/store ->");
-                        console.log(data);
+//                        console.log("DATA /statistics/store ->");
+//                        console.log(data);
                     },
                     error: function () {
-                        console.log("ERROR /statistics/store");
+//                        console.log("ERROR /statistics/store");
                     }
                 });
 
@@ -176,13 +176,13 @@
                 table_quiz_row_index++;
             }
 
-            console.log(table_quiz_row_index);
+//            console.log(table_quiz_row_index);
 
             var index = table_quiz_row_index;
             var tr = $('#index_' + index).parent();
             var word = tr.find('#word');
             var translate_user = tr.find('#translate_word_user');
-            console.log(translate_user.text());
+//            console.log(translate_user.text());
             $('#p_word_box').text(word.text());
             $('#translate_box').val(translate_user.text());
 
@@ -253,6 +253,8 @@
             $('#button_next').text('Next').removeClass('btn-success').addClass('btn-primary');
 
         });
+
+        $("#button_next").trigger("click");
 
     });
 

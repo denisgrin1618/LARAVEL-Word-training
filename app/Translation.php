@@ -9,23 +9,19 @@ class Translation extends Model
     
 //    protected $primaryKey = 'id'; 
     
-    public function word1()
-    {
+    public function word1(){
         return $this->hasOne('App\Word', 'id', 'word1_id');
     }
     
-    public function word2()
-    {
+    public function word2(){
         return $this->hasOne('App\Word', 'id', 'word2_id');
     }
     
-    public function user()
-    {
+    public function user(){
         return $this->belongsTo('App\User');
     }
     
-    public function statistics()
-    {
+    public function statistics(){
         return $this->hasOne('App\TranslationStatistics', 'translation_id', 'id');
     }
     

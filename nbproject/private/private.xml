@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/app/Http/Controllers/QuizController.php</file>
-            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/resources/views/quiz/show.blade.php</file>
-            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/database/migrations/2020_03_30_123656_create_translation_statistics_table.php</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/app/Http/Controllers/StatisticsController.php</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/resources/views/translation/show.blade.php</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/app/Http/Controllers/TranslationController.php</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/app/Translation.php</file>
         </group>
     </open-files>
 </project-private>

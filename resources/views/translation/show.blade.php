@@ -13,9 +13,10 @@
                 <tr>
                     <!-- <th style="width: 3%" scope="col">#</th> -->
                     <th style="width: 10%" scope="col"></th>
-                    <th style="width: 35%" scope="col">Word</th>
+                    <th style="width: 30%" scope="col">Word</th>
                     <th style="width: 10%" scope="col"></th>
-                    <th style="width: 35%" scope="col">Translate</th>
+                    <th style="width: 30%" scope="col">Translate</th>
+                    <th style="width: 10%" scope="col"></th>
                     <th style="width: 10%" scope="col"></th>
                     <th style="width: 0%"  scope="col" class="d-none"></th>
                     <th style="width: 0%"  scope="col" class="d-none"></th>
@@ -60,6 +61,7 @@
                     <td>
                         <input class="form-control" type="text" placeholder="search" name="word2" value="{{$search_input['word2'] ?? ''}}">
                     </td>
+                    <td></td>
                     <td align="right"> 
                         <!-- <button type="button" class="btn btn-secondary  ml-1 mt-1" >Search</button>  -->
                         {{ Form::submit('Search',['class'=>'btn btn-secondary  ml-1 mt-1']) }}
@@ -77,6 +79,7 @@
                     <td id="translate_word1_name"></td>
                     <td id='translate_word2_language_name'></td>
                     <td id="translate_word2_name" ></td>
+                    <td id="translate_statistics"> </td>
                     <td align="right" >
                         <button type="button" class="btn btn-primary  ml-1 mt-1 bt_edit" data-toggle="modal" data-target="#translateAddModal" data-whatever="@mdo">Edit</button>
                     </td>
@@ -93,6 +96,7 @@
                     <td id="translate_word1_name"></td>
                     <td id='translate_word2_language_name'></td>
                     <td id="translate_word2_name" ></td>
+                    <td id="translate_statistics"> </td>
                     <td align="right" >
                         <button type="button" class="btn btn-primary  ml-1 mt-1 bt_edit" data-toggle="modal" data-target="#translateAddModal" data-whatever="@mdo">Edit</button>
                     </td>
@@ -108,10 +112,13 @@
                 @foreach ($translates as $translate)
                 <tr>
                     <!--<th scope="row" >{{ $loop->iteration }}</th> -->
-                    <td id='translate_word1_language_name'>{{ $translate->word1->language->name }} </td>
-                    <td id="translate_word1_name">{{ $translate->word1->name }}</td>
-                    <td id='translate_word2_language_name'>{{ $translate->word2->language->name }}</td>
-                    <td id="translate_word2_name" >{{ $translate->word2->name }}</td>
+                    <td id='translate_word1_language_name'  >{{ $translate->word1->language->name }} </td>
+                    <td id="translate_word1_name"           >{{ $translate->word1->name }}</td>
+                    <td id='translate_word2_language_name'  >{{ $translate->word2->language->name }}</td>
+                    <td id="translate_word2_name"           >{{ $translate->word2->name }}</td>
+                    <td id="translate_statistics"           >
+                        {!! !empty($translate->statistics) ? ''.$translate->statistics->count_success.'/'.($translate->statistics->count_error+$translate->statistics->count_success) : '0/0' !!} 
+                    </td>
                     <td align="right" >
                         <button type="button" class="btn btn-primary  ml-1 mt-1 bt_edit" data-toggle="modal" data-target="#translateAddModal" data-whatever="@mdo">Edit</button>
                     </td>
@@ -146,7 +153,7 @@
                             @endforeach
                         </select>
                     </td>
-                    <td style="width: 35%">
+                    <td style="width: 30%">
                         <textarea style="resize: none; " id="new_word1_name" class="form-control" type="text" placeholder="слово" ></textarea>
                     </td>
                     <td style="width: 10%">
@@ -156,10 +163,11 @@
                             @endforeach
                         </select>
                     </td>
-                    <td style="width: 35%">
+                    <td style="width: 30%">
                         <textarea style="resize: none; " id="new_word2_name" class="form-control" type="text" placeholder="перевод"></textarea> 
                     </td>
-                    <td style="width: 10%" align="right"> 
+
+                    <td style="width: 20%" align="right"> 
                         <button type="button" class="btn btn-success  ml-1 mt-1" id='button_translate_new'>New</button>
                     </td>
 

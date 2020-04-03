@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Language;
 use App\Word;
 use App\Translation;
+use App\TranslationStatistics;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -21,6 +22,7 @@ class TranslationController extends Controller {
 
         $translates = Translation::where('user_id', Auth::user()->id)->paginate(7);
 
+//        dd($translates);
         return view('translation.show')
                         ->with('languages', $languages)
                         ->with('translates', $translates)
