@@ -10,6 +10,7 @@ class StatisticsController extends Controller {
 
     
 //    https://drivemarketing.ca/en/blog/connecting-laravel-to-a-google-sheet/
+//    https://developers.google.com/sheets/api/quickstart/php
     
     public function store(Request $request) {
 

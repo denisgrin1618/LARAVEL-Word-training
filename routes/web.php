@@ -23,6 +23,8 @@ Route::get('/', 'QuizController@start');
 
 
 Route::get('/translation', 'TranslationController@show')->name('translation.show');
+Route::get('/translation/import', 'TranslationController@import')->name('translation.import');
+Route::post('/translation/postimport', 'TranslationController@postimport')->name('translation.postimport');
 Route::post('/translation/add', 'TranslationController@add')->name('translation.add');
 Route::post('/translation/edit', 'TranslationController@edit')->name('translation.edit');
 Route::get('/translation/search', 'TranslationController@search')->name('translation.search');
