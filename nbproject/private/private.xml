@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/composer.json</file>
-            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/routes/web.php</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/app/Jobs/ImportVacabularyFromGoogleTranslate.php</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/config/queue.php</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/.env</file>
             <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/resources/views/translation/import.blade.php</file>
             <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/app/Http/Controllers/TranslationController.php</file>
-            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/resources/views/quiz/start.blade.php</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/app/ImportProgress.php</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/config/logging.php</file>
         </group>
     </open-files>
 </project-private>

@@ -19,7 +19,7 @@
             </div>
             
             
-            <a class="navbar-brand" href="{{ route('home') }}"><img src="{{ URL::to('/img/start_training.png') }}" ></a>
+<!--            <a class="navbar-brand" href="{{ route('home') }}"><img src="{{ URL::to('/img/start_training.png') }}" ></a>-->
         </div>
     </div>
 </div>

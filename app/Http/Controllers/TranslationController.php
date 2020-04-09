@@ -8,8 +8,11 @@ use App\Language;
 use App\Word;
 use App\Translation;
 use App\TranslationStatistics;
+use App\ImportProgress;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
+use App\Jobs\ImportVacabularyFromGoogleTranslate;
 
 class TranslationController extends Controller {
 
@@ -115,7 +118,7 @@ class TranslationController extends Controller {
         if ($resalt) {
             $response = ['status' => 'success'];
         } else {
-            $response = ['status' => 'error'];
+            $response = ['status' => 'error. could not delete translation id='.$id];
         }
 
         return response()->json($response);
@@ -169,126 +172,57 @@ class TranslationController extends Controller {
     public function import() {
         return view('translation.import');
     }
+    
+    public function importProgess() {
+//        $import_progress = session('import_progress', 100); 
+        
+        $percent_progress = 0;
+        
+        $import_progress = ImportProgress::where('user_id', Auth::user()->id)->get();
+        if (!$import_progress->isEmpty()) {
+            $percent_progress = $import_progress->first()->percent_progress;
+        }
+        
+        return response()->json($percent_progress);
+    }
 
-    public function postimport(Request $request) {
+
+    public function importPost(Request $request) {
 //        dd($request);
 
 //        https://duplexcrux.wordpress.com/2015/04/18/laravel-5-google-apis-client-library/
+//        https://laravel-news.com/google-api-socialite
+//        
+//        
+//        Ajax
+//        https://stackoverflow.com/questions/21530743/displaying-progress-while-waiting-for-controller-in-laravel-4
             
         $validatedData = $request->validate([
             'spreadsheetId' => ['required'],
         ]);
 
-
-        // Get the API client and construct the service object.
-        $client         = $this->getClient();
-        $service        = new \Google_Service_Sheets($client);
-        $spreadsheetId  = $request->post('spreadsheetId');
-        $range          = 'Сохраненные переводы!A1:D';
-
-        $response       = $service->spreadsheets_values->get($spreadsheetId, $range);
-        $values         = $response->getValues();
-        $rezalt         = "";
-
-
+//        session(['import_progress' => '20']);
+//        
+//        return response()->json(session('import_progress'));
+     
+        $user = Auth::user();
         
-        $user        = Auth::user();
-        $language_ru = Language::find(1);
-        $language_en = Language::find(2);
-        
-        
-        
-        if (empty($values)) {
-            $rezalt = "No data found";
-        } else {
-
-            $count_uploaded_words = 0;
-            foreach ($values as $row) {
-                $count_uploaded_words++;
-                
-//                $row[2], $row[3]
-                
-                $word1 = new Word;
-                $word1->name = $row[2];
-                $word1->language()->associate($language_en);
-                $word1->user()->associate($user);
-                $word1->save();
-                
-                $word2 = new Word;
-                $word2->name = $row[3];
-                $word2->language()->associate($language_ru);
-                $word2->user()->associate($user);
-                $word2->save();
-                
-                $translate = new Translation;
-                $translate->word1_id = $word1->id;
-                $translate->word2_id = $word2->id;
-                $translate->user()->associate($user);
-                $translate->save();
+        $import_progress = ImportProgress::where('user_id', $user->id)->get();
+        if ($import_progress->isEmpty()) {
+            $import_progress = new ImportProgress;
+            $import_progress->user()->associate($user);
             
-            }
-            $rezalt = "Was uploaded " . $count_uploaded_words . " words";
+        } else {
+            $import_progress = $import_progress->first();
         }
-
-
-
-        $output = array(
-            'success' => $rezalt
-        );
-
-        return response()->json($output);
+        $import_progress->percent_progress = 0;
+        $import_progress->save();
+        
+        ImportVacabularyFromGoogleTranslate::dispatch($request->post('spreadsheetId'), $user);
+        return response()->json('DONE');
+        
     }
 
-    /**
-     * Returns an authorized API client.
-     * @return Google_Client the authorized client object
-     */
-    function getClient() {
-        $client = new \Google_Client();
-        $client->setApplicationName('Google Sheets API PHP Quickstart');
-        $client->setScopes(\Google_Service_Sheets::SPREADSHEETS_READONLY);
-        $client->setAuthConfig(base_path().'/credentials.json');
-        $client->setAccessType('offline');
-        $client->setPrompt('select_account consent');
-
-        // Load previously authorized token from a file, if it exists.
-        // The file token.json stores the user's access and refresh tokens, and is
-        // created automatically when the authorization flow completes for the first
-        // time.
-        $tokenPath = base_path().'/token.json';
-        if (file_exists($tokenPath)) {
-            $accessToken = json_decode(file_get_contents($tokenPath), true);
-            $client->setAccessToken($accessToken);
-        }
-
-        // If there is no previous token or it's expired.
-        if ($client->isAccessTokenExpired()) {
-            // Refresh the token if possible, else fetch a new one.
-            if ($client->getRefreshToken()) {
-                $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
-            } else {
-                // Request authorization from the user.
-                $authUrl = $client->createAuthUrl();
-                printf("Open the following link in your browser:\n%s\n", $authUrl);
-                print 'Enter verification code: ';
-                $authCode = trim(fgets(STDIN));
-
-                // Exchange authorization code for an access token.
-                $accessToken = $client->fetchAccessTokenWithAuthCode($authCode);
-                $client->setAccessToken($accessToken);
-
-                // Check to see if there was an error.
-                if (array_key_exists('error', $accessToken)) {
-                    throw new Exception(join(', ', $accessToken));
-                }
-            }
-            // Save the token to a file.
-            if (!file_exists(dirname($tokenPath))) {
-                mkdir(dirname($tokenPath), 0700, true);
-            }
-            file_put_contents($tokenPath, json_encode($client->getAccessToken()));
-        }
-        return $client;
-    }
+  
 
 }
