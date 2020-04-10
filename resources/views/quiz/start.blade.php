@@ -41,7 +41,7 @@
                                     <select class="form-control" name="word_language">
                             
                                         @foreach ($languages as $language) 
-                                            @if ($language->name ===  ($search_input['language2'] ?? ""))
+                                            @if ($language->name ===  'en')
                                                 <option selected>{{ $language->name }}</option>
                                             @else
                                                 <option>{{ $language->name }}</option>

@@ -15,6 +15,8 @@
         <script src="{{ asset('js/jquery.textareaAutoResize.js') }}" ></script>
 
 
+        <link rel="shortcut icon" href="{{ asset('img/logo_page.png') }}" type="image/png">
+        
         <!-- Fonts 
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -45,7 +47,10 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('translation.import') }}" style="color: rgb(255,255,255)">Import</a>
-                        </li>	  
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('quiz.start') }}" style="color: rgb(255,255,255)">Quiz</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

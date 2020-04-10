@@ -23,13 +23,13 @@ class TranslationController extends Controller {
     public function show() {
         $languages = Language::all();
 
-        $translates = Translation::where('user_id', Auth::user()->id)->paginate(7);
+        $translates = Translation::where('user_id', Auth::user()->id)->paginate(25);
 
 //        dd($translates);
         return view('translation.show')
                         ->with('languages', $languages)
                         ->with('translates', $translates)
-                        ->with('search_input', []);
+                        ->with('search_input', ['language1' => 'en']);
     }
 
     public function add(Request $request) {
@@ -158,7 +158,10 @@ class TranslationController extends Controller {
                             ->join('languages as language2', 'word2.language_id', '=', 'language2.id')
                             ->where('language2.name', $language2);
                 })
-                ->paginate(7)
+//                ->toSql();              
+//                dd($translates);
+                ->select('*', 'translations.id as id')
+                ->paginate(25)
                 ->appends(request()->query());
 
 
