@@ -21,6 +21,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Route::get('/', 'QuizController@start');
 Route::get('/', 'QuizController@start');
 
+Route::get('/profile', 'UserController@profile')->name('profile');
+Route::post('/profile', 'UserController@update_avatar');
+
 
 Route::get('/translation', 'TranslationController@show')->name('translation.show');
 Route::get('/translation/import', 'TranslationController@import')->name('translation.import');
