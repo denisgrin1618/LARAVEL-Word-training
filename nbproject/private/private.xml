@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/app/Jobs/ImportVacabularyFromGoogleTranslate.php</file>
-            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/resources/views/translation/import.blade.php</file>
-            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/app/Http/Controllers/TranslationController.php</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/composer.lock</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/composer.json</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/app/Http/Controllers/UserController.php</file>
             <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/config/app.php</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/vendor/autoload.php</file>
         </group>
     </open-files>
 </project-private>

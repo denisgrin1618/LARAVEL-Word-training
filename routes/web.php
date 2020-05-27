@@ -34,8 +34,9 @@ Route::post('/translation/edit', 'TranslationController@edit')->name('translatio
 Route::get('/translation/search', 'TranslationController@search')->name('translation.search');
 Route::delete('/translation/delete/{id}', 'TranslationController@destroy')->name('translation.destroy');
 
-Route::get('/quiz', 'QuizController@start')->name('quiz.start');
-Route::post('/quiz/store', 'QuizController@store')->name('quiz.store');
+Route::get('/quiz/start', 'QuizController@start')->name('quiz.start');
+Route::get('/quiz', 'QuizController@show_all')->name('quiz.show_all');
 Route::get('/quiz/{id}', 'QuizController@show')->name('quiz.id');
+Route::post('/quiz/store', 'QuizController@store')->name('quiz.store');
 
 Route::post('/statistics/store', 'StatisticsController@store')->name('statistics.store');

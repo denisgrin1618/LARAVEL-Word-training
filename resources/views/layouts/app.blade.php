@@ -49,7 +49,7 @@
                             <a class="nav-link" href="{{ route('translation.import') }}" style="color: rgb(255,255,255)">Import</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('quiz.start') }}" style="color: rgb(255,255,255)">Quiz</a>
+                            <a class="nav-link" href="{{ route('quiz.show_all') }}" style="color: rgb(255,255,255)">Quiz</a>
                         </li>
                     </ul>
 
