@@ -6,7 +6,8 @@
 <div class="container">
     <main role="main" class="container" >
 
-        <br/>
+        <h1 id="quiz_id" class="invisible"> {{ $quiz->id }} </h1>
+ 
 
         <div class="row justify-content-center" id="div_quiz">
             <div class="col-md-8">
@@ -117,6 +118,7 @@
             $('#div_result').removeClass('invisible');
             $('#div_quiz').addClass('d-none');
                 
+                var quiz_id = $('#quiz_id').text();
                 var data =[];
                 $("#table_translates tr").each(function (index) {
                     var correct = $(this).find('#translate_word_correct').text();
@@ -124,8 +126,10 @@
                     var id      = $(this).find("#translate_id").text();
                     
                     var row_data = new Object();
+                    row_data.quiz_id = quiz_id;
                     row_data.translation_id = id;
                     row_data.correct_answer = (correct == user);
+                    row_data.answer = user;
                     data.push(row_data);
                 });
 //                console.log(JSON.stringify(data));
@@ -146,6 +150,7 @@
 //                        console.log("ERROR /statistics/store");
                     }
                 });
+                            
 
         });
 

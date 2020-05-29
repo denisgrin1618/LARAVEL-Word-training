@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\TranslationStatistics;
 use App\Translation;
+use App\Quiz;
+use App\QuizHistory;
 use Illuminate\Http\Request;
 
 class StatisticsController extends Controller {
@@ -17,6 +19,8 @@ class StatisticsController extends Controller {
 //        return $request->post('data');
 
         $data = $request->post('data');
+//        $json_data = json_decode($data);
+        
         foreach (json_decode($data) as $data_row) {
 
             $translation = Translation::find($data_row->translation_id);
@@ -41,7 +45,32 @@ class StatisticsController extends Controller {
             $translation_statistics->save();
         }
         
+        
+        ////////////////////////////////////////
+        foreach (json_decode($data) as $data_row) {
+
+            $quiz = Quiz::find($data_row->quiz_id);
+            $translation = Translation::find($data_row->translation_id);
+            $quiz_history = QuizHistory::where('translation_id', $translation->id)
+                            ->where('quiz_id', $quiz->id)
+                            ->get();
+
+            if ($quiz_history->isEmpty()) {
+                $quiz_history = new QuizHistory;
+                $quiz_history->translation()->associate($translation);
+                $quiz_history->quiz()->associate($quiz);
+                $quiz_history->answer = $data_row->answer;
+                $quiz_history->save();
+            } else {
+                $quiz_history = $quiz_history->first();
+                $quiz_history->answer = $data_row->answer;
+                $translation_statistics->save();
+            }
+        }
+        
+        
         return true;
     }
+     
 
 }

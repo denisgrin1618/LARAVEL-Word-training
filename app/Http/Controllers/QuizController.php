@@ -47,7 +47,7 @@ class QuizController extends Controller {
 
 
         $quiz = new Quiz;
-        $quiz->name     = 'test '.$string_time_now;
+        $quiz->name     = $string_time_now;
         $quiz->user_id  = $user_id;
         $quiz->save();
 
@@ -68,6 +68,8 @@ class QuizController extends Controller {
 
     }
 
+
+    
     public function start() {
 
         $languages = Language::all();
