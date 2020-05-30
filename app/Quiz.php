@@ -16,5 +16,29 @@ class Quiz extends Model
     {
         return $this->hasManyThrough('App\Translation', 'App\QuizTranslations', 'quiz_id',  'id', 'id', 'translate_id');
     }
+    
+    public function history()
+    {
+        return $this->hasMany('App\QuizHistory');
+    }
+    
+    public function pass_percentage()
+    {
+        $all_words       = \DB::table('quiz_history')->where('quiz_id','=',$this->id)->count();
+        $correct_answers = \DB::table('quiz_history')
+                ->join('translations', 'quiz_history.translation_id', '=', 'translations.id')           
+                //->join('words', 'translations.word2_id', '=', 'words.id')
+
+                ->join("words",function($join){
+                        $join->on('translations.word2_id', '=', 'words.id')
+                             ->on('quiz_history.answer','=','words.name');
+                })
+                ->where('quiz_id','=',$this->id)
+                ->count();
+                
+        return  $all_words == 0  ? 0 : round($correct_answers * 100 / $all_words, 0);       
+         
+    }
+
 
 }

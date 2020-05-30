@@ -5,6 +5,7 @@ use App\Language;
 use App\Translation;
 use App\Quiz;
 use App\QuizTranslations;
+use App\QuizHistory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -67,9 +68,7 @@ class QuizController extends Controller {
 //        return view('quiz.show')->with('quiz', $quiz);
 
     }
-
-
-    
+   
     public function start() {
 
         $languages = Language::all();
@@ -98,6 +97,7 @@ class QuizController extends Controller {
                 ->where('user_id', Auth::user()->id)
                 ->paginate(10);
 
+        
 //        dd($quiz->toJson(JSON_PRETTY_PRINT));
         return view('quiz.show_all')->with('quizes', $quizes);
     }

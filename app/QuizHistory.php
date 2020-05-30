@@ -19,4 +19,5 @@ class QuizHistory extends Model
     }
     
     
+    
 }

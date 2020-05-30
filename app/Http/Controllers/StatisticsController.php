@@ -64,7 +64,7 @@ class StatisticsController extends Controller {
             } else {
                 $quiz_history = $quiz_history->first();
                 $quiz_history->answer = $data_row->answer;
-                $translation_statistics->save();
+                $quiz_history->save();
             }
         }
         
