@@ -39,6 +39,42 @@ class Quiz extends Model
         return  $all_words == 0  ? 0 : round($correct_answers * 100 / $all_words, 0);       
          
     }
+    
+    public function total_correct_answers()
+    {
+        $correct_answers = \DB::table('quiz_history')
+                ->join('translations', 'quiz_history.translation_id', '=', 'translations.id')           
+                //->join('words', 'translations.word2_id', '=', 'words.id')
+
+                ->join("words",function($join){
+                        $join->on('translations.word2_id', '=', 'words.id')
+                             ->on('quiz_history.answer','=','words.name');
+                })
+                ->where('quiz_id','=',$this->id)
+                ->count();
+                
+        return  $correct_answers;       
+         
+    }
+    
+    public function total_wrong_answers()
+    {
+        $wrong_answers = \DB::table('quiz_history')
+                ->join('translations', 'quiz_history.translation_id', '=', 'translations.id')           
+                //->join('words', 'translations.word2_id', '=', 'words.id')
+
+                ->join("words",function($join){
+                        $join->on('translations.word2_id', '=', 'words.id')
+                             ->on('quiz_history.answer','!=','words.name');
+                })
+                ->where('quiz_id','=',$this->id)
+                ->count();
+                
+        return  $wrong_answers;       
+         
+    }
+    
+    
 
 
 }

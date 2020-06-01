@@ -4,10 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/app/Http/Controllers/StatisticsController.php</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/resources/views/layouts/app.blade.php</file>
             <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/app/Http/Controllers/QuizController.php</file>
-            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/resources/views/quiz/show.blade.php</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/.env</file>
             <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/routes/web.php</file>
-            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/database/migrations/2020_05_29_133426_create_quiz_history_table.php</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/resources/views/quiz/show_all.blade.php</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/app/Translation.php</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/config/app.php</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/app/Quiz.php</file>
         </group>
     </open-files>
 </project-private>
