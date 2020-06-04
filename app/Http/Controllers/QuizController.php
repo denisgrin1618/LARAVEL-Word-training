@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+
 use App\Language;
 use App\Translation;
 use App\Quiz;
@@ -95,11 +97,32 @@ class QuizController extends Controller {
                 ->with('translations.word1')
                 ->with('translations.word2')
                 ->where('user_id', Auth::user()->id)
-                ->paginate(10);
+                ->paginate(config('app.paginate_max'));
 
         
 //        dd($quiz->toJson(JSON_PRETTY_PRINT));
+
         return view('quiz.show_all')->with('quizes', $quizes);
     }
 
+    public function destroy($id) {
+
+        $resalt = false;
+        $quiz = Quiz::find($id);
+        if (is_null($quiz)) {
+            $resalt = false;
+        } else {
+            $resalt = Quiz::find($id)->delete();
+        }
+
+
+        if ($resalt) {
+            $response = ['status' => 'success'];
+        } else {
+            $response = ['status' => 'error. could not delete quiz id='.$id];
+        }
+
+        return response()->json($response);
+    }
+    
 }

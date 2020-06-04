@@ -13,6 +13,7 @@
                     <!-- <th style="width: 3%" scope="col">#</th> -->
                     <th  scope="col"></th>
                     <th style="width: 60px" scope="col"></th>
+                    <th style="width: 70px" scope="col"></th>
 
                 </tr>
             </thead>
@@ -34,19 +35,27 @@
                         
                         
                        
-                        <div id="div_quiz" class="d-flex btn p-0 m-0 rounded border border-secondary bg-white" style="width:100%;  background: linear-gradient(90deg, #DCDCDC 0%, #DCDCDC {{$quiz->pass_percentage()}}%, white {{$quiz->pass_percentage()}}%, white {{100-$quiz->pass_percentage()}}%)">
+                        <div id="div_quiz" 
+                             class="d-flex btn p-0 m-0 rounded border border-secondary bg-white" 
+                             data-toggle="collapse" data-target="#div_quiz_details{{ $quiz->id }}" aria-expanded="false" aria-controls="div_quiz_details{{ $quiz->id }}"
+                             style="width:100%;  background: linear-gradient(90deg, #DCDCDC 0%, #DCDCDC {{$quiz->pass_percentage()}}%, white {{$quiz->pass_percentage()}}%, white {{100-$quiz->pass_percentage()}}%)">
                             <div class="m-1" style="width:100%">
 
                                 
                                 <table style="width:100%">
                                     <tr>
-                                        <td class="text-left">{{ $quiz->name }}</td> 
+                                        <td class="text-left">Words: {{ $quiz->translations()->count() }}</td> 
                                         <td class="text-right" id="td_pass_percentage">{{ $quiz->pass_percentage() }}%</td>
                                     </tr>
                                 </table>
                                 
-                                <div id="div_quiz_details" class="d-none">
-                                    
+                                
+                                
+                               
+                                
+                                
+                                <div id="div_quiz_details{{ $quiz->id }}" class="collapse">
+                                    <div >
                                     <table class="d-none d-flex text-left p-2">
                                         <tr >
                                             <td>total words:</td>
@@ -65,6 +74,7 @@
                                             <td>{{ $quiz->pass_percentage() }}%</td>
                                         </tr>
                                     </table>
+                                    </div>
                                 </div >
                                  
                             </div>
@@ -81,6 +91,11 @@
                     <td class="text-right align-top">
                         <a class="btn btn-success" href="{{ route('quiz.id', ['id'=> $quiz->id]) }}">start</a>
                         <!-- <img src="/img/play_30.png" class="btn"> -->
+                    </td>
+                    <td class="float-right align-top">
+                        <button  class="btn btn-danger text-white but_delete_quiz" data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo"">delete</button>
+                        <!-- <img src="/img/play_30.png" class="btn"> -->
+                        <p id="quiz_id" class="d-none">{{$quiz->id}}</p>
                     </td>
                 </tr>
                 @endforeach
@@ -99,6 +114,47 @@
         
     </main>
 
+    
+    
+    
+     <div >
+
+        <div class="modal fade" id="quiz_delete_modal" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" id="modal-content-div">
+
+                    <!--
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modal-label">New translate</h4>
+                    </div>
+                    -->
+                    <div class="modal-body">
+
+                       <div class="form-group">
+                            <label for="translate_word2_name" class="col-form-label">Delete this quiz? Are you sure?</label>
+                        </div>
+
+                        <textarea class="form-control d-none" id="modal_quiz_id" name="modal_quiz_id"></textarea>
+                        
+                        <div class="text-right">
+                            <button  class="btn btn-secondary" data-dismiss="modal" id="modal_dialog_button_delete">Ok</button>                         
+                            <button  class="btn btn-secondary" data-dismiss="modal" id="modal_dialog_button_cansel">Cansel</button>
+                        </div>
+                    </div>
+                    <!--
+                    <div class="modal-footer">
+                        
+                    </div>
+                    -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    
+    
 </div>
 
 
@@ -106,9 +162,52 @@
 
     $(function ()
     {
+//      
+//      
+
+        var curent_table_tr;
+        $('.but_delete_quiz').on("click", function (event) {
+
+            var button = $(event.target) // Кнопка, что спровоцировало модальное окно  
+            var quiz_id = button.parent().find('#quiz_id').text();
+            console.log("quiz_id " + quiz_id);
+            
+            curent_table_tr = button.parent().parent();
+//            console.log(curent_table_tr.html());
+            
+            $('#modal_quiz_id').val(quiz_id);
+  
+        });
+
+         $('#modal_dialog_button_delete').click(function (e) {
+
+            e.preventDefault();
+
+//            console.log('click delete');
+
+            var quiz_id = $('#modal_quiz_id').val();
+            console.log(quiz_id);
+            $.ajax({
+                type: 'DELETE',
+                url: "/quiz/delete/"+quiz_id,
+                data: {
+                    "_token": $('meta[name="csrf-token"]').attr('content')
+                },
+
+                success: function (data) {
+                    console.log(data);
+//                    $('#table_translates').find('#translate_id').eq(translate_id).remove();
+                    curent_table_tr.remove();
+                },
+                error: function () {
+                    console.log("ERROR");
+                }
+            });
+        });
         
         $('td #div_quiz').on("click", function (event) {
 
+//            console.log('1111');
             var target = $(event.target);
             while(target.attr('id') != 'div_quiz'){
                target = target.parent(); 
@@ -116,8 +215,9 @@
 
             var pass_percentage  = target.find('#td_pass_percentage').text(); 
             pass_percentage      = pass_percentage.replace("%", "");
-            var div_quiz_details = target.find('#div_quiz_details');
+            var div_quiz_details = target.find('[id*="div_quiz_details"] table');
             
+//            console.log(div_quiz_details.html());
             if(div_quiz_details.hasClass("d-none")){
                 div_quiz_details.removeClass('d-none');
                 target.css('background', 'white');

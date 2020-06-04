@@ -329,11 +329,11 @@
 
             console.log('click delete');
 
-            var translate_id = $('#translateAddModal').find('#translate_id').val();
+            var quiz_id = $('#translateAddModal').find('#translate_id').val();
             
             $.ajax({
                 type: 'DELETE',
-                url: "/translation/delete/"+translate_id,
+                url: "/quiz/delete/"+quiz_id,
                 data: {
                     "_token": $('meta[name="csrf-token"]').attr('content')
                 },

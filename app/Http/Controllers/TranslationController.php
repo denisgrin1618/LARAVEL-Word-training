@@ -161,7 +161,7 @@ class TranslationController extends Controller {
 //                ->toSql();              
 //                dd($translates);
                 ->select('*', 'translations.id as id')
-                ->paginate(25)
+                ->paginate(config('app.paginate_max'))
                 ->appends(request()->query());
 
 
