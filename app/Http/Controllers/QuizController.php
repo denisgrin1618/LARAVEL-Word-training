@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Language;
 use App\Translation;
 use App\Quiz;
@@ -28,49 +27,47 @@ class QuizController extends Controller {
             'quantity_of_words' => ['required', 'integer'],
         ]);
 
-        $string_time_now    = Carbon::now()->toDateTimeString();
-        $user_id            = Auth::user()->id;
+        $string_time_now = Carbon::now()->toDateTimeString();
+        $user_id = Auth::user()->id;
 
 
-         $translates   = DB::table('translations')
-                 ->join('words as word1', 'translations.word1_id', '=', 'word1.id')
-                 ->join('languages as language1', 'word1.language_id', '=', 'language1.id')
-                 ->join('words as word2', 'translations.word2_id', '=', 'word2.id')
-                 ->join('languages as language2', 'word2.language_id', '=', 'language2.id')
-                 ->where('translations.user_id', $user_id)
-                 ->where('language1.name', $request->post('word_language'))
-                 ->where('language2.name', $request->post('translate_language'))
-                 ->select('translations.id')
-                 ->inRandomOrder()
-                 ->take($request->post('quantity_of_words'))
-                 ->get();
+        $translates = DB::table('translations')
+                ->join('words as word1', 'translations.word1_id', '=', 'word1.id')
+                ->join('languages as language1', 'word1.language_id', '=', 'language1.id')
+                ->join('words as word2', 'translations.word2_id', '=', 'word2.id')
+                ->join('languages as language2', 'word2.language_id', '=', 'language2.id')
+                ->where('translations.user_id', $user_id)
+                ->where('language1.name', $request->post('word_language'))
+                ->where('language2.name', $request->post('translate_language'))
+                ->select('translations.id')
+                ->inRandomOrder()
+                ->take($request->post('quantity_of_words'))
+                ->get();
 
-       // dd($translates);
+        // dd($translates);
 
 
 
         $quiz = new Quiz;
-        $quiz->name     = $string_time_now;
-        $quiz->user_id  = $user_id;
+        $quiz->name = $string_time_now;
+        $quiz->user_id = $user_id;
         $quiz->save();
 
-        foreach ($translates as $translate ){
+        foreach ($translates as $translate) {
             $quizzes_translations = new QuizTranslations;
-            $quizzes_translations->quiz_id      = $quiz->id;
+            $quizzes_translations->quiz_id = $quiz->id;
             $quizzes_translations->translate_id = $translate->id;
             $quizzes_translations->save();
         }
 
 
 //        dd($quiz->load('translations')->toJson(JSON_PRETTY_PRINT));
-
 //        $quiz->load('translations')->load('translations.word1')->load('translations.word2');
 
         return redirect()->route('quiz.id', ['id' => $quiz->id]);
 //        return view('quiz.show')->with('quiz', $quiz);
-
     }
-   
+
     public function start() {
 
         $languages = Language::all();
@@ -81,19 +78,41 @@ class QuizController extends Controller {
     public function show(Request $request, $id) {
 
 //        dd($request->only_errors == "Yes");
-        
-        $quiz = Quiz::with('translations')
-                ->with('translations.word1')
-                ->with('translations.word2')
-                ->where('id', $id)
+//        $quiz = Quiz::with('translations')
+//                ->with('translations.word1')
+//                ->with('translations.word2')
+//                ->where('id', $id)
+//                ->where('user_id', Auth::user()->id)
+//                ->applyFilters($request->all(), $id)
+//                ->first();
+
+        $array_wrong_translations_id = \DB::table('quiz_history')
+                ->join('translations', 'quiz_history.translation_id', '=', 'translations.id')
+                ->join("words", function($join) {
+                    $join->on('translations.word2_id', '=', 'words.id')
+                    ->on('quiz_history.answer', '!=', 'words.name');
+                })
+                ->where('quiz_id', '=', $id)
+                ->pluck('translation_id')
+                ->toArray();
+
+        $quiz = Quiz::where('id', $id)
                 ->where('user_id', Auth::user()->id)
-                ->applyFilters($request->all())
                 ->first();
 
+        $quiz->load(['translations' => function ($q) use ($array_wrong_translations_id) {
+//                $q->whereIn('translate_id', $array_wrong_translations_id);
+
+                $q->when(count($array_wrong_translations_id) > 0, function ($q) use ($array_wrong_translations_id) {
+                            return $q->whereIn('translate_id', $array_wrong_translations_id);
+                        });
+            }]);
+
+        //dd($quiz->toSQL());
 //        dd($quiz->toJson(JSON_PRETTY_PRINT));
         return view('quiz.show')->with('quiz', $quiz);
     }
-    
+
     public function show_all() {
 
         $quizes = Quiz::with('translations')
@@ -102,7 +121,7 @@ class QuizController extends Controller {
                 ->where('user_id', Auth::user()->id)
                 ->paginate(config('app.paginate_max'));
 
-        
+
 //        dd($quiz->toJson(JSON_PRETTY_PRINT));
 
         return view('quiz.show_all')->with('quizes', $quizes);
@@ -122,10 +141,10 @@ class QuizController extends Controller {
         if ($resalt) {
             $response = ['status' => 'success'];
         } else {
-            $response = ['status' => 'error. could not delete quiz id='.$id];
+            $response = ['status' => 'error. could not delete quiz id=' . $id];
         }
 
         return response()->json($response);
     }
-    
+
 }
