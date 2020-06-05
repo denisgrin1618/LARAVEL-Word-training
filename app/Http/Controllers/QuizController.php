@@ -78,13 +78,16 @@ class QuizController extends Controller {
         return view('quiz.start')->with('languages', $languages);
     }
 
-    public function show($id) {
+    public function show(Request $request, $id) {
 
+//        dd($request->only_errors == "Yes");
+        
         $quiz = Quiz::with('translations')
                 ->with('translations.word1')
                 ->with('translations.word2')
                 ->where('id', $id)
                 ->where('user_id', Auth::user()->id)
+                ->applyFilters($request->all())
                 ->first();
 
 //        dd($quiz->toJson(JSON_PRETTY_PRINT));

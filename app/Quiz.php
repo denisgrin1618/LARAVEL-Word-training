@@ -75,6 +75,25 @@ class Quiz extends Model
     }
     
     
+    public function scopeApplyFilters($query, $filters)
+    {
+        // Perform filtering logic with $query->where(...);
+        if($filters != null && $filters['only_errors'] == "yes"){
+            
+            return $query
+                ->join('translations', 'quiz_history.translation_id', '=', 'translations.id')           
+                
+                ->join("words",function($join){
+                        $join->on('translations.word2_id', '=', 'words.id')
+                             ->on('quiz_history.answer','!=','words.name');
+                });
+            
+        }else{
+            return $query;
+        }
+
+        
+    }
 
 
 }

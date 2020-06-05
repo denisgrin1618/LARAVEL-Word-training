@@ -12,8 +12,8 @@
                 <tr>
                     <!-- <th style="width: 3%" scope="col">#</th> -->
                     <th  scope="col"></th>
-                    <th style="width: 60px" scope="col"></th>
-                    <th style="width: 70px" scope="col"></th>
+                    <th style="width: 36px" scope="col"></th>
+                    <th style="width: 36px" scope="col"></th>
 
                 </tr>
             </thead>
@@ -35,8 +35,7 @@
                         
                         
                        
-                        <div id="div_quiz" 
-                             class="d-flex btn p-0 m-0 rounded border border-secondary bg-white" 
+                        <div class=" div_quiz d-flex btn p-0 m-0 rounded border border-secondary bg-white" 
                              data-toggle="collapse" data-target="#div_quiz_details{{ $quiz->id }}" aria-expanded="false" aria-controls="div_quiz_details{{ $quiz->id }}"
                              style="width:100%;  background: linear-gradient(90deg, #DCDCDC 0%, #DCDCDC {{$quiz->pass_percentage()}}%, white {{$quiz->pass_percentage()}}%, white {{100-$quiz->pass_percentage()}}%)">
                             <div class="m-1" style="width:100%">
@@ -49,14 +48,14 @@
                                     </tr>
                                 </table>
                                 
-                                
-                                
-                               
-                                
-                                
+
                                 <div id="div_quiz_details{{ $quiz->id }}" class="collapse">
                                     <div >
                                     <table class="d-none d-flex text-left p-2">
+                                        <tr>
+                                            <td>success rate:</td>
+                                            <td>{{ $quiz->pass_percentage() }}%</td>
+                                        </tr>
                                         <tr >
                                             <td>total words:</td>
                                             <td>{{ $quiz->translations()->count() }}</td>
@@ -69,10 +68,15 @@
                                             <td>total wrong answers:</td>
                                             <td>{{ $quiz->total_wrong_answers() }}</td>
                                         </tr>
+                                        
+                            
+                                        @if ($quiz->total_wrong_answers() > 0)
                                         <tr>
-                                            <td>success rate:</td>
-                                            <td>{{ $quiz->pass_percentage() }}%</td>
+                                            <td colspan="2">
+                                                <a href="{{ route('quiz.id', ['id'=> $quiz->id, 'only_errors' => 'yes']) }}">start quiz only with wrong answers</a>
+                                            </td>
                                         </tr>
+                                        @endif
                                     </table>
                                     </div>
                                 </div >
@@ -89,13 +93,19 @@
                         
                     </td>
                     <td class="text-right align-top">
-                        <a class="btn btn-success" href="{{ route('quiz.id', ['id'=> $quiz->id]) }}">start</a>
-                        <!-- <img src="/img/play_30.png" class="btn"> -->
+                        
+                        <a class="d-flex btn p-0 m-0 rounded border border-secondary bg-white  " href="{{ route('quiz.id', ['id'=> $quiz->id]) }}">            
+                            <img class="mx-auto" src="/img/icons/play-fill.svg" alt="" width="32" height="32" title="start">
+                        </a>
+                        
                     </td>
                     <td class="float-right align-top">
-                        <button  class="btn btn-danger text-white but_delete_quiz" data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo"">delete</button>
-                        <!-- <img src="/img/play_30.png" class="btn"> -->
-                        <p id="quiz_id" class="d-none">{{$quiz->id}}</p>
+
+                        <div class="but_delete_quiz d-flex btn p-0 m-0 rounded border border-secondary bg-white  "  data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">            
+                            <img class="mx-auto" src="/img/icons/x.svg" alt="" width="32" height="32" title="delete">
+                            <p id="quiz_id" class="d-none">{{$quiz->id}}</p>
+                        </div>
+                        
                     </td>
                 </tr>
                 @endforeach
@@ -162,24 +172,28 @@
 
     $(function ()
     {
-//      
-//      
 
         var curent_table_tr;
+               
+        $('.div_quiz').click(function(e){
+            //При нажатии новой строки сворачивает все открытые div деталей
+//            $('[id*="div_quiz_details"]').removeClass('show');
+        });
+        
         $('.but_delete_quiz').on("click", function (event) {
 
-            var button = $(event.target) // Кнопка, что спровоцировало модальное окно  
+            var button = $(event.target); 
             var quiz_id = button.parent().find('#quiz_id').text();
             console.log("quiz_id " + quiz_id);
             
-            curent_table_tr = button.parent().parent();
+            curent_table_tr = button.parent().parent().parent();
 //            console.log(curent_table_tr.html());
             
             $('#modal_quiz_id').val(quiz_id);
   
         });
 
-         $('#modal_dialog_button_delete').click(function (e) {
+        $('#modal_dialog_button_delete').click(function (e) {
 
             e.preventDefault();
 
@@ -205,11 +219,11 @@
             });
         });
         
-        $('td #div_quiz').on("click", function (event) {
+        $('td .div_quiz').on("click", function (event) {
 
-//            console.log('1111');
+            console.log('1111');
             var target = $(event.target);
-            while(target.attr('id') != 'div_quiz'){
+            while(!target.hasClass('div_quiz')){  //target.attr('id') != 'div_quiz'
                target = target.parent(); 
             }
 
