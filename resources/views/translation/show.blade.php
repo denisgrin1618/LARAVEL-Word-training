@@ -64,7 +64,12 @@
                     <td></td>
                     <td align="right"> 
                         <!-- <button type="button" class="btn btn-secondary  ml-1 mt-1" >Search</button>  -->
-                        {{ Form::submit('Search',['class'=>'btn btn-secondary  ml-1 mt-1']) }}
+<!--                        {{ Form::submit('Search',['class'=>'btn btn-secondary  ml-1 mt-1']) }}-->
+                        
+                        <button type="submit" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white  " >            
+                            <img class="mx-auto" src="/img/icons/search.svg" alt="" width="20" height="20" title="start">
+                        </button>
+                        
                     </td>
                     <td class="d-none"></td>
                     <td class="d-none"></td>
@@ -120,7 +125,13 @@
                         {!! !empty($translate->statistics) ? ''.$translate->statistics->count_success.'/'.($translate->statistics->count_error+$translate->statistics->count_success) : '0/0' !!} 
                     </td>
                     <td align="right" >
-                        <button type="button" class="btn btn-primary  ml-1 mt-1 bt_edit" data-toggle="modal" data-target="#translateAddModal" data-whatever="@mdo">Edit</button>
+<!--                        <button type="button" class="btn btn-primary  ml-1 mt-1 bt_edit" data-toggle="modal" data-target="#translateAddModal" data-whatever="@mdo">Edit</button>-->
+
+                            <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white bt_edit" data-toggle="modal" data-target="#translateAddModal" data-whatever="@mdo">
+                                <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="start">
+                        
+                            </button>
+
                     </td>
                     <td class="d-none" id="translate_word1_id">{{ $translate->word1->id }}</td>
                     <td class="d-none" id="translate_word2_id">{{ $translate->word2->id }}</td>
@@ -168,7 +179,10 @@
                     </td>
 
                     <td style="width: 20%" align="right"> 
-                        <button type="button" class="btn btn-success  ml-1 mt-1" id='button_translate_new'>New</button>
+                        <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white" id='button_translate_new'>
+                            <img class="mx-auto" src="/img/icons/plus.svg" alt="" width="20" height="20" title="start">
+                        
+                        </button>
                     </td>
 
                 </tr>
@@ -262,7 +276,7 @@
             var button = $(event.target) // Кнопка, что спровоцировало модальное окно  
 
             
-            curent_table_tr = button.parent().parent();
+            curent_table_tr = button.parent().parent().parent();
             var translate_word1_name    = curent_table_tr.find('#translate_word1_name').text();
             var translate_word2_name    = curent_table_tr.find('#translate_word2_name').text();
             var translate_word1_id      = curent_table_tr.find('#translate_word1_id').text();
@@ -353,6 +367,8 @@
 
             e.preventDefault();   
 
+
+                console.log($('#table_translate_new').find('#new_word1_name').val());
             $.ajax({
                 type: 'POST',
                 url: "/translation/add",

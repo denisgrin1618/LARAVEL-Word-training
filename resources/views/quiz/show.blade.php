@@ -76,11 +76,17 @@
 
 <script type="text/javascript">
 
+
+    var min_height_input = 70;
+
+
     function ResizeElements() {
         var width = $('.input-group-text').parent().parent().width();
         var height = $('.input-group-text').parent().parent().height();
+        
         $('.input-group-text').css('width', width / 2);
-        $('.input-group-text').css('height', height < 100 ? 100 : height);
+        $('.input-group-text').css('height', height < min_height_input ? min_height_input : height);
+       
     }
 
     $(window).resize(function () {
@@ -102,13 +108,13 @@
     {
 
         // при изменении размера textarea при наборе текста, будем менять размер зависимых елементов
-        $('#translate_box').autoResize({elCopyResize: $("#p_word_box")});
+        $('#translate_box').autoResize({elCopyResize: $("#p_word_box"), minHeight:min_height_input});
 
         // при ручном растягивании textarea, будем менять размер зависимых елементов
         $("#translate_box").ResizeSecondaryElement($("#p_word_box"));
 
         $(window).resize(function () {
-            $('#translate_box').autoResize({elCopyResize: $("#p_word_box")});
+            $('#translate_box').autoResize({elCopyResize: $("#p_word_box"), minHeight:min_height_input});
             $("#translate_box").ResizeSecondaryElement($("#p_word_box"));
         });
 
@@ -121,8 +127,8 @@
                 var quiz_id = $('#quiz_id').text();
                 var data =[];
                 $("#table_translates tr").each(function (index) {
-                    var correct = $(this).find('#translate_word_correct').text();
-                    var user    = $(this).find('#translate_word_user').text();
+                    var correct = $(this).find('#translate_word_correct').text().replace(/\n/g, "");
+                    var user    = $(this).find('#translate_word_user').text().replace(/\n/g, "");
                     var id      = $(this).find("#translate_id").text();
                     
                     var row_data = new Object();
@@ -171,7 +177,7 @@
             var translate_user = tr.find('#translate_word_user');
 
             translate_user.text($('#translate_box').val());
-            if (translate_user.text() == translate_correct.text()) {
+            if (translate_user.text().replace(/\n/g, "") == translate_correct.text().replace(/\n/g, "")) {
                 translate_user.removeClass('text-danger').addClass('text-success');
             } else {
                 translate_user.removeClass('text-success').addClass('text-danger');
@@ -189,7 +195,7 @@
             var translate_user = tr.find('#translate_word_user');
 //            console.log(translate_user.text());
             $('#p_word_box').text(word.text());
-            $('#translate_box').val(translate_user.text());
+            $('#translate_box').val(translate_user.text().replace(/\n/g, ""));
 
             if (table_translates_rows_count == table_quiz_row_index) {
 //                $(this).text('Finish').removeClass('btn-primary').addClass('btn-success');
@@ -206,8 +212,8 @@
 
             
             $("#table_translates tr").each(function (index) {
-                var correct = $(this).find('#translate_word_correct').text();
-                var user    = $(this).find('#translate_word_user').text();
+                var correct = $(this).find('#translate_word_correct').text().replace(/\n/g, "");
+                var user    = $(this).find('#translate_word_user').text().replace(/\n/g, "");
                 var id      = $(this).find("#translate_id").text();
                 if (correct == user) {
                     count_correct++;
@@ -260,6 +266,16 @@
         });
 
         $("#button_next").trigger("click");
+        
+        $("#translate_box").keypress(function (e) {
+            var code = (e.keyCode ? e.keyCode : e.which);
+            //alert(code);
+            if (code == 13) {
+                $("#translate_box").val().replace(/\n/g, "");
+                $("#button_next").trigger('click');  
+                return true;
+            }
+        });
 
     });
 

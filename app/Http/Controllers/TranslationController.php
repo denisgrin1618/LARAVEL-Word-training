@@ -70,7 +70,9 @@ class TranslationController extends Controller {
 
 
 
-        $translate = Translation::where('word1_id', $word1->id)->where('word2_id', $word2->id)->get();
+        $translate = Translation::where('word1_id', $word1->id)
+                                ->where('word2_id', $word2->id)
+                                ->get();
         if ($translate->isEmpty()) {
             $translate = new Translation;
             $translate->word1_id = $word1->id;

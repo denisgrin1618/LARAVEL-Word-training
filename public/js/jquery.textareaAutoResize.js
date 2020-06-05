@@ -66,7 +66,7 @@
 			}
 			
 			
-			var newHeight = Math.max(parseInt(newHeight1), parseInt(newHeight2), 70);
+			var newHeight = Math.max(parseInt(newHeight1), parseInt(newHeight2));
 			// - Денис
 			
 			
@@ -81,11 +81,7 @@
 			minHeight = parseInt(options.minHeight);
 
 			
-			// + denis
-			if(options.elCopyResize != undefined) {
-				options.elCopyResize.css('height', newHeight);
-			}
-			// - denis
+			
 			
 			
 			if(newHeightI != 0) {
@@ -111,14 +107,21 @@
 
 					if (options.maxHeight && newHeightI >= maxHeight) {
 						$textarea.css('height', options.maxHeight);
+                                                newHeight = options.maxHeight;
 					}
 					else if (options.minHeight && newHeightI <= minHeight)
 					{
 						$textarea.css('height', options.minHeight);
+                                                newHeight = options.minHeight;
 					}
 				}
 			}
 			
+//                         + denis
+			if(options.elCopyResize != undefined) {
+				options.elCopyResize.css('height', newHeight);
+			}
+//			 - denis
 			
 			
 			
@@ -157,11 +160,11 @@
 		$.fn.ResizeSecondaryElement = function(dest) {
 			var resizeInt = null;
 			var $this = $(this);
-			
+			     
 			// the handler function
 			var resizeEvent = function() {
 				dest.outerWidth( $this.outerWidth() );
-				dest.outerHeight($this.outerHeight());
+				dest.outerHeight($this.outerHeight());        
 			};
 
 			// This provides a "real-time" (actually 15 fps)

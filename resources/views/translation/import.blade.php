@@ -35,7 +35,15 @@
             <div class="input-group mb-3">
                 <input name="spreadsheetId" id="spreadsheetId" type="text" class="form-control" placeholder="Spreadsheet Id" aria-label="Spreadsheet Id" aria-describedby="basic-addon2">
                 <div class="input-group-append">
+                    <!--                    
                     <button class="btn btn-success" type="button" id="button_import">Import</button>
+                    -->
+                    <button class="d-flex btn p-6 m-0 rounded border border-secondary bg-white" type="button" id="button_import">
+                        <img class="mx-auto" src="/img/icons/download.svg" alt="" width="20" height="20" title="start">
+                    
+                    </button>
+                    
+                        
                 </div>
             </div>
 
