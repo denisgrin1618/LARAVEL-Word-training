@@ -12,8 +12,8 @@
                 <tr>
                     <!-- <th style="width: 3%" scope="col">#</th> -->
                     <th  scope="col"></th>
-                    <th style="width: 36px" scope="col"></th>
-                    <th style="width: 36px" scope="col"></th>
+                    <th style="width: 50px" scope="col"></th>
+                    <th style="width: 50px" scope="col"></th>
 
                 </tr>
             </thead>
@@ -73,7 +73,7 @@
                                         @if ($quiz->total_wrong_answers() > 0)
                                         <tr>
                                             <td colspan="2">
-                                                <a href="{{ route('quiz.id', ['id'=> $quiz->id, 'only_errors' => 'yes']) }}">start quiz only with wrong answers</a>
+                                                <a href="{{ route('quiz.id', ['id'=> $quiz->id, 'only_wrong_translations' => 'yes']) }}">start quiz only with wrong answers</a>
                                             </td>
                                         </tr>
                                         @endif
@@ -94,15 +94,15 @@
                     </td>
                     <td class="text-right align-top">
                         
-                        <a class="d-flex btn p-0 m-0 rounded border border-secondary bg-white  " href="{{ route('quiz.id', ['id'=> $quiz->id]) }}">            
-                            <img class="mx-auto" src="/img/icons/play-fill.svg" alt="" width="32" height="32" title="start">
+                        <a class="d-flex btn p-6 m-0 rounded border border-secondary bg-white  " href="{{ route('quiz.id', ['id'=> $quiz->id]) }}">            
+                            <img class="mx-auto" src="/img/icons/play-fill.svg" alt="" width="20" height="20" title="start">
                         </a>
                         
                     </td>
                     <td class="float-right align-top">
 
-                        <div class="but_delete_quiz d-flex btn p-0 m-0 rounded border border-secondary bg-white  "  data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">            
-                            <img class="mx-auto" src="/img/icons/x.svg" alt="" width="32" height="32" title="delete">
+                        <div class="but_delete_quiz d-flex btn p-6 m-0 rounded border border-secondary bg-white  "  data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">            
+                            <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="delete">
                             <p id="quiz_id" class="d-none">{{$quiz->id}}</p>
                         </div>
                         

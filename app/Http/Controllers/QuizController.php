@@ -77,7 +77,7 @@ class QuizController extends Controller {
 
     public function show(Request $request, $id) {
 
-//        dd($request->only_errors == "Yes");
+//        dd($request->only_wrong_translations == "Yes");
 //        $quiz = Quiz::with('translations')
 //                ->with('translations.word1')
 //                ->with('translations.word2')
@@ -86,6 +86,9 @@ class QuizController extends Controller {
 //                ->applyFilters($request->all(), $id)
 //                ->first();
 
+        
+        $array_wrong_translations_id = [];
+        if($request->only_wrong_translations == "yes"){
         $array_wrong_translations_id = \DB::table('quiz_history')
                 ->join('translations', 'quiz_history.translation_id', '=', 'translations.id')
                 ->join("words", function($join) {
@@ -96,13 +99,13 @@ class QuizController extends Controller {
                 ->pluck('translation_id')
                 ->toArray();
 
+        }
+        
         $quiz = Quiz::where('id', $id)
                 ->where('user_id', Auth::user()->id)
                 ->first();
 
         $quiz->load(['translations' => function ($q) use ($array_wrong_translations_id) {
-//                $q->whereIn('translate_id', $array_wrong_translations_id);
-
                 $q->when(count($array_wrong_translations_id) > 0, function ($q) use ($array_wrong_translations_id) {
                             return $q->whereIn('translate_id', $array_wrong_translations_id);
                         });

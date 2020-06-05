@@ -65,7 +65,7 @@ class Quiz extends Model {
 
     public function scopeApplyFilters($query, $filters, $id) {
         // Perform filtering logic with $query->where(...);
-        if ($filters != null && $filters['only_errors'] == "yes") {
+        if ($filters != null && $filters['only_wrong_translations'] == "yes") {
 //            
 //            dd( $query
 //                ->join('quiz_history', 'quiz_history.translation_id', '=', 'translation_id')           
