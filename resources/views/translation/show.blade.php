@@ -69,7 +69,7 @@
                         <!--                        {{ Form::submit('Search',['class'=>'btn btn-secondary  ml-1 mt-1']) }}-->
 
                         <button type="submit" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white  " >            
-                            <img class="mx-auto" src="/img/icons/search.svg" alt="" width="20" height="20" title="start">
+                            <img class="mx-auto" src="/img/icons/search.svg" alt="" width="20" height="20" title="search">
                         </button>
 
                     </td>
@@ -90,7 +90,7 @@
                     <td id="translate_statistics"> </td>
                     <td align="right" >
                         <button id="bt_edit" type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white bt_edit" >
-                            <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="start">
+                            <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="edit">
                         </button>
                     </td>
                     <td align="right" >
@@ -114,7 +114,7 @@
                     <td id="translate_statistics"> </td>
                     <td align="right" >
                         <button id="bt_edit" type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white bt_edit" >
-                            <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="start">
+                            <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="edit">
                         </button>
                     </td>
                     <td align="right" >
@@ -144,7 +144,7 @@
                     <td align="right" >
 
                         <button id="bt_edit" type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white bt_edit" >
-                            <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="start">
+                            <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="edit">
                         </button>
 
                     </td>
@@ -202,7 +202,7 @@
 
                     <td style="width: 20%" align="right"> 
                         <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white" id='button_translate_new'>
-                            <img class="mx-auto" src="/img/icons/plus.svg" alt="" width="20" height="20" title="start">
+                            <img class="mx-auto" src="/img/icons/plus.svg" alt="" width="20" height="20" title="new">
 
                         </button>
                     </td>
