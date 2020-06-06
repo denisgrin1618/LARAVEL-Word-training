@@ -104,8 +104,11 @@ class TranslationController extends Controller {
 
 
         return $translate->toJson();
+        
+        
+//        return $request->post('translate_id');
     }
-
+    
     public function destroy($id) {
 
         $resalt = false;

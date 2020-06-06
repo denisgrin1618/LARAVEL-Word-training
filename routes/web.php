@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-//Route::get('/', 'QuizController@start');
 Route::get('/', 'QuizController@start');
 
 Route::get('/profile', 'UserController@profile')->name('profile');
@@ -30,9 +29,9 @@ Route::get('/translation/import', 'TranslationController@import')->name('transla
 Route::post('/translation/importprogress', 'TranslationController@importProgess')->name('translation.importprogress');
 Route::post('/translation/importpost', 'TranslationController@importPost')->name('translation.postimport');
 Route::post('/translation/add', 'TranslationController@add')->name('translation.add');
-Route::post('/translation/edit', 'TranslationController@edit')->name('translation.edit');
 Route::get('/translation/search', 'TranslationController@search')->name('translation.search');
 Route::delete('/translation/delete/{id}', 'TranslationController@destroy')->name('translation.destroy');
+Route::post('/translation/edit', 'TranslationController@edit')->name('translation.edit');
 
 Route::get('/quiz/start', 'QuizController@start')->name('quiz.start');
 Route::get('/quiz', 'QuizController@show_all')->name('quiz.show_all');

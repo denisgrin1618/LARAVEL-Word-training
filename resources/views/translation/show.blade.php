@@ -16,8 +16,9 @@
                     <th style="width: 30%" scope="col">Word</th>
                     <th style="width: 10%" scope="col"></th>
                     <th style="width: 30%" scope="col">Translate</th>
-                    <th style="width: 10%" scope="col"></th>
-                    <th style="width: 10%" scope="col"></th>
+                    <th style="width: 10%" scope="col"><img class="mx-auto" src="/img/icons/graph-up.svg" alt="" width="20" height="20" title="statistics"></th>
+                    <th style="width: 50px" scope="col"></th>
+                    <th style="width: 50px" scope="col"></th>
                     <th style="width: 0%"  scope="col" class="d-none"></th>
                     <th style="width: 0%"  scope="col" class="d-none"></th>
                     <th style="width: 0%"  scope="col" class="d-none"></th>
@@ -32,13 +33,13 @@
                 <tr>
                     <td>
                         <select class="form-control" name="language1">
-                            
+
                             @foreach ($languages as $language)
-                                @if ($language->name ===  ($search_input['language1'] ?? ""))
-                                    <option selected>{{ $language->name }}</option>
-                                @else
-                                    <option>{{ $language->name }}</option>
-                                @endif
+                            @if ($language->name ===  ($search_input['language1'] ?? ""))
+                            <option selected>{{ $language->name }}</option>
+                            @else
+                            <option>{{ $language->name }}</option>
+                            @endif
                             @endforeach
                         </select>
                     </td>
@@ -47,35 +48,37 @@
                     </td>
                     <td>
                         <select class="form-control" name="language2">
-                            
+
                             @foreach ($languages as $language) 
-                                @if ($language->name ===  ($search_input['language2'] ?? ""))
-                                    <option selected>{{ $language->name }}</option>
-                                @else
-                                    <option>{{ $language->name }}</option>
-                                @endif
+                            @if ($language->name ===  ($search_input['language2'] ?? ""))
+                            <option selected>{{ $language->name }}</option>
+                            @else
+                            <option>{{ $language->name }}</option>
+                            @endif
                             @endforeach
-                            
+
                         </select>
                     </td>
                     <td>
                         <input class="form-control" type="text" placeholder="search" name="word2" value="{{$search_input['word2'] ?? ''}}">
                     </td>
                     <td></td>
+                    <td></td>
                     <td align="right"> 
                         <!-- <button type="button" class="btn btn-secondary  ml-1 mt-1" >Search</button>  -->
-<!--                        {{ Form::submit('Search',['class'=>'btn btn-secondary  ml-1 mt-1']) }}-->
-                        
+                        <!--                        {{ Form::submit('Search',['class'=>'btn btn-secondary  ml-1 mt-1']) }}-->
+
                         <button type="submit" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white  " >            
                             <img class="mx-auto" src="/img/icons/search.svg" alt="" width="20" height="20" title="start">
                         </button>
-                        
+
                     </td>
                     <td class="d-none"></td>
                     <td class="d-none"></td>
                     <td class="d-none"></td>
                     <td class="d-none"></td>
                     <td class="d-none"></td>
+                    
                 </tr>
                 {{ Form::close() }}
 
@@ -86,7 +89,14 @@
                     <td id="translate_word2_name" ></td>
                     <td id="translate_statistics"> </td>
                     <td align="right" >
-                        <button type="button" class="btn btn-primary  ml-1 mt-1 bt_edit" data-toggle="modal" data-target="#translateAddModal" data-whatever="@mdo">Edit</button>
+                        <button id="bt_edit" type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white bt_edit" >
+                            <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="start">
+                        </button>
+                    </td>
+                    <td align="right" >
+                        <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white but_delete" data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">
+                            <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="delete">
+                        </button>
                     </td>
                     <td class="d-none" id="translate_word1_id"> </td>
                     <td class="d-none" id="translate_word2_id"> </td>
@@ -95,7 +105,7 @@
                     <td class="d-none" id="translate_word2_language_id"> </td>
 
                 </tr>
-                
+
                 <tr class="d-none">                  
                     <td id='translate_word1_language_name'> </td>
                     <td id="translate_word1_name"></td>
@@ -103,7 +113,14 @@
                     <td id="translate_word2_name" ></td>
                     <td id="translate_statistics"> </td>
                     <td align="right" >
-                        <button type="button" class="btn btn-primary  ml-1 mt-1 bt_edit" data-toggle="modal" data-target="#translateAddModal" data-whatever="@mdo">Edit</button>
+                        <button id="bt_edit" type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white bt_edit" >
+                            <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="start">
+                        </button>
+                    </td>
+                    <td align="right" >
+                        <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white but_delete" data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">
+                            <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="delete">
+                        </button>
                     </td>
                     <td class="d-none" id="translate_word1_id"> </td>
                     <td class="d-none" id="translate_word2_id"> </td>
@@ -112,8 +129,8 @@
                     <td class="d-none" id="translate_word2_language_id"> </td>
 
                 </tr>
-                
-                
+
+
                 @foreach ($translates as $translate)
                 <tr>
                     <!--<th scope="row" >{{ $loop->iteration }}</th> -->
@@ -125,12 +142,17 @@
                         {!! !empty($translate->statistics) ? ''.$translate->statistics->count_success.'/'.($translate->statistics->count_error+$translate->statistics->count_success) : '0/0' !!} 
                     </td>
                     <td align="right" >
-<!--                        <button type="button" class="btn btn-primary  ml-1 mt-1 bt_edit" data-toggle="modal" data-target="#translateAddModal" data-whatever="@mdo">Edit</button>-->
 
-                            <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white bt_edit" data-toggle="modal" data-target="#translateAddModal" data-whatever="@mdo">
-                                <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="start">
-                        
-                            </button>
+                        <button id="bt_edit" type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white bt_edit" >
+                            <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="start">
+                        </button>
+
+                    </td>
+                    <td align="right" >
+
+                        <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white but_delete" data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">
+                            <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="delete">
+                        </button>
 
                     </td>
                     <td class="d-none" id="translate_word1_id">{{ $translate->word1->id }}</td>
@@ -143,14 +165,14 @@
                 @endforeach
 
 
-                
+
 
 
             </tbody>
         </table>
 
         <br>
-        
+
         <table class="table-responsive table-striped w-100 d-block d-md-table" id='table_translate_new'>
 
             <tbody>
@@ -181,7 +203,7 @@
                     <td style="width: 20%" align="right"> 
                         <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white" id='button_translate_new'>
                             <img class="mx-auto" src="/img/icons/plus.svg" alt="" width="20" height="20" title="start">
-                        
+
                         </button>
                     </td>
 
@@ -191,20 +213,20 @@
         </table>
 
         <br/>
-        
+
         <div class="d-flex justify-content-center">
             <!-- {{ $translates->links() }} -->     
             {{ $translates->appends(request()->query())->links() }}
         </div>
-        
-        
+
+
     </main>
 
 
     <div >
 
-        <div class="modal fade" id="translateAddModal" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+        <div class="modal fade" id="quiz_delete_modal" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content" id="modal-content-div">
 
                     <!--
@@ -214,30 +236,15 @@
                     -->
                     <div class="modal-body">
 
-                        <div class="form-group">
-                            <label for="translate_word1_name" class="col-form-label">Слово:</label>
-                            <textarea class="form-control" id="translate_word1_name" name="translate_word1_name"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="translate_word2_name" class="col-form-label">Перевод:</label>
-                            <textarea class="form-control" id="translate_word2_name" name="translate_word2_name"></textarea>
+                       <div class="form-group">
+                            <label class="col-form-label">Delete this quiz? Are you sure?</label>
                         </div>
 
-                        <textarea class="form-control d-none" id="translate_id" name="translate_id"></textarea>
-                        <textarea class="form-control d-none" id="translate_word1_id" name="translate_word1_id"></textarea>
-                        <textarea class="form-control d-none" id="translate_word2_id" name="translate_word2_id"></textarea>
-                        <textarea class="form-control d-none" id="translate_word1_language_id" name="translate_word1_language_id"></textarea>
-                        <textarea class="form-control d-none" id="translate_word2_language_id" name="translate_word2_language_id"></textarea>
-
-                        <div>
-                            <!--
-                            {{Form::open(array('method'=>'delete', 'route'=>['translation.destroy', 'route_param_translate_id']))}}
-                                <button  class="btn btn-danger" data-dismiss="modal" id="modal_dialog_button_delete">Delete</button>                         
-                            {{Form::close()}}
-                            -->
-    
-                            <button  class="btn btn-danger" data-dismiss="modal" id="modal_dialog_button_delete">Delete</button>                         
-                            <button  class="btn btn-success" data-dismiss="modal" id="modal_dialog_button_save">Save</button>
+                        <textarea class="form-control d-none" id="modal_translate_id" name="modal_quiz_id"></textarea>
+                        
+                        <div class="text-right">
+                            <button  class="btn btn-secondary" data-dismiss="modal" id="modal_dialog_button_delete">Ok</button>                         
+                            <button  class="btn btn-secondary" data-dismiss="modal" id="modal_dialog_button_cansel">Cansel</button>
                         </div>
                     </div>
                     <!--
@@ -251,10 +258,10 @@
         </div>
     </div>
 
-    
-    
-    
-    
+
+
+
+
 
 </div>
 
@@ -272,82 +279,110 @@
         $('.bt_edit').on("click", function (event) {
 
 
-//            var modal = $(this);
-            var button = $(event.target) // Кнопка, что спровоцировало модальное окно  
+            var button = $(event.target);
+            if (button.prop("tagName") == "IMG") {
+                button = button.parent();
+            }
 
+            curent_table_tr = button.parent().parent();
+
+            var td_translate_word1_name = curent_table_tr.find('#translate_word1_name');
+            var td_translate_word2_name = curent_table_tr.find('#translate_word2_name');
+
+            if (button.attr('id') == 'bt_edit') {
+
+                
+
+                var translate_word1_name_text = td_translate_word1_name.text();
+                var translate_word2_name_text = td_translate_word2_name.text();
+
+                var textarea_word1 = $('<textarea/>', {text: translate_word1_name_text, class: 'form-control text-primary', id: 'textarea_word1'});
+                var textarea_word2 = $('<textarea/>', {text: translate_word2_name_text, class: 'form-control text-primary', id: 'textarea_word2'});
+
+
+                td_translate_word1_name.text("").append(textarea_word1);
+                td_translate_word2_name.text("").append(textarea_word2);
+
+                textarea_word1.autoResize({elCopyResize: $("#textarea_word2")});
+                textarea_word2.autoResize({elCopyResize: $("#textarea_word1")});
+
+                textarea_word1.ResizeSecondaryElement($("#textarea_word2"));
+                textarea_word2.ResizeSecondaryElement($("#textarea_word1"));
+
+                button.attr('id', 'bt_save');
+                button.find('img').attr("src", "/img/icons/file-earmark-check.svg");
+                curent_table_tr.addClass('text-white border border-secondary bg-info');
+
+
+            }else if(button.attr('id') == 'bt_save'){
+
+
+                curent_table_tr.removeClass('text-white border border-secondary bg-info');
+                button.find('img').attr("src", "/img/icons/pencil.svg");
+                button.attr('id', 'bt_edit');
+                
+                translate_word1_name_text = td_translate_word1_name.find('textarea').val();
+                td_translate_word1_name.empty().text(translate_word1_name_text);
+                
+                translate_word2_name_text = td_translate_word2_name.find('textarea').val();
+                td_translate_word2_name.empty().text(translate_word2_name_text);
+                
+                var id = curent_table_tr.find('#translate_id').text();
+                console.log('id = ' + id);
+                $.ajax({
+                    type: 'POST',
+                    url: "/translation/edit", //"{{ route('translation.edit') }}",
+                    data: {
+                        "_token": $('meta[name="csrf-token"]').attr('content'),
+                        "translate_word1_id":   curent_table_tr.find('#translate_word1_id').text(),
+                        "translate_word2_id":   curent_table_tr.find('#translate_word2_id').text(),
+                        "translate_word1_name": curent_table_tr.find('#translate_word1_name').text(),
+                        "translate_word2_name": curent_table_tr.find('#translate_word2_name').text(),
+                        "translate_id":         curent_table_tr.find('#translate_id').text()
+
+                    },
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function () {
+                        console.log("ERROR");
+                    }
+                });
+                
+                
+                
             
-            curent_table_tr = button.parent().parent().parent();
-            var translate_word1_name    = curent_table_tr.find('#translate_word1_name').text();
-            var translate_word2_name    = curent_table_tr.find('#translate_word2_name').text();
-            var translate_word1_id      = curent_table_tr.find('#translate_word1_id').text();
-            var translate_word2_id      = curent_table_tr.find('#translate_word2_id').text();
-            var translate_id            = curent_table_tr.find('#translate_id').text();
-
-            console.log(button);
-            console.log(translate_id);
+            }
 
 
-            $('#translateAddModal').find('#translate_word1_name').val(translate_word1_name).autoResize();
-            $('#translateAddModal').find('#translate_word2_name').val(translate_word2_name).autoResize();
-            $('#translateAddModal').find('#translate_id').val(translate_id);
-//            $('#translateAddModal').find('#translate_word1_language_id').val(translate_word1_language_id);
-//            $('#translateAddModal').find('#translate_word2_language_id').val(translate_word2_language_id);
-            $('#translateAddModal').find('#translate_word1_id').val(translate_word1_id);
-            $('#translateAddModal').find('#translate_word2_id').val(translate_word2_id);
 
         });
 
-        $('#translateAddModal').on('shown.bs.modal', function (event) {
-            console.log('shown');
-//            var modal = $(this);
-            $(this).find('#translate_word1_name').autoResize();
-            $(this).find('#translate_word2_name').autoResize();
-        });
+        $('.but_delete').on("click", function (event) {
 
-        $('#modal_dialog_button_save').click(function (e) {
+            var button = $(event.target);
+            if (button.prop("tagName") == "IMG") {
+                button = button.parent();
+            }
 
-            e.preventDefault();
+            curent_table_tr = button.parent().parent();
+            var translate_id = curent_table_tr.find('#translate_id').text();
 
-            console.log('click');
-            var word1 = $('#translateAddModal').find('#translate_word1_name').val();
-            var word2 = $('#translateAddModal').find('#translate_word2_name').val();
-
-            curent_table_tr.find('#translate_word1_name').text(word1);
-            curent_table_tr.find('#translate_word2_name').text(word2);
-
-            $.ajax({
-                type: 'POST',
-                url: "/translation/edit",
-                data: {
-                    "_token": $('meta[name="csrf-token"]').attr('content'),
-                    "translate_word1_id": $('#translateAddModal').find('#translate_word1_id').val(),
-                    "translate_word2_id": $('#translateAddModal').find('#translate_word2_id').val(),
-                    "translate_word1_name": $('#translateAddModal').find('#translate_word1_name').val(),
-                    "translate_word2_name": $('#translateAddModal').find('#translate_word2_name').val(),
-                    "translate_id": $('#translateAddModal').find('#translate_id').val()
-
-                },
-
-                success: function (data) {
-                    console.log(data);
-                },
-                error: function () {
-                    console.log("ERROR");
-                }
-            });
+            $('#modal_translate_id').val(translate_id);
+  
         });
 
         $('#modal_dialog_button_delete').click(function (e) {
 
             e.preventDefault();
 
-            console.log('click delete');
+//            console.log('click delete');
 
-            var quiz_id = $('#translateAddModal').find('#translate_id').val();
+            var translate_id = $('#modal_translate_id').val();
             
             $.ajax({
                 type: 'DELETE',
-                url: "/quiz/delete/"+quiz_id,
+                url: "/translation/delete/"+translate_id,
                 data: {
                     "_token": $('meta[name="csrf-token"]').attr('content')
                 },
@@ -363,12 +398,16 @@
             });
         });
 
+
+
+       
+
         $('#button_translate_new').click(function (e) {
 
-            e.preventDefault();   
+            e.preventDefault();
 
 
-                console.log($('#table_translate_new').find('#new_word1_name').val());
+            console.log($('#table_translate_new').find('#new_word1_name').val());
             $.ajax({
                 type: 'POST',
                 url: "/translation/add",
@@ -382,18 +421,18 @@
                 },
 
                 success: function (data) {
-                    
+
 //                    console.log(data);
                     var obj = $.parseJSON(data);
-                    
+
                     var tr = $("#tr_blank").clone(true);
                     tr.removeAttr("id").removeAttr("class");
-                   // tr.addClass("bg-success").css('color', '#fff');
+                    // tr.addClass("bg-success").css('color', '#fff');
                     tr.addClass("text-success");
                     tr.find('#translate_word1_language_name').text(obj.word1.language.name);
                     tr.find('#translate_word2_language_name').text(obj.word2.language.name);
                     tr.find('#translate_word1_name').text(obj.word1.name);
-                    tr.find('#translate_word2_name').text(obj.word2.name);                  
+                    tr.find('#translate_word2_name').text(obj.word2.name);
                     tr.find('#translate_word1_id').text(obj.word1.id);
                     tr.find('#translate_word2_id').text(obj.word2.id);
                     tr.find('#translate_id').text(obj.id);
