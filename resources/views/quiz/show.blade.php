@@ -7,7 +7,53 @@
     <main role="main" class="container" >
 
         <h1 id="quiz_id" class="invisible"> {{ $quiz->id }} </h1>
- 
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+
+                <div class="row justify-content-md-center">
+                    <table class="table  table-borderless">
+
+                        <thead>
+                            <tr>                    
+                                <th class="text-left"></th>
+                                <th class="text-right"></th>
+                                <th class="text-left"></th>
+                                <th class="text-right"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            <tr>
+                                <td>
+                                    <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white" >
+                                        <img class="mx-auto" src="/img/icons/chevron-double-left.svg" alt="" width="20" height="20" title="search">
+                                    </button>
+                                </td>
+                                <td>
+                                    <button type="button" class="float-right d-flex btn p-6 m-0 rounded border border-secondary bg-white" >
+                                        <img class="mx-auto" src="/img/icons/chevron-left.svg" alt="" width="20" height="20" title="search">
+                                    </button>
+                                </td>
+                                <td>
+                                    <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white" >
+                                        <img class="mx-auto" src="/img/icons/chevron-right.svg" alt="" width="20" height="20" title="search">
+                                    </button>
+                                </td>
+                                <td>
+                                    <button type="button" class="float-right d-flex btn p-6 m-0 rounded border border-secondary bg-white" >
+                                        <img class="mx-auto" src="/img/icons/chevron-double-right.svg" alt="" width="20" height="20" title="search">
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
 
         <div class="row justify-content-center" id="div_quiz">
             <div class="col-md-8">
@@ -31,10 +77,11 @@
                 <button class="btn btn-primary float-right" id="button_next">
                     Next
                 </button>
-                
+
                 <button class="btn btn-success float-right d-none" id="button_finish">
                     Finish
                 </button>
+
 
             </div>
         </div>
@@ -83,10 +130,10 @@
     function ResizeElements() {
         var width = $('.input-group-text').parent().parent().width();
         var height = $('.input-group-text').parent().parent().height();
-        
+
         $('.input-group-text').css('width', width / 2);
         $('.input-group-text').css('height', height < min_height_input ? min_height_input : height);
-       
+
     }
 
     $(window).resize(function () {
@@ -108,13 +155,13 @@
     {
 
         // при изменении размера textarea при наборе текста, будем менять размер зависимых елементов
-        $('#translate_box').autoResize({elCopyResize: $("#p_word_box"), minHeight:min_height_input});
+        $('#translate_box').autoResize({elCopyResize: $("#p_word_box"), minHeight: min_height_input});
 
         // при ручном растягивании textarea, будем менять размер зависимых елементов
         $("#translate_box").ResizeSecondaryElement($("#p_word_box"));
 
         $(window).resize(function () {
-            $('#translate_box').autoResize({elCopyResize: $("#p_word_box"), minHeight:min_height_input});
+            $('#translate_box').autoResize({elCopyResize: $("#p_word_box"), minHeight: min_height_input});
             $("#translate_box").ResizeSecondaryElement($("#p_word_box"));
         });
 
@@ -123,40 +170,40 @@
             $("#button_next").trigger("click");
             $('#div_result').removeClass('invisible');
             $('#div_quiz').addClass('d-none');
-                
-                var quiz_id = $('#quiz_id').text();
-                var data =[];
-                $("#table_translates tr").each(function (index) {
-                    var correct = $(this).find('#translate_word_correct').text().replace(/\n/g, "");
-                    var user    = $(this).find('#translate_word_user').text().replace(/\n/g, "");
-                    var id      = $(this).find("#translate_id").text();
-                    
-                    var row_data = new Object();
-                    row_data.quiz_id = quiz_id;
-                    row_data.translation_id = id;
-                    row_data.correct_answer = (correct == user);
-                    row_data.answer = user;
-                    data.push(row_data);
-                });
-//                console.log(JSON.stringify(data));
-                
-                $.ajax({
-                    type: 'POST',
-                    url: "/statistics/store",
-                    data: {
-                        "_token": $('meta[name="csrf-token"]').attr('content'),
-                        "data": JSON.stringify(data)
-                    },
 
-                    success: function (data) {
+            var quiz_id = $('#quiz_id').text();
+            var data = [];
+            $("#table_translates tr").each(function (index) {
+                var correct = $(this).find('#translate_word_correct').text().replace(/\n/g, "");
+                var user = $(this).find('#translate_word_user').text().replace(/\n/g, "");
+                var id = $(this).find("#translate_id").text();
+
+                var row_data = new Object();
+                row_data.quiz_id = quiz_id;
+                row_data.translation_id = id;
+                row_data.correct_answer = (correct == user);
+                row_data.answer = user;
+                data.push(row_data);
+            });
+//                console.log(JSON.stringify(data));
+
+            $.ajax({
+                type: 'POST',
+                url: "/statistics/store",
+                data: {
+                    "_token": $('meta[name="csrf-token"]').attr('content'),
+                    "data": JSON.stringify(data)
+                },
+
+                success: function (data) {
 //                        console.log("DATA /statistics/store ->");
 //                        console.log(data);
-                    },
-                    error: function () {
+                },
+                error: function () {
 //                        console.log("ERROR /statistics/store");
-                    }
-                });
-                            
+                }
+            });
+
 
         });
 
@@ -167,9 +214,9 @@
 //                $('#div_result').removeClass('invisible');
 //                $('#div_quiz').addClass('d-none');  
 //            }
-            
-            
-            
+
+
+
             var index = table_quiz_row_index;
             var tr = $('#index_' + index).parent();
             var word = tr.find('#word');
@@ -200,7 +247,7 @@
             if (table_translates_rows_count == table_quiz_row_index) {
 //                $(this).text('Finish').removeClass('btn-primary').addClass('btn-success');
                 $('#button_finish').removeClass('d-none');
-                $('#button_next').addClass('d-none');  
+                $('#button_next').addClass('d-none');
             }
 
 
@@ -210,26 +257,26 @@
             var count_correct = 0;
             var count_error = 0;
 
-            
+
             $("#table_translates tr").each(function (index) {
                 var correct = $(this).find('#translate_word_correct').text().replace(/\n/g, "");
-                var user    = $(this).find('#translate_word_user').text().replace(/\n/g, "");
-                var id      = $(this).find("#translate_id").text();
+                var user = $(this).find('#translate_word_user').text().replace(/\n/g, "");
+                var id = $(this).find("#translate_id").text();
                 if (correct == user) {
                     count_correct++;
                 } else {
                     count_error++;
                 }
-                
-               
+
+
             });
 
             result_persant = Math.round(count_correct * 100 / (count_correct + count_error));
             $('#result').text("RESULT " + result_persant + "%");
-            
-            
-      
-            
+
+
+
+
         });
 
         $('#button_back').click(function (e) {
@@ -266,13 +313,13 @@
         });
 
         $("#button_next").trigger("click");
-        
+
         $("#translate_box").keypress(function (e) {
             var code = (e.keyCode ? e.keyCode : e.which);
             //alert(code);
             if (code == 13) {
                 $("#translate_box").val().replace(/\n/g, "");
-                $("#button_next").trigger('click');  
+                $("#button_next").trigger('click');
                 return true;
             }
         });

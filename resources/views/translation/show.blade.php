@@ -237,7 +237,7 @@
                     <div class="modal-body">
 
                        <div class="form-group">
-                            <label class="col-form-label">Delete this quiz? Are you sure?</label>
+                            <label class="col-form-label">Delete this translation? Are you sure?</label>
                         </div>
 
                         <textarea class="form-control d-none" id="modal_translate_id" name="modal_quiz_id"></textarea>
@@ -398,10 +398,6 @@
             });
         });
 
-
-
-       
-
         $('#button_translate_new').click(function (e) {
 
             e.preventDefault();
@@ -451,6 +447,14 @@
             });
         });
 
+        $("button")
+            .mouseover(function() {
+              $( this ).removeClass('bt-white').addClass('bg-secondary');
+            })
+            .mouseout(function() {
+              $( this ).removeClass('bg-secondary').addClass('bt-white');
+        });
+  
     });
 
 </script>

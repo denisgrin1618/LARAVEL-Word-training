@@ -242,6 +242,15 @@
 
         });
   
+  
+        $(".but_delete_quiz, a")
+            .mouseover(function() {
+              $( this ).removeClass('bt-white').addClass('bg-secondary');
+            })
+            .mouseout(function() {
+              $( this ).removeClass('bg-secondary').addClass('bt-white');
+        });
+  
     });
      
 </script>
