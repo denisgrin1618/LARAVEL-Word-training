@@ -7,16 +7,6 @@
 
     <main role="main" class="container" >
 
-
-        <!--        
-                {{ Form::open(array('route' => 'translation.postimport', 'method' => 'post')) }}
-        
-                <input class="form-control" type="text" placeholder="spreadsheetId" name="spreadsheetId" >
-                {{ Form::submit('import',['class'=>'btn btn-secondary  ml-1 mt-1']) }}
-        
-                {{ Form::close() }}
-        -->
-
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -27,43 +17,36 @@
         </div>
         @endif
 
-        <div class="card-body">
 
-            <!--            {{ Form::open(array('route' => 'translation.postimport', 'method' => 'post')) }}-->
+        <div >
+            <h1>Import translations from Google Translate</h1>
+            <div class="input-group " >
+            <input name="spreadsheetId" id="spreadsheetId" type="text" autocomplete="off"
+                   class="form-control" placeholder="Spreadsheet ID" aria-label="Spreadsheet ID" aria-describedby="basic-addon2">
+            <div class="input-group-append">
 
-
-            <div class="input-group mb-3">
-                <input name="spreadsheetId" id="spreadsheetId" type="text" class="form-control" placeholder="Spreadsheet Id" aria-label="Spreadsheet Id" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                    <!--                    
-                    <button class="btn btn-success" type="button" id="button_import">Import</button>
-                    -->
-                    <button class="d-flex btn p-6 m-0 rounded border border-secondary bg-white" type="button" id="button_import">
-                        <img class="mx-auto" src="/img/icons/download.svg" alt="" width="20" height="20" title="start">
-                    
-                    </button>
-                    
-                        
-                </div>
+                <button class="d-flex btn p-6 m-0 rounded border border-secondary bg-white" type="button" id="button_import">
+                    <img class="mx-auto" src="/img/icons/download.svg" alt="" width="20" height="20" title="start">
+                </button>
             </div>
-
-            <!--            {{ Form::close() }}-->
-
-            <div class="progress">
-                <div id='import_progress_bar'  class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
-            </div>
-       
-
         </div>
-
-
-
-
-
+        
+        <br>
+        
+            <p>1. Open Google Translate </p>
+            <p>2. Open saved translations  <img src="/img/Import_words_phrasebook_icon.jpg"> </p>
+            <p>3. Then export them to Google Sheet <img src="/img/Import_words_export_icon_2.jpg"></p>
+            <p>4. Copy Spreadsheet ID from url and enter it to input below</p>
+            <img src="/img/Import_words_export_icon_3.jpg">
+        </div>
+        
+        <br>
+        
+        
+        <br>
+        <br>
 
     </main>
-
-
 
 </div>
 
@@ -73,8 +56,36 @@
 
 <script type="text/javascript" defer>
 
+
+
+
     $(function ()
     {
+
+//        $("#spreadsheetId").hover(     
+//            function(){$(this).css('background', "linear-gradient(90deg, #DCDCDC 0%, #DCDCDC 40%, white 40%, white 60%)!important");}, 
+//            function(){$(this).css('background', "linear-gradient(90deg, #DCDCDC 0%, #DCDCDC 40%, white 40%, white 60%)!important");}
+//        );
+////
+//        $( "#spreadsheetId" ).focus(function() {
+//            console.log('focus');
+//            $(this).css('background', "linear-gradient(90deg, #DCDCDC 0%, #DCDCDC 40%, white 40%, white 60%)!important");
+//        });
+//        
+//        $( "#spreadsheetId" ).change(function() {
+//            console.log('change');
+//            $(this).css('background', "linear-gradient(90deg, #DCDCDC 0%, #DCDCDC 40%, white 40%, white 60%)!important");
+//        });
+//        
+//        $( "#spreadsheetId" ).ready(function() {
+//            console.log('ready');
+//            $(this).css('background', "linear-gradient(90deg, #DCDCDC 0%, #DCDCDC 40%, white 40%, white 60%)!important");
+//        });
+
+//        $('html').bind('input', function() {
+//            console.log('auto');
+//            $("#spreadsheetId").css('background', "linear-gradient(90deg, #DCDCDC 0%, #DCDCDC 40%, white 40%, white 60%)!important");
+//        });
 
         $('#button_import').click(function (e) {
 
@@ -86,7 +97,7 @@
 //                $.get('/translation/importprogress', function (data) {
 //                    console.log(data);
 //                });
-                
+
                 $.ajax({
                     type: 'POST',
                     url: "/translation/importprogress",
@@ -99,23 +110,26 @@
 
                     success: function (data) {
                         console.log(data);
-                        var bar = $('#import_progress_bar');
-                        bar.text(data+"%").attr("aria-valuenow",data).css('width', data+'%');
-                        
-                        
-                        
-                        if (data == 100){
+//                        var bar = $('#import_progress_bar');
+//                        bar.text(data+"%").attr("aria-valuenow",data).css('width', data+'%');
+
+
+                        $('#spreadsheetId').css('background', "linear-gradient(90deg, #DCDCDC 0%, #DCDCDC " + data + "%, white " + data + "%, white " + (100 - data) + "%)");
+
+
+
+                        if (data == 100) {
                             clearInterval(myInterval);
-			}
-                        
+                        }
+
                     },
                     error: function () {
                         console.log("ERROR");
                         clearInterval(myInterval);
                     }
-                    
+
                 });
-            
+
             }, 1000);
 
 
