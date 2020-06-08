@@ -89,7 +89,7 @@
                                 <div class="input-group mb-3 dropdown-item">
                                     <div class="input-group-prepend">
                                         <a class="btn btn-outline-secondary {{ Cookie::get('locale') == 'ru' ? 'bg-secondary text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'ru']) }}">RU</a>
-                                        <a class="btn btn-outline-secondary {{ Cookie::get('locale') == 'en' ? 'bg-secondary text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'en']) }}">EN</a>
+                                        <a class="btn btn-outline-secondary {{ Cookie::get('locale') == 'en' || Cookie::get('locale') == null ? 'bg-secondary text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'en']) }}">EN</a>
                                         <a class="btn btn-outline-secondary rounded-right {{ Cookie::get('locale') == 'uk' ? 'bg-secondary text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'uk']) }}">UK</a>
                                     </div>
 
