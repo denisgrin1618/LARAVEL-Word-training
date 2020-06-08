@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('/locale/{locale}', 'LocaleController@setLocale')->name('locale.setlocale');
+
+
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'QuizController@start');
 

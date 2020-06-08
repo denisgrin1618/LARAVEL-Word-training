@@ -94,17 +94,17 @@
                     </td>
                     <td class="text-right align-top">
                         
-                        <a class="d-flex btn p-6 m-0 rounded border border-secondary bg-white  " href="{{ route('quiz.id', ['id'=> $quiz->id]) }}">            
+                        <a class="but_start_quiz d-flex btn p-6 m-0 rounded border border-secondary bg-white" href="{{ route('quiz.id', ['id'=> $quiz->id]) }}">            
                             <img class="mx-auto" src="/img/icons/play-fill.svg" alt="" width="20" height="20" title="start">
                         </a>
                         
                     </td>
                     <td class="float-right align-top">
 
-                        <div class="but_delete_quiz d-flex btn p-6 m-0 rounded border border-secondary bg-white  "  data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">            
+                        <button class="but_delete_quiz d-flex btn p-6 m-0 rounded border border-secondary bg-white  "  data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">            
                             <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="delete">
                             <p id="quiz_id" class="d-none">{{$quiz->id}}</p>
-                        </div>
+                        </button>
                         
                     </td>
                 </tr>
@@ -242,8 +242,7 @@
 
         });
   
-  
-        $(".but_delete_quiz, a")
+        $(".but_start_quiz, button")
             .mouseover(function() {
               $( this ).removeClass('bt-white').addClass('bg-secondary');
             })

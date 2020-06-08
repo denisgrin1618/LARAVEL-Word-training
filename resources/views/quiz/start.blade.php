@@ -34,7 +34,7 @@
 
                             <tr>
                                 <td>
-                                    <p>language word</p>
+                                    <p>Language word</p>
                                 </td>
                                 <td>
                                    
@@ -55,7 +55,7 @@
 
                             <tr>
                                 <td>
-                                    <p>language translate</p>
+                                    <p>Language translate</p>
                                 </td>
                                 <td>
                                     <select class="form-control" name="translate_language">
@@ -74,11 +74,21 @@
 
                             <tr>
                                 <td>
-                                    <p>quantity of words</p>
+                                    <p>Quantity of words</p>
                                 </td>
                                 <td>
                                     <input class="form-control" type="number" name="quantity_of_words">
                                 </td>
+                            </tr>    
+                            
+                            <tr>
+                                <td colspan="2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck1" name="select_most_complicated_words">
+                                        <label class="custom-control-label" for="customCheck1">Select most complicated words</label>
+                                      </div>
+                                </td>
+                               
                             </tr>    
                         </tbody>
                     </table>

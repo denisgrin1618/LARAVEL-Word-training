@@ -7,7 +7,7 @@
     <main role="main" class="container" >
 
         <h1 id="quiz_id" class="invisible"> {{ $quiz->id }} </h1>
-
+<!--
         <div class="row justify-content-center">
             <div class="col-md-8">
 
@@ -53,7 +53,7 @@
                 </div>
             </div>
         </div>
-
+-->
 
         <div class="row justify-content-center" id="div_quiz">
             <div class="col-md-8">
@@ -281,11 +281,11 @@
 
         $('#button_back').click(function (e) {
 
-            var index = table_quiz_row_index;
-            var tr = $('#index_' + index).parent();
-            var word = tr.find('#word');
+            var index             = table_quiz_row_index;
+            var tr                = $('#index_' + index).parent();
+            var word              = tr.find('#word');
             var translate_correct = tr.find('#translate_word_correct');
-            var translate_user = tr.find('#translate_word_user');
+            var translate_user    = tr.find('#translate_word_user');
 
             translate_user.text($('#translate_box').val());
             if (translate_user.text() == translate_correct.text()) {
@@ -294,7 +294,7 @@
                 translate_user.removeClass('text-success').addClass('text-danger');
             }
 
-            if (table_quiz_row_index > 0) {
+            if (table_quiz_row_index > 1) {
                 table_quiz_row_index--;
             }
 
@@ -310,6 +310,9 @@
 
             $('#button_next').text('Next').removeClass('btn-success').addClass('btn-primary');
 
+            $('#button_finish').addClass('d-none');
+            $('#button_next').removeClass('d-none');
+                
         });
 
         $("#button_next").trigger("click");

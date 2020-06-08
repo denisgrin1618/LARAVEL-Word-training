@@ -455,6 +455,8 @@
               $( this ).removeClass('bg-secondary').addClass('bt-white');
         });
   
+  
+        
     });
 
 </script>

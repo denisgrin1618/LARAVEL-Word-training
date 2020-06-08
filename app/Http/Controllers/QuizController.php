@@ -20,7 +20,9 @@ class QuizController extends Controller {
 
     public function store(Request $request) {
 
-
+        
+        //dd($request);
+        
         $validatedData = $request->validate([
             'word_language' => ['required', 'string', 'max:2', 'min:2'],
             'translate_language' => ['required', 'string', 'max:2', 'min:2'],
@@ -40,12 +42,30 @@ class QuizController extends Controller {
                 ->where('language1.name', $request->post('word_language'))
                 ->where('language2.name', $request->post('translate_language'))
                 ->select('translations.id')
-                ->inRandomOrder()
+                
+                
+                ->when($request->post('select_most_complicated_words') == 'on', 
+                        
+                    function ($query)  {
+
+                        return $query->join('translation_statistics as translation_statistics', 'translations.id', '=', 'translation_statistics.translation_id')
+                            ->orderBy('translation_statistics.count_error', 'desc');
+                    }, 
+                            
+                    function ($query) {
+                        return $query->inRandomOrder();
+                })
+
+                
+                
+//                ->inRandomOrder()
                 ->take($request->post('quantity_of_words'))
                 ->get();
 
-        // dd($translates);
+        
 
+        
+        //select_most_complicated_words
 
 
         $quiz = new Quiz;
@@ -87,6 +107,8 @@ class QuizController extends Controller {
 //                ->first();
 
         
+       
+        
         $array_wrong_translations_id = [];
         if($request->only_wrong_translations == "yes"){
         $array_wrong_translations_id = \DB::table('quiz_history')
@@ -118,6 +140,11 @@ class QuizController extends Controller {
 
     public function show_all() {
 
+//         dd(\App::getLocale());
+        
+//        \App::setLocale('ru');
+//        dd(\Session::get('locale'));
+         
         $quizes = Quiz::with('translations')
                 ->with('translations.word1')
                 ->with('translations.word2')

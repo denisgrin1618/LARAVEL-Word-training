@@ -160,6 +160,14 @@
     });
 
 
+        $("button")
+            .mouseover(function() {
+              $( this ).removeClass('bt-white').addClass('bg-secondary');
+            })
+            .mouseout(function() {
+              $( this ).removeClass('bg-secondary').addClass('bt-white');
+        });
+        
 //    $(document).ready(function() {
 //        $('#button_import').click(function (e) {
 //            setInterval(function(){

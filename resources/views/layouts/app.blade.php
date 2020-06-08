@@ -43,10 +43,10 @@
                         </li>
 -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('translation.show') }}" style="color: rgb(255,255,255)">Vocabulary</a>
+                            <a class="nav-link" href="{{ route('translation.show') }}" style="color: rgb(255,255,255)">@lang('app_strings.vocabulary')</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('translation.import') }}" style="color: rgb(255,255,255)">Import</a>
+                            <a class="nav-link" href="{{ route('translation.import') }}" style="color: rgb(255,255,255)">@lang('app_strings.import')</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('quiz.show_all') }}" style="color: rgb(255,255,255)">Quiz</a>
@@ -67,7 +67,7 @@
                         @endif
                         @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"   style="position:relative; padding-left:50px;">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"   style="position:relative; padding-left:50px;">
                                     <img class="align-middle" src="/img/avatars/{{ Auth::user()->avatar }}" style="width:32px; height:32px; position:absolute; top:3px; left:10px; border-radius:50%">
                                     {{ Auth::user()->name }}<span class="caret"></span>
 
