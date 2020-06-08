@@ -43,7 +43,7 @@
                                 
                                 <table style="width:100%">
                                     <tr>
-                                        <td class="text-left">Words: {{ $quiz->translations()->count() }}</td> 
+                                        <td class="text-left">@lang('app_strings.total_words'): {{ $quiz->translations()->count() }}</td> 
                                         <td class="text-right" id="td_pass_percentage">{{ $quiz->pass_percentage() }}%</td>
                                     </tr>
                                 </table>
@@ -53,19 +53,19 @@
                                     <div >
                                     <table class="d-none d-flex text-left p-2">
                                         <tr>
-                                            <td>success rate:</td>
+                                            <td>@lang('app_strings.success_rate'):</td>
                                             <td>{{ $quiz->pass_percentage() }}%</td>
                                         </tr>
                                         <tr >
-                                            <td>total words:</td>
+                                            <td>@lang('app_strings.total_words'):</td>
                                             <td>{{ $quiz->translations()->count() }}</td>
                                         </tr>
                                         <tr>
-                                            <td>total correct answers:</td>
+                                            <td>@lang('app_strings.total_correct_answers'):</td>
                                             <td>{{ $quiz->total_correct_answers() }}</td>
                                         </tr>
                                         <tr>
-                                            <td>total wrong answers:</td>
+                                            <td>@lang('app_strings.total_wrong_answers'):</td>
                                             <td>{{ $quiz->total_wrong_answers() }}</td>
                                         </tr>
                                         
@@ -73,7 +73,7 @@
                                         @if ($quiz->total_wrong_answers() > 0)
                                         <tr>
                                             <td colspan="2">
-                                                <a href="{{ route('quiz.id', ['id'=> $quiz->id, 'only_wrong_translations' => 'yes']) }}">start quiz only with wrong answers</a>
+                                                <a href="{{ route('quiz.id', ['id'=> $quiz->id, 'only_wrong_translations' => 'yes']) }}">@lang('app_strings.start_quiz_only_with_wrong_answers')</a>
                                             </td>
                                         </tr>
                                         @endif
@@ -95,14 +95,14 @@
                     <td class="text-right align-top">
                         
                         <a class="but_start_quiz d-flex btn p-6 m-0 rounded border border-secondary bg-white" href="{{ route('quiz.id', ['id'=> $quiz->id]) }}">            
-                            <img class="mx-auto" src="/img/icons/play-fill.svg" alt="" width="20" height="20" title="start">
+                            <img class="mx-auto" src="/img/icons/play-fill.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
                         </a>
                         
                     </td>
                     <td class="float-right align-top">
 
                         <button class="but_delete_quiz d-flex btn p-6 m-0 rounded border border-secondary bg-white  "  data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">            
-                            <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="delete">
+                            <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="{{__('app_strings.delete')}}">
                             <p id="quiz_id" class="d-none">{{$quiz->id}}</p>
                         </button>
                         
@@ -141,14 +141,14 @@
                     <div class="modal-body">
 
                        <div class="form-group">
-                            <label for="translate_word2_name" class="col-form-label">Delete this quiz? Are you sure?</label>
+                            <label for="translate_word2_name" class="col-form-label">@lang('app_strings.worning_delete_quiz')</label>
                         </div>
 
                         <textarea class="form-control d-none" id="modal_quiz_id" name="modal_quiz_id"></textarea>
                         
                         <div class="text-right">
-                            <button  class="btn btn-secondary" data-dismiss="modal" id="modal_dialog_button_delete">Ok</button>                         
-                            <button  class="btn btn-secondary" data-dismiss="modal" id="modal_dialog_button_cansel">Cansel</button>
+                            <button  class="btn btn-secondary" data-dismiss="modal" id="modal_dialog_button_delete">@lang('app_strings.yes')</button>                         
+                            <button  class="btn btn-secondary" data-dismiss="modal" id="modal_dialog_button_cansel">@lang('app_strings.no')</button>
                         </div>
                     </div>
                     <!--

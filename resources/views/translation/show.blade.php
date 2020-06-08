@@ -13,9 +13,9 @@
                 <tr>
                     <!-- <th style="width: 3%" scope="col">#</th> -->
                     <th style="width: 10%" scope="col"></th>
-                    <th style="width: 30%" scope="col">Word</th>
+                    <th style="width: 30%" scope="col">@lang('app_strings.word')</th>
                     <th style="width: 10%" scope="col"></th>
-                    <th style="width: 30%" scope="col">Translate</th>
+                    <th style="width: 30%" scope="col">@lang('app_strings.translation')</th>
                     <th style="width: 10%" scope="col"><img class="mx-auto" src="/img/icons/graph-up.svg" alt="" width="20" height="20" title="statistics"></th>
                     <th style="width: 50px" scope="col"></th>
                     <th style="width: 50px" scope="col"></th>
@@ -44,7 +44,7 @@
                         </select>
                     </td>
                     <td>
-                        <input class="form-control" type="text" placeholder="search" name="word1" value="{{$search_input['word1'] ?? ''}}">
+                        <input class="form-control" type="text" placeholder="{{__('app_strings.search')}}" name="word1" value="{{$search_input['word1'] ?? ''}}">
                     </td>
                     <td>
                         <select class="form-control" name="language2">
@@ -60,7 +60,7 @@
                         </select>
                     </td>
                     <td>
-                        <input class="form-control" type="text" placeholder="search" name="word2" value="{{$search_input['word2'] ?? ''}}">
+                        <input class="form-control" type="text" placeholder="{{__('app_strings.search')}}" name="word2" value="{{$search_input['word2'] ?? ''}}">
                     </td>
                     <td></td>
                     <td></td>
@@ -69,7 +69,7 @@
                         <!--                        {{ Form::submit('Search',['class'=>'btn btn-secondary  ml-1 mt-1']) }}-->
 
                         <button type="submit" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white  " >            
-                            <img class="mx-auto" src="/img/icons/search.svg" alt="" width="20" height="20" title="search">
+                            <img class="mx-auto" src="/img/icons/search.svg" alt="" width="20" height="20" title="{{__('app_strings.search')}}">
                         </button>
 
                     </td>
@@ -90,12 +90,12 @@
                     <td id="translate_statistics"> </td>
                     <td align="right" >
                         <button id="bt_edit" type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white bt_edit" >
-                            <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="edit">
+                            <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="{{__('app_strings.edit')}}">
                         </button>
                     </td>
                     <td align="right" >
                         <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white but_delete" data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">
-                            <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="delete">
+                            <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="{{__('app_strings.delete')}}">
                         </button>
                     </td>
                     <td class="d-none" id="translate_word1_id"> </td>
@@ -114,12 +114,12 @@
                     <td id="translate_statistics"> </td>
                     <td align="right" >
                         <button id="bt_edit" type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white bt_edit" >
-                            <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="edit">
+                            <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="{{__('app_strings.edit')}}">
                         </button>
                     </td>
                     <td align="right" >
                         <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white but_delete" data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">
-                            <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="delete">
+                            <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="{{__('app_strings.delete')}}">
                         </button>
                     </td>
                     <td class="d-none" id="translate_word1_id"> </td>
@@ -144,14 +144,14 @@
                     <td align="right" >
 
                         <button id="bt_edit" type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white bt_edit" >
-                            <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="edit">
+                            <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="{{__('app_strings.edit')}}">
                         </button>
 
                     </td>
                     <td align="right" >
 
                         <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white but_delete" data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">
-                            <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="delete">
+                            <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="{{__('app_strings.delete')}}">
                         </button>
 
                     </td>
@@ -187,7 +187,7 @@
                         </select>
                     </td>
                     <td style="width: 30%">
-                        <textarea style="resize: none; " id="new_word1_name" class="form-control" type="text" placeholder="слово" ></textarea>
+                        <textarea style="resize: none; " id="new_word1_name" class="form-control" type="text" placeholder="{{__('app_strings.word')}}" ></textarea>
                     </td>
                     <td style="width: 10%">
                         <select class="form-control" id="new_word2_language_name">
@@ -197,12 +197,12 @@
                         </select>
                     </td>
                     <td style="width: 30%">
-                        <textarea style="resize: none; " id="new_word2_name" class="form-control" type="text" placeholder="перевод"></textarea> 
+                        <textarea style="resize: none; " id="new_word2_name" class="form-control" type="text" placeholder="{{__('app_strings.translation')}}"></textarea> 
                     </td>
 
                     <td style="width: 20%" align="right"> 
                         <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white" id='button_translate_new'>
-                            <img class="mx-auto" src="/img/icons/plus.svg" alt="" width="20" height="20" title="new">
+                            <img class="mx-auto" src="/img/icons/plus.svg" alt="" width="20" height="20" title="{{__('app_strings.new')}}">
 
                         </button>
                     </td>
@@ -237,14 +237,14 @@
                     <div class="modal-body">
 
                        <div class="form-group">
-                            <label class="col-form-label">Delete this translation? Are you sure?</label>
+                            <label class="col-form-label">@lang('app_strings.worning_delete_traslation')</label>
                         </div>
 
                         <textarea class="form-control d-none" id="modal_translate_id" name="modal_quiz_id"></textarea>
                         
                         <div class="text-right">
-                            <button  class="btn btn-secondary" data-dismiss="modal" id="modal_dialog_button_delete">Ok</button>                         
-                            <button  class="btn btn-secondary" data-dismiss="modal" id="modal_dialog_button_cansel">Cansel</button>
+                            <button  class="btn btn-secondary" data-dismiss="modal" id="modal_dialog_button_delete">@lang('app_strings.yes')</button>                         
+                            <button  class="btn btn-secondary" data-dismiss="modal" id="modal_dialog_button_cansel">@lang('app_strings.no')</button>
                         </div>
                     </div>
                     <!--
