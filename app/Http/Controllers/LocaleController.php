@@ -13,7 +13,7 @@ class LocaleController extends Controller
     {
         
 //        dd($locale);
-        if (! in_array($locale,['en','ru']))
+        if (! in_array($locale,['en','ru', 'uk']))
         {
             $locale = Config::get('app.locale');
         }

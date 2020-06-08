@@ -49,7 +49,7 @@
                             <a class="nav-link" href="{{ route('translation.import') }}" style="color: rgb(255,255,255)">@lang('app_strings.import')</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('quiz.show_all') }}" style="color: rgb(255,255,255)">Quiz</a>
+                            <a class="nav-link" href="{{ route('quiz.show_all') }}" style="color: rgb(255,255,255)">@lang('app_strings.quiz')</a>
                         </li>
                     </ul>
 
@@ -76,14 +76,28 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 
                                 <a class="dropdown-item" href="{{ route('profile') }}">
-                                    Profile
+                                    @lang('app_strings.profile')
                                 </a>
                                 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+<!--                                    {{ __('Logout') }}-->
+                                    @lang('app_strings.logout')
                                 </a>
 
+                                
+                                <div class="input-group mb-3 dropdown-item">
+                                    <div class="input-group-prepend">
+                                        <a class="btn btn-outline-secondary {{ Cookie::get('locale') == 'ru' ? 'bg-secondary text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'ru']) }}">RU</a>
+                                        <a class="btn btn-outline-secondary {{ Cookie::get('locale') == 'en' ? 'bg-secondary text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'en']) }}">EN</a>
+                                        <a class="btn btn-outline-secondary rounded-right {{ Cookie::get('locale') == 'uk' ? 'bg-secondary text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'uk']) }}">UK</a>
+                                    </div>
+
+                                      
+                                </div>
+                                
+                                
+                                
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>

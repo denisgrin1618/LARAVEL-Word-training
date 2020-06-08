@@ -28,6 +28,7 @@ class Locale
 //         dd(Crypt::decrypt($locale, false));
 //         dd($locale);
          
+        
         App::setLocale($locale);
 //        Carbon::setLocale($locale);
 

@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header font-weight-bold">
-                    Start new quiz
+                    @lang('app_strings.start_new_quiz')
                 </div>
 
                 @if ($errors->any())
@@ -34,7 +34,7 @@
 
                             <tr>
                                 <td>
-                                    <p>Language word</p>
+                                    <p>@lang('app_strings.language_word')</p>
                                 </td>
                                 <td>
                                    
@@ -55,7 +55,7 @@
 
                             <tr>
                                 <td>
-                                    <p>Language translate</p>
+                                    <p>@lang('app_strings.language_translation')</p>
                                 </td>
                                 <td>
                                     <select class="form-control" name="translate_language">
@@ -74,7 +74,7 @@
 
                             <tr>
                                 <td>
-                                    <p>Quantity of words</p>
+                                    <p>@lang('app_strings.quantity_of_words')</p>
                                 </td>
                                 <td>
                                     <input class="form-control" type="number" name="quantity_of_words">
@@ -85,7 +85,7 @@
                                 <td colspan="2">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="customCheck1" name="select_most_complicated_words">
-                                        <label class="custom-control-label" for="customCheck1">Select most complicated words</label>
+                                        <label class="custom-control-label" for="customCheck1">@lang('app_strings.select_most_complicated_words')</label>
                                       </div>
                                 </td>
                                
@@ -93,7 +93,7 @@
                         </tbody>
                     </table>
 
-                    {{ Form::submit('Start',['class'=>'btn btn-success  ml-1 mt-1 float-right']) }}
+                    {{ Form::submit( __('app_strings.start') ,['class'=>'btn btn-success  ml-1 mt-1 float-right']) }}
 
                     {{ Form::close() }}
                 </div>
@@ -101,6 +101,20 @@
             </div>
 
 
+            
+<!--            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <a class="btn btn-outline-secondary" >RU</a>
+                    <a class="btn btn-outline-secondary" >EN</a>
+                </div>
+                
+                <div class="input-group-prepend">
+                    <a class="btn btn-outline-secondary rounded-right" >UK</a>
+                </div>   
+            </div>-->
+
+   
+            
 
         </div>
     </div>
