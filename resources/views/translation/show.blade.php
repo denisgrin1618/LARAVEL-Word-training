@@ -68,7 +68,7 @@
                         <!-- <button type="button" class="btn btn-secondary  ml-1 mt-1" >Search</button>  -->
                         <!--                        {{ Form::submit('Search',['class'=>'btn btn-secondary  ml-1 mt-1']) }}-->
 
-                        <button type="submit" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white  " >            
+                        <button type="submit" class="d-flex btn p-6 m-0 rounded border border-secondary bt-light-white  " >            
                             <img class="mx-auto" src="/img/icons/search.svg" alt="" width="20" height="20" title="{{__('app_strings.search')}}">
                         </button>
 
@@ -89,12 +89,12 @@
                     <td id="translate_word2_name" ></td>
                     <td id="translate_statistics"> </td>
                     <td align="right" >
-                        <button id="bt_edit" type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white bt_edit" >
+                        <button id="bt_edit" type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bt-light-white bt_edit" >
                             <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="{{__('app_strings.edit')}}">
                         </button>
                     </td>
                     <td align="right" >
-                        <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white but_delete" data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">
+                        <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bt-light-white but_delete" data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">
                             <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="{{__('app_strings.delete')}}">
                         </button>
                     </td>
@@ -113,12 +113,12 @@
                     <td id="translate_word2_name" ></td>
                     <td id="translate_statistics"> </td>
                     <td align="right" >
-                        <button id="bt_edit" type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white bt_edit" >
+                        <button id="bt_edit" type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bt-light-white bt_edit" >
                             <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="{{__('app_strings.edit')}}">
                         </button>
                     </td>
                     <td align="right" >
-                        <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white but_delete" data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">
+                        <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bt-light-white but_delete" data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">
                             <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="{{__('app_strings.delete')}}">
                         </button>
                     </td>
@@ -143,14 +143,14 @@
                     </td>
                     <td align="right" >
 
-                        <button id="bt_edit" type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white bt_edit" >
+                        <button id="bt_edit" type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bt-light-white bt_edit" >
                             <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="{{__('app_strings.edit')}}">
                         </button>
 
                     </td>
                     <td align="right" >
 
-                        <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white but_delete" data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">
+                        <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bt-light-white but_delete" data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">
                             <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="{{__('app_strings.delete')}}">
                         </button>
 
@@ -201,7 +201,7 @@
                     </td>
 
                     <td style="width: 20%" align="right"> 
-                        <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white" id='button_translate_new'>
+                        <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bt-light-white" id='button_translate_new'>
                             <img class="mx-auto" src="/img/icons/plus.svg" alt="" width="20" height="20" title="{{__('app_strings.new')}}">
 
                         </button>
@@ -449,10 +449,10 @@
 
         $("button")
             .mouseover(function() {
-              $( this ).removeClass('bt-white').addClass('bg-secondary');
+              $( this ).removeClass('bt-light-white').addClass('bt-grey-silver');
             })
             .mouseout(function() {
-              $( this ).removeClass('bg-secondary').addClass('bt-white');
+              $( this ).removeClass('bt-grey-silver').addClass('bt-light-white');
         });
   
   

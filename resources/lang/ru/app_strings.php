@@ -30,5 +30,13 @@ return [
     'total_wrong_answers'               => 'Всего не верных овтетов',
     'start_quiz_only_with_wrong_answers'=> 'Работа над ошибками. Открыть только не верные ответы',
 
+    'import_instruction_1'              => 'Откройте Google Translate',
+    'import_instruction_2'              => 'Откройте сохраненные переводы',
+    'import_instruction_3'              => 'Потом эскспортируйте их в Google Sheet',
+    'import_instruction_4'              => 'Скопируйте Spreadsheet ID из url и введите его input выше',
+    'import_instruction_header'         => 'Импорт словаря из Google Translate',
+    
+    'start_new_quiz'                    => 'Начать новое тестирование',
+    
 ];
 

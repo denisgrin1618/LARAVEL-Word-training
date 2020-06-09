@@ -19,13 +19,13 @@
 
 
         <div >
-            <h1>Import translations from Google Translate</h1>
+            <h1>@lang('app_strings.import_instruction_header')</h1>
             <div class="input-group " >
             <input name="spreadsheetId" id="spreadsheetId" type="text" autocomplete="off"
                    class="form-control" placeholder="Spreadsheet ID" aria-label="Spreadsheet ID" aria-describedby="basic-addon2">
             <div class="input-group-append">
 
-                <button class="d-flex btn p-6 m-0 rounded border border-secondary bg-white" type="button" id="button_import">
+                <button class="d-flex btn p-6 m-0 rounded-right border border-secondary bt-light-white" type="button" id="button_import">
                     <img class="mx-auto" src="/img/icons/download.svg" alt="" width="20" height="20" title="start">
                 </button>
             </div>
@@ -33,10 +33,10 @@
         
         <br>
         
-            <p>1. Open Google Translate </p>
-            <p>2. Open saved translations  <img src="/img/Import_words_phrasebook_icon.jpg"> </p>
-            <p>3. Then export them to Google Sheet <img src="/img/Import_words_export_icon_2.jpg"></p>
-            <p>4. Copy Spreadsheet ID from url and enter it to input below</p>
+            <p>1. @lang('app_strings.import_instruction_1') </p>
+            <p>2. @lang('app_strings.import_instruction_2') <img src="/img/Import_words_phrasebook_icon.jpg"> </p>
+            <p>3. @lang('app_strings.import_instruction_3') <img src="/img/Import_words_export_icon_2.jpg"></p>
+            <p>4. @lang('app_strings.import_instruction_4')</p>
             <img src="/img/Import_words_export_icon_3.jpg">
         </div>
         
@@ -170,15 +170,15 @@
    
 
 
-        $("button")
-            .mouseover(function() {
-              $( this ).removeClass('bt-white').addClass('bg-secondary');
-            })
-            .mouseout(function() {
-              $( this ).removeClass('bg-secondary').addClass('bt-white');
-        });
-        
-    });
+//        $("button")
+//            .mouseover(function() {
+//              $( this ).removeClass('bt-white').addClass('bg-secondary');
+//            })
+//            .mouseout(function() {
+//              $( this ).removeClass('bg-secondary').addClass('bt-white');
+//        });
+//        
+//    });
     
 </script>
 @endsection

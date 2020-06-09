@@ -19,3 +19,40 @@ table tr td {
     word-break: break-all;
 }
 
+.bt-grey-silver {
+  background-color: #C0C0C0;
+}
+
+.bt-light-white {
+  background-color: white;
+}
+
+button:hover{
+    background-color: #C0C0C0;
+    color: white;
+}
+
+.bt-light-green:hover {
+  background-color: #04d041;
+  color: white;
+}
+
+.bt-red:hover {
+  background-color: red;
+  color: white;
+}
+
+.bt-light-yellow {
+  background-color: #fcf100;
+}
+
+
+
+.bt-light-blue:hover {
+  background-color: #00a6f2;
+  color: white;
+}
+
+.bt-light-red {
+  background-color: #fc7e1f;
+}

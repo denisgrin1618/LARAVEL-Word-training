@@ -19,7 +19,28 @@
             </thead>
             <tbody id="table_translates">
 
-  
+                <tr>
+                    <td colspan="3" > 
+                    
+                        <a href="{{ route('quiz.start') }}" style="text-decoration: none;">
+                            <button class="but_start_new_quiz  bt-light-green d-flex btn p-6 m-10 rounded border border-secondary mx-auto" >            
+                                @lang('app_strings.start_new_quiz')
+                            </button>
+                        </a>
+                        
+<!--                        
+                        <img class="mx-auto" src="/img/icons/file-earmark-plus.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
+                    -->
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td colspan="3" class="align-middle"> 
+                    
+                        <br>
+                        
+                    </td>
+                </tr>
                 
                 
                 @foreach ($quizes as $quiz)
@@ -93,15 +114,19 @@
                         
                     </td>
                     <td class="text-right align-top">
-                        
-                        <a class="but_start_quiz d-flex btn p-6 m-0 rounded border border-secondary bg-white" href="{{ route('quiz.id', ['id'=> $quiz->id]) }}">            
-                            <img class="mx-auto" src="/img/icons/play-fill.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
+<!--                        
+                        <a class=" d-flex btn p-6 m-0 rounded border border-secondary bg-white" href="{{ route('quiz.id', ['id'=> $quiz->id]) }}"> 
+                            -->
+                        <a  href="{{ route('quiz.id', ['id'=> $quiz->id]) }}">  
+                            <button class="but_start_new_quiz d-flex btn p-6 m-10 rounded border border-secondary mx-auto" >            
+                                <img class="mx-auto" src="/img/icons/play-fill.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
+                            </button>
                         </a>
                         
                     </td>
                     <td class="float-right align-top">
 
-                        <button class="but_delete_quiz d-flex btn p-6 m-0 rounded border border-secondary bg-white  "  data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">            
+                        <button class="but_delete_quiz d-flex btn p-6 m-0 rounded border border-secondary "  data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">            
                             <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="{{__('app_strings.delete')}}">
                             <p id="quiz_id" class="d-none">{{$quiz->id}}</p>
                         </button>
@@ -180,6 +205,10 @@
 //            $('[id*="div_quiz_details"]').removeClass('show');
         });
         
+//        $('.but_start_new_quiz').click(function(e){
+//           $(location).attr('href', {{ route('quiz.start') }});
+//        });
+        
         $('.but_delete_quiz').on("click", function (event) {
 
             var button = $(event.target); 
@@ -242,14 +271,14 @@
 
         });
   
-        $(".but_start_quiz, button")
-            .mouseover(function() {
-              $( this ).removeClass('bt-white').addClass('bg-secondary');
-            })
-            .mouseout(function() {
-              $( this ).removeClass('bg-secondary').addClass('bt-white');
-        });
-  
+//        $(".but_start_quiz")
+//            .mouseover(function() {
+//              $( this ).removeClass('bt-white').addClass('bg-secondary');
+//            })
+//            .mouseout(function() {
+//              $( this ).removeClass('bg-secondary').addClass('bt-white');
+//        });
+//  
     });
      
 </script>
