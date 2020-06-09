@@ -29,7 +29,7 @@ Route::post('/profile', 'UserController@update_avatar');
 
 
 Route::get('/translation', 'TranslationController@show')->name('translation.show');
-Route::get('/translation/import', 'TranslationController@import')->name('translation.import');
+Route::get('/translation/import/{spreadsheet_id?}', 'TranslationController@import')->name('translation.import');
 Route::post('/translation/importprogress', 'TranslationController@importProgess')->name('translation.importprogress');
 Route::post('/translation/importpost', 'TranslationController@importPost')->name('translation.postimport');
 Route::post('/translation/add', 'TranslationController@add')->name('translation.add');

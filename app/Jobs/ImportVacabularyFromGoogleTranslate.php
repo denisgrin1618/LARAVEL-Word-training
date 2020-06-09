@@ -14,6 +14,7 @@ use App\Word;
 use App\Translation;
 use App\TranslationStatistics;
 use App\ImportProgress;
+use App\ISOLanguage;
 
 class ImportVacabularyFromGoogleTranslate implements ShouldQueue {
 
@@ -40,13 +41,13 @@ class ImportVacabularyFromGoogleTranslate implements ShouldQueue {
      *
      * @return void
      */
-    public function handle() {
+    public function DELETE_handle() {
 
-        $user       = $this->user;
-        $language1  = Language::find(2);
-        $language2  = Language::find(1);
-        
-        
+        $user = $this->user;
+        $language1 = Language::find(2);
+        $language2 = Language::find(1);
+
+
         $import_progress = ImportProgress::where('user_id', $user->id)->get();
         if ($import_progress->isEmpty()) {
             $import_progress = new ImportProgress;
@@ -63,6 +64,8 @@ class ImportVacabularyFromGoogleTranslate implements ShouldQueue {
 
 
 
+
+
         $client = $this->getClient();
         $service = new Google_Service_Sheets($client);
         $spreadsheetId = $this->spreadsheetId;
@@ -74,7 +77,7 @@ class ImportVacabularyFromGoogleTranslate implements ShouldQueue {
 
 
 
-        
+
 
 
 
@@ -90,14 +93,10 @@ class ImportVacabularyFromGoogleTranslate implements ShouldQueue {
             $count_all_words = count($values);
             foreach ($values as $row) {
                 $count_uploaded_words++;
-
                 $progress = round($count_uploaded_words * 100 / $count_all_words);
-
-//                session(['import_progress' => $progress]);
-
                 $import_progress->percent_progress = $progress;
                 $import_progress->save();
-        
+
 
                 $word1_name = $row[2];
                 $word2_name = $row[3];
@@ -154,7 +153,55 @@ class ImportVacabularyFromGoogleTranslate implements ShouldQueue {
 //        
         $import_progress->percent_progress = 100;
         $import_progress->save();
-                
+    }
+
+    public function handle() {
+
+        $user = $this->user;
+
+        ImportProgress::create_new($user, 0);
+
+
+        $client             = $this->getClient();
+        $service            = new Google_Service_Sheets($client);
+        $spreadsheetId      = $this->spreadsheetId;
+        $spreadSheet        = $service->spreadsheets->get($spreadsheetId);
+        $sheets             = $spreadSheet->getSheets();
+        $name_first_sheet   = reset($sheets)->properties->title;
+
+      
+        if (empty($name_first_sheet)) {
+            return "No data found";
+        }
+
+        $range                  = $name_first_sheet . '!A1:D';
+        $response               = $service->spreadsheets_values->get($spreadsheetId, $range);
+        $values                 = $response->getValues();
+        $count_uploaded_words   = 0;
+        $count_all_words        = count($values);
+        
+        foreach ($values as $row) {
+            $count_uploaded_words++;
+
+            $progress = round($count_uploaded_words * 100 / $count_all_words);
+            ImportProgress::create_new($user, $progress);
+
+            
+            $language1  = Language::get_language(strtolower($row[0]));
+            $language2  = Language::get_language(strtolower($row[1]));
+            
+            if($language1 == null || $language2 == null){
+                continue;
+            }
+            $word1      = Word::get_word($user, $language1, $row[2]);
+            $word2      = Word::get_word($user, $language1, $row[3]); 
+            $translate  = Translation::get_translation($word1, $word2, $user); 
+
+            
+        }
+        
+
+        ImportProgress::create_new($user, 100);
     }
 
     /**

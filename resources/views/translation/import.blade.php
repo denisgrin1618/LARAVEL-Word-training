@@ -90,13 +90,8 @@
         $('#button_import').click(function (e) {
 
             e.preventDefault();
-            console.log('click');
-
 
             var myInterval = setInterval(function () {
-//                $.get('/translation/importprogress', function (data) {
-//                    console.log(data);
-//                });
 
                 $.ajax({
                     type: 'POST',
@@ -132,8 +127,6 @@
 
             }, 1000);
 
-
-
             $.ajax({
                 type: 'POST',
                 url: "/translation/importpost",
@@ -155,9 +148,26 @@
                     console.log("ERROR");
                 }
             });
+//            
+            
+            
+            
+//            $.post("/translation/importpost", 
+//                {
+//                    "_token": $('meta[name="csrf-token"]').attr('content'),
+//                    "spreadsheetId": $('#spreadsheetId').val()
+//                }, 
+//                function(result){ console.log(result); }
+//            );
+
+
         });
 
-    });
+
+
+  
+
+   
 
 
         $("button")
@@ -168,25 +178,7 @@
               $( this ).removeClass('bg-secondary').addClass('bt-white');
         });
         
-//    $(document).ready(function() {
-//        $('#button_import').click(function (e) {
-//            setInterval(function(){
-//                $.get('/translation/importprogress', function(data) {
-//                    console.log(data);
-//                });
-//            }, 1000);
-//
-//            $.post(
-//                '/translation/importpost',
-//                {"_token": $('meta[name="csrf-token"]').attr('content'), "spreadsheetId": $('#spreadsheetId').val()},
-//                function() {
-//                    console.log("data");
-//                },
-//                'json'
-//            );
-//
-//            return false;
-//        });
-//    });
+    });
+    
 </script>
 @endsection

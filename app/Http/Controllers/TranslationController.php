@@ -177,9 +177,19 @@ class TranslationController extends Controller {
                         ->with('search_input', $request->input());
     }
 
-    public function import() {
-        return view('translation.import');
+    public function import(Request $request, $spreadsheet_id=0) {
+        
+        if(empty($spreadsheet_id)){
+            return view('translation.import');
+        }else{
+            
+            ImportVacabularyFromGoogleTranslate::dispatchNow($spreadsheet_id, Auth::user());
+            return response()->json('DONE');
+        }
+        
     }
+    
+
     
     public function importProgess() {
 //        $import_progress = session('import_progress', 100); 
@@ -226,6 +236,7 @@ class TranslationController extends Controller {
         $import_progress->percent_progress = 0;
         $import_progress->save();
         
+//        ImportVacabularyFromGoogleTranslate::dispatch($request->post('spreadsheetId'), $user);
         ImportVacabularyFromGoogleTranslate::dispatch($request->post('spreadsheetId'), $user);
         return response()->json('DONE');
         
