@@ -37,6 +37,10 @@ return [
     'import_instruction_header'         => 'Импорт словаря из Google Translate',
     
     'start_new_quiz'                    => 'Начать новое тестирование',
+    'statistic'                         => 'Статистика',
+    'back'                              => 'Назад',
+    'next'                              => 'Далее',
+    'finish'                            => 'Финиш',
     
 ];
 

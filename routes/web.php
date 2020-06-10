@@ -44,3 +44,4 @@ Route::post('/quiz/store', 'QuizController@store')->name('quiz.store');
 Route::delete('/quiz/delete/{id}', 'QuizController@destroy')->name('quiz.destroy');
 
 Route::post('/statistics/store', 'StatisticsController@store')->name('statistics.store');
+Route::get('/statistics', 'StatisticsController@show')->name('statistics.show');

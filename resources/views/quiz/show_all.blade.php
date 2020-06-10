@@ -23,7 +23,7 @@
                     <td colspan="3" > 
                     
                         <a href="{{ route('quiz.start') }}" style="text-decoration: none;">
-                            <button class="but_start_new_quiz  bt-light-green d-flex btn p-6 m-10 rounded border border-secondary mx-auto" >            
+                            <button class="font-weight-bold but_start_new_quiz  bt-light-green d-flex btn p-6 m-10 rounded border border-secondary mx-auto" >            
                                 @lang('app_strings.start_new_quiz')
                             </button>
                         </a>
@@ -56,7 +56,7 @@
                         
                         
                        
-                        <div class=" div_quiz d-flex btn p-0 m-0 rounded border border-secondary bg-white" 
+                        <div class="font-weight-bold div_quiz d-flex btn p-0 m-0 rounded border border-secondary bg-white" 
                              data-toggle="collapse" data-target="#div_quiz_details{{ $quiz->id }}" aria-expanded="false" aria-controls="div_quiz_details{{ $quiz->id }}"
                              style="width:100%;  background: linear-gradient(90deg, #DCDCDC 0%, #DCDCDC {{$quiz->pass_percentage()}}%, white {{$quiz->pass_percentage()}}%, white {{100-$quiz->pass_percentage()}}%)">
                             <div class="m-1" style="width:100%">
@@ -72,7 +72,7 @@
 
                                 <div id="div_quiz_details{{ $quiz->id }}" class="collapse">
                                     <div >
-                                    <table class="d-none d-flex text-left p-2">
+                                    <table class="d-none d-flex text-left p-2 ">
                                         <tr>
                                             <td>@lang('app_strings.success_rate'):</td>
                                             <td>{{ $quiz->pass_percentage() }}%</td>
@@ -81,11 +81,11 @@
                                             <td>@lang('app_strings.total_words'):</td>
                                             <td>{{ $quiz->translations()->count() }}</td>
                                         </tr>
-                                        <tr>
+                                        <tr class='text-success'>
                                             <td>@lang('app_strings.total_correct_answers'):</td>
                                             <td>{{ $quiz->total_correct_answers() }}</td>
                                         </tr>
-                                        <tr>
+                                        <tr class='text-danger'>
                                             <td>@lang('app_strings.total_wrong_answers'):</td>
                                             <td>{{ $quiz->total_wrong_answers() }}</td>
                                         </tr>

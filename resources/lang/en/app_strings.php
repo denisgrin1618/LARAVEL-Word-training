@@ -37,7 +37,10 @@ return [
     'import_instruction_header'         => 'Import translations from Google Translate',
     
     'start_new_quiz'                    => 'Start new quiz',
-    
+    'statistic'                         => 'Statistic',
+    'back'                              => 'Back',
+    'next'                              => 'Next',
+    'finish'                            => 'Finish',
     
 ];
 

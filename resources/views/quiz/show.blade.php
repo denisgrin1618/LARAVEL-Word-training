@@ -58,22 +58,67 @@
         <div class="row justify-content-center" id="div_quiz">
             <div class="col-md-8">
 
-<!--                <div class="row justify-content-md-center">
+                <div class="row justify-content-md-center">
 
-                    <div class="input-group mb-3">
-                        <a  href="#">  
-                            <img class="mx-auto" src="/img/icons/chevron-left.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
-                        </a>
-                        <p>    12/100    </p>
+                    <table class='table-responsive d-flex justify-content-center'>
+                        <tr >
+                            <td>
+                                    <button class=" btn rounded border border-secondary " >            
+                                        <img  src="/img/icons/chevron-left.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
+                                    </button>
+                               
+                            </td>
+                            <td>
+                                <a href="{{ route('quiz.id', ['id'=> $quiz->id]) }}">  
+                                    <button class=" btn rounded border border-secondary " >            
+                                        <img src="/img/icons/chevron-right.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
+                                    </button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ route('quiz.id', ['id'=> $quiz->id]) }}">  
+                                    <button class=" btn rounded border border-secondary" >            
+                                        <img src="/img/icons/clock.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
+                                    </button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ route('quiz.id', ['id'=> $quiz->id]) }}">  
+                                    <button class=" btn rounded border border-secondary" >            
+                                        <img src="/img/icons/eye.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
+                                    </button>
+                                </a>
+                            </td>
+                             <td>
+                                <a href="{{ route('quiz.id', ['id'=> $quiz->id]) }}">  
+                                    <button class=" btn rounded border border-secondary" >            
+                                        <img src="/img/icons/star.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
+                                    </button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ route('quiz.id', ['id'=> $quiz->id]) }}">  
+                                    <button class=" btn rounded border border-secondary " >            
+                                        <img src="/img/icons/check2.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
 
-                        <a  href="#">           
-                            <img class="mx-auto" src="/img/icons/chevron-right.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
-                        </a>
 
-                    </div>
 
-                </div>-->
-                
+
+
+
+
+
+
+
+
+                </div>
+                <br>
+
                 <div class="row justify-content-md-center">
 
                     <div class="input-group mb-3">
@@ -86,16 +131,16 @@
                 </div>
 
 
-                <button class="btn btn-primary float-left" id="button_back">
-                    Back
+                <button class="btn bt-grey-silver float-left" id="button_back">
+                    @lang('app_strings.back')
                 </button>
 
-                <button class="btn btn-primary float-right" id="button_next">
-                    Next
+                <button class="btn bt-grey-silver float-right" id="button_next">
+                    @lang('app_strings.next')
                 </button>
 
                 <button class="btn btn-success float-right d-none" id="button_finish">
-                    Finish
+                    @lang('app_strings.finish')
                 </button>
 
 
@@ -143,12 +188,12 @@
     var min_height_input = 100;
     var table_quiz_row_index = 0;
     var table_translates_rows_count = $('#table_translates tr').length;
-   
+
     $(function ()
     {
 
         function resize_elements() {
-        
+
             var width = $('.input-group-text').parent().parent().width();
             var height = $('.input-group-text').parent().parent().height();
 
@@ -158,14 +203,14 @@
             $('#translate_box').autoResize({elCopyResize: $("#p_word_box"), minHeight: min_height_input});
 
             // при ручном растягивании textarea, будем менять размер зависимых елементов
-    //        $("#translate_box").ResizeSecondaryElement($("#p_word_box"), min_height_input);
+            //        $("#translate_box").ResizeSecondaryElement($("#p_word_box"), min_height_input);
 
         }
 
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             resize_elements();
-            
+
             console.log("ready");
         });
 
@@ -223,14 +268,14 @@
 //                $('#div_quiz').addClass('d-none');  
 //            }
 
-            
 
 
-            var index               = table_quiz_row_index;
-            var tr                  = $('#index_' + index).parent();
-            var word                = tr.find('#word');
-            var translate_correct   = tr.find('#translate_word_correct');
-            var translate_user      = tr.find('#translate_word_user');
+
+            var index = table_quiz_row_index;
+            var tr = $('#index_' + index).parent();
+            var word = tr.find('#word');
+            var translate_correct = tr.find('#translate_word_correct');
+            var translate_user = tr.find('#translate_word_user');
 
             translate_user.text($('#translate_box').val());
             if (translate_user.text().replace(/\n/g, "") == translate_correct.text().replace(/\n/g, "")) {
@@ -245,10 +290,10 @@
 
 //            console.log(table_quiz_row_index);
 
-            var index           = table_quiz_row_index;
-            var tr              = $('#index_' + index).parent();
-            var word            = tr.find('#word');
-            var translate_user  = tr.find('#translate_word_user');
+            var index = table_quiz_row_index;
+            var tr = $('#index_' + index).parent();
+            var word = tr.find('#word');
+            var translate_user = tr.find('#translate_word_user');
 //            console.log(translate_user.text());
             $('#p_word_box').text(word.text());
             $('#translate_box').val(translate_user.text().replace(/\n/g, ""));
@@ -290,8 +335,8 @@
 
         $('#button_back').click(function (e) {
 
-            
-            
+
+
             var index = table_quiz_row_index;
             var tr = $('#index_' + index).parent();
             var word = tr.find('#word');
@@ -323,7 +368,7 @@
 
             $('#button_finish').addClass('d-none');
             $('#button_next').removeClass('d-none');
-            
+
             resize_elements();
 
         });
@@ -332,18 +377,19 @@
 
         $("#translate_box").keypress(function (e) {
             var code = (e.keyCode ? e.keyCode : e.which);
-            
-            
-            
+
+
+
             if (code == 13) {
-                
+
                 //избавимся от перевода строки
-                if(event.preventDefault) event.preventDefault();
-                
+                if (event.preventDefault)
+                    event.preventDefault();
+
                 $("#translate_box").val().replace(/\n/g, "").replace(/\n/g, "");
                 $("#button_next").trigger('click');
-                
-                
+
+
                 return true;
             }
         });

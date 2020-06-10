@@ -72,5 +72,10 @@ class StatisticsController extends Controller {
         return true;
     }
      
+    
+    public function show(Request $request){
+        
+        return view('statistics.show')->with('statistics', 0);
+    }
 
 }

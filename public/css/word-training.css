@@ -9,6 +9,9 @@ and open the template in the editor.
 */
 
 
+/*svg:hover{
+    fill: white;
+}*/
 
 table {
     table-layout: fixed;
@@ -41,6 +44,7 @@ button:hover{
   background-color: #04d041;
   color: white;
 }
+
 
 .bt-red:hover {
   background-color: red;

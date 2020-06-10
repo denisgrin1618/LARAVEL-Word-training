@@ -26,10 +26,10 @@
         <link href="{{ asset('css/word-training.css') }}" rel="stylesheet">
         <link href="{{ asset('css/sticky-footer.css') }}" rel="stylesheet">
     </head>
-    <body>
+    <body >
         <div id="app">
 
-            <nav class="navbar navbar-expand-lg navbar-light  " style="background-color: #4ebdad;">
+            <nav class="navbar navbar-expand-lg navbar-light  " style="background: #4ebdad" >
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -99,6 +99,10 @@
                                 
                                 <a class="dropdown-item" href="{{ route('profile') }}">
                                     @lang('app_strings.profile')
+                                </a>
+                                
+                                <a class="dropdown-item" href="{{ route('statistics.show') }}">
+                                    @lang('app_strings.statistic')
                                 </a>
                                 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
