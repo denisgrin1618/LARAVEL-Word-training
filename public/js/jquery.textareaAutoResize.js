@@ -1,7 +1,7 @@
 
 (function($) {
 	$(document).ready(function() {
-		$('body').append('<div id="autoResizeTextareaCopy" style="box-sizing: border-box; -moz-box-sizing: border-box;  -ms-box-sizing: border-box; -webkit-box-sizing: border-box; visibility: hidden;"></div>');
+		$('body').append('<div id="autoResizeTextareaCopy" style="word-break: break-word;    box-sizing: border-box; -moz-box-sizing: border-box;  -ms-box-sizing: border-box; -webkit-box-sizing: border-box; visibility: hidden;"></div>');
 		var $copy = $('#autoResizeTextareaCopy');
 
 		function autoSize($textarea, options) {
@@ -157,14 +157,17 @@
 		};
 		
 		// + Denis
-		$.fn.ResizeSecondaryElement = function(dest) {
+		$.fn.ResizeSecondaryElement = function(dest, minHeight) {
 			var resizeInt = null;
 			var $this = $(this);
 			     
 			// the handler function
 			var resizeEvent = function() {
-				dest.outerWidth( $this.outerWidth() );
-				dest.outerHeight($this.outerHeight());        
+                            
+                                var heg = Math.max( $this.outerHeight(), minHeight);
+                                dest.outerWidth( $this.outerWidth() );
+				dest.outerHeight( $this.outerHeight());
+
 			};
 
 			// This provides a "real-time" (actually 15 fps)
@@ -181,10 +184,18 @@
 			// We listen for the whole window because in some cases,
 			// the mouse pointer may be on the outside of the textarea.
 			$(window).on("mouseup", function(e) {
-				if (resizeInt !== null) {
+				if (resizeInt !== null ) {
 					clearInterval(resizeInt);
 				}
 				resizeEvent();
+                                
+                                
+//                                var min_hight = Math.max(min_height_input, dest.outerHeight(), $this.outerHeight());
+                                if( min_height_input > $this.outerHeight()){
+                                    $this.autoResize({elCopyResize: dest, minHeight: min_height_input});
+//                                    dest.autoResize({elCopyResize: $this, minHeight: min_height_input});
+                                }
+                                
 			});
 
 		};

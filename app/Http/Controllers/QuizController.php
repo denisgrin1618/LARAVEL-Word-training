@@ -111,7 +111,7 @@ class QuizController extends Controller {
         
         $array_wrong_translations_id = [];
         if($request->only_wrong_translations == "yes"){
-        $array_wrong_translations_id = \DB::table('quiz_history')
+            $array_wrong_translations_id = \DB::table('quiz_history')
                 ->join('translations', 'quiz_history.translation_id', '=', 'translations.id')
                 ->join("words", function($join) {
                     $join->on('translations.word2_id', '=', 'words.id')

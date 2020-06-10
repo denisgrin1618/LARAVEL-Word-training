@@ -7,64 +7,80 @@
     <main role="main" class="container" >
 
         <h1 id="quiz_id" class="invisible"> {{ $quiz->id }} </h1>
-<!--
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-
-                <div class="row justify-content-md-center">
-                    <table class="table  table-borderless">
-
-                        <thead>
-                            <tr>                    
-                                <th class="text-left"></th>
-                                <th class="text-right"></th>
-                                <th class="text-left"></th>
-                                <th class="text-right"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-
-                            <tr>
-                                <td>
-                                    <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white" >
-                                        <img class="mx-auto" src="/img/icons/chevron-double-left.svg" alt="" width="20" height="20" title="search">
-                                    </button>
-                                </td>
-                                <td>
-                                    <button type="button" class="float-right d-flex btn p-6 m-0 rounded border border-secondary bg-white" >
-                                        <img class="mx-auto" src="/img/icons/chevron-left.svg" alt="" width="20" height="20" title="search">
-                                    </button>
-                                </td>
-                                <td>
-                                    <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white" >
-                                        <img class="mx-auto" src="/img/icons/chevron-right.svg" alt="" width="20" height="20" title="search">
-                                    </button>
-                                </td>
-                                <td>
-                                    <button type="button" class="float-right d-flex btn p-6 m-0 rounded border border-secondary bg-white" >
-                                        <img class="mx-auto" src="/img/icons/chevron-double-right.svg" alt="" width="20" height="20" title="search">
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
+        <!--
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+        
+                        <div class="row justify-content-md-center">
+                            <table class="table  table-borderless">
+        
+                                <thead>
+                                    <tr>                    
+                                        <th class="text-left"></th>
+                                        <th class="text-right"></th>
+                                        <th class="text-left"></th>
+                                        <th class="text-right"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+        
+        
+                                    <tr>
+                                        <td>
+                                            <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white" >
+                                                <img class="mx-auto" src="/img/icons/chevron-double-left.svg" alt="" width="20" height="20" title="search">
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="float-right d-flex btn p-6 m-0 rounded border border-secondary bg-white" >
+                                                <img class="mx-auto" src="/img/icons/chevron-left.svg" alt="" width="20" height="20" title="search">
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bg-white" >
+                                                <img class="mx-auto" src="/img/icons/chevron-right.svg" alt="" width="20" height="20" title="search">
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="float-right d-flex btn p-6 m-0 rounded border border-secondary bg-white" >
+                                                <img class="mx-auto" src="/img/icons/chevron-double-right.svg" alt="" width="20" height="20" title="search">
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+        
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
--->
+        -->
 
         <div class="row justify-content-center" id="div_quiz">
             <div class="col-md-8">
 
+<!--                <div class="row justify-content-md-center">
+
+                    <div class="input-group mb-3">
+                        <a  href="#">  
+                            <img class="mx-auto" src="/img/icons/chevron-left.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
+                        </a>
+                        <p>    12/100    </p>
+
+                        <a  href="#">           
+                            <img class="mx-auto" src="/img/icons/chevron-right.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
+                        </a>
+
+                    </div>
+
+                </div>-->
+                
                 <div class="row justify-content-md-center">
 
                     <div class="input-group mb-3">
-                        <div class="input-group-prepend" id="word_box" >
-                            <p class="input-group-text" id="p_word_box" style="word-wrap: break-all; white-space: normal;"></p>
+                        <div class="input-group-prepend flex-wrap" id="word_box" >
+                            <p class="input-group-text " id="p_word_box" style="word-break: break-word; white-space: normal;"></p>
                         </div>
-                        <textarea class="form-control" aria-label="With textarea" id="translate_box" placeholder="Введите перевод">  </textarea>
+                        <textarea class="form-control" aria-label="With textarea" id="translate_box"  style="resize: none; overflow:hidden; "></textarea>
                     </div>
 
                 </div>
@@ -121,48 +137,40 @@
     </main>
 </div>
 
-<script type="text/javascript">
+<script type="text/javascript" defer>
 
 
-    var min_height_input = 70;
-
-
-    function ResizeElements() {
-        var width = $('.input-group-text').parent().parent().width();
-        var height = $('.input-group-text').parent().parent().height();
-
-        $('.input-group-text').css('width', width / 2);
-        $('.input-group-text').css('height', height < min_height_input ? min_height_input : height);
-
-    }
-
-    $(window).resize(function () {
-        ResizeElements();
-    });
-
-    $('#translate_box').resize(function () {
-        $('#word_box').css('height', $('#translate_box').height());
-    });
-
-
-    ResizeElements();
-
-
+    var min_height_input = 100;
     var table_quiz_row_index = 0;
     var table_translates_rows_count = $('#table_translates tr').length;
-
+   
     $(function ()
     {
 
-        // при изменении размера textarea при наборе текста, будем менять размер зависимых елементов
-        $('#translate_box').autoResize({elCopyResize: $("#p_word_box"), minHeight: min_height_input});
+        function resize_elements() {
+        
+            var width = $('.input-group-text').parent().parent().width();
+            var height = $('.input-group-text').parent().parent().height();
 
-        // при ручном растягивании textarea, будем менять размер зависимых елементов
-        $("#translate_box").ResizeSecondaryElement($("#p_word_box"));
+            $('.input-group-text').css('width', width / 2);
+
+            // при изменении размера textarea при наборе текста, будем менять размер зависимых елементов
+            $('#translate_box').autoResize({elCopyResize: $("#p_word_box"), minHeight: min_height_input});
+
+            // при ручном растягивании textarea, будем менять размер зависимых елементов
+    //        $("#translate_box").ResizeSecondaryElement($("#p_word_box"), min_height_input);
+
+        }
+
+
+        $(document).ready(function() {
+            resize_elements();
+            
+            console.log("ready");
+        });
 
         $(window).resize(function () {
-            $('#translate_box').autoResize({elCopyResize: $("#p_word_box"), minHeight: min_height_input});
-            $("#translate_box").ResizeSecondaryElement($("#p_word_box"));
+            resize_elements();
         });
 
         $('#button_finish').click(function (e) {
@@ -215,13 +223,14 @@
 //                $('#div_quiz').addClass('d-none');  
 //            }
 
+            
 
 
-            var index = table_quiz_row_index;
-            var tr = $('#index_' + index).parent();
-            var word = tr.find('#word');
-            var translate_correct = tr.find('#translate_word_correct');
-            var translate_user = tr.find('#translate_word_user');
+            var index               = table_quiz_row_index;
+            var tr                  = $('#index_' + index).parent();
+            var word                = tr.find('#word');
+            var translate_correct   = tr.find('#translate_word_correct');
+            var translate_user      = tr.find('#translate_word_user');
 
             translate_user.text($('#translate_box').val());
             if (translate_user.text().replace(/\n/g, "") == translate_correct.text().replace(/\n/g, "")) {
@@ -236,10 +245,10 @@
 
 //            console.log(table_quiz_row_index);
 
-            var index = table_quiz_row_index;
-            var tr = $('#index_' + index).parent();
-            var word = tr.find('#word');
-            var translate_user = tr.find('#translate_word_user');
+            var index           = table_quiz_row_index;
+            var tr              = $('#index_' + index).parent();
+            var word            = tr.find('#word');
+            var translate_user  = tr.find('#translate_word_user');
 //            console.log(translate_user.text());
             $('#p_word_box').text(word.text());
             $('#translate_box').val(translate_user.text().replace(/\n/g, ""));
@@ -274,18 +283,20 @@
             result_persant = Math.round(count_correct * 100 / (count_correct + count_error));
             $('#result').text("RESULT " + result_persant + "%");
 
-
+            resize_elements();
 
 
         });
 
         $('#button_back').click(function (e) {
 
-            var index             = table_quiz_row_index;
-            var tr                = $('#index_' + index).parent();
-            var word              = tr.find('#word');
+            
+            
+            var index = table_quiz_row_index;
+            var tr = $('#index_' + index).parent();
+            var word = tr.find('#word');
             var translate_correct = tr.find('#translate_word_correct');
-            var translate_user    = tr.find('#translate_word_user');
+            var translate_user = tr.find('#translate_word_user');
 
             translate_user.text($('#translate_box').val());
             if (translate_user.text() == translate_correct.text()) {
@@ -312,17 +323,27 @@
 
             $('#button_finish').addClass('d-none');
             $('#button_next').removeClass('d-none');
-                
+            
+            resize_elements();
+
         });
 
         $("#button_next").trigger("click");
 
         $("#translate_box").keypress(function (e) {
             var code = (e.keyCode ? e.keyCode : e.which);
-            //alert(code);
+            
+            
+            
             if (code == 13) {
-                $("#translate_box").val().replace(/\n/g, "");
+                
+                //избавимся от перевода строки
+                if(event.preventDefault) event.preventDefault();
+                
+                $("#translate_box").val().replace(/\n/g, "").replace(/\n/g, "");
                 $("#button_next").trigger('click');
+                
+                
                 return true;
             }
         });

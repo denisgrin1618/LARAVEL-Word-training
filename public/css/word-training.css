@@ -23,6 +23,11 @@ table tr td {
   background-color: #C0C0C0;
 }
 
+.bt-grey-silver-hover:hover {
+  background-color: #C0C0C0;
+   color: white;
+}
+
 .bt-light-white {
   background-color: white;
 }

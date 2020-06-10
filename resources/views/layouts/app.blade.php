@@ -42,6 +42,28 @@
                             <a class="nav-link" href="{{ route('home') }}" style="color: rgb(255,255,255)">Home <span class="sr-only">(current)</span></a>
                         </li>
 -->
+<!--                        <li class="nav-item">
+                            <div class="btn-group">
+  
+                                <div class="btn-group" role="group" aria-label="...">
+                                    <a class="btn btn-outline-secondary {{ Cookie::get('locale') == 'ru' ? 'bg-secondary text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'ru']) }}">RU</a>
+                                    
+                                </div>
+                                <div class="btn-group" role="group" aria-label="...">
+                                     <a class="btn btn-outline-secondary {{ Cookie::get('locale') == 'en' || Cookie::get('locale') == null ? 'bg-secondary text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'en']) }}">EN</a>
+                                        
+                                </div>
+                                <div class="btn-group" role="group" aria-label="...">
+                                    <a class="btn btn-outline-secondary  {{ Cookie::get('locale') == 'uk' ? 'bg-secondary text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'uk']) }}">UK</a>
+                                   
+                                </div>
+                                       
+                            </div>
+                            
+                            
+                            
+            
+                        </li>-->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('translation.show') }}" style="color: rgb(255,255,255)">@lang('app_strings.vocabulary')</a>
                         </li>
@@ -88,9 +110,9 @@
                                 
                                 <div class="input-group mb-3 dropdown-item">
                                     <div class="input-group-prepend">
-                                        <a class="btn btn-outline-secondary {{ Cookie::get('locale') == 'ru' ? 'bg-secondary text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'ru']) }}">RU</a>
-                                        <a class="btn btn-outline-secondary {{ Cookie::get('locale') == 'en' || Cookie::get('locale') == null ? 'bg-secondary text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'en']) }}">EN</a>
-                                        <a class="btn btn-outline-secondary rounded-right {{ Cookie::get('locale') == 'uk' ? 'bg-secondary text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'uk']) }}">UK</a>
+                                        <a class="btn bt-grey-silver-hover border border-secondary {{ Cookie::get('locale') == 'ru' ? 'bt-grey-silver text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'ru']) }}">RU</a>
+                                        <a class="btn bt-grey-silver-hover border border-secondary {{ Cookie::get('locale') == 'en' || Cookie::get('locale') == null ? 'bt-grey-silver text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'en']) }}">EN</a>
+                                        <a class="btn bt-grey-silver-hover border border-secondary rounded-right {{ Cookie::get('locale') == 'uk' ? 'bt-grey-silver text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'uk']) }}">UK</a>
                                     </div>
 
                                       
