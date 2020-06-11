@@ -130,6 +130,7 @@ class QuizController extends Controller {
         }
         
         $quiz = Quiz::where('id', $id)
+                ->with('translations.statistics')
                 ->where('user_id', Auth::user()->id)
                 ->first();
 

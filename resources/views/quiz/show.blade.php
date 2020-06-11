@@ -63,17 +63,14 @@
                     <table class='table-responsive d-flex justify-content-center'>
                         <tr >
                             <td>
-                                    <button class=" btn rounded border border-secondary " >            
-                                        <img  src="/img/icons/chevron-left.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
-                                    </button>
-                               
+                                <button id="button_back" class=" btn rounded border border-secondary " >            
+                                    <img  src="/img/icons/chevron-left.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
+                                </button>
                             </td>
                             <td>
-                                <a href="{{ route('quiz.id', ['id'=> $quiz->id]) }}">  
-                                    <button class=" btn rounded border border-secondary " >            
-                                        <img src="/img/icons/chevron-right.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
-                                    </button>
-                                </a>
+                                <button id="button_next" class=" btn rounded border border-secondary " >            
+                                    <img src="/img/icons/chevron-right.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
+                                </button>
                             </td>
                             <td>
                                 <a href="{{ route('quiz.id', ['id'=> $quiz->id]) }}">  
@@ -90,18 +87,16 @@
                                 </a>
                             </td>
                              <td>
-                                <a href="{{ route('quiz.id', ['id'=> $quiz->id]) }}">  
-                                    <button class=" btn rounded border border-secondary" >            
-                                        <img src="/img/icons/star.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
-                                    </button>
-                                </a>
+                                <button id="but_favorite" class="btn rounded border border-secondary" >            
+                                    <img src="/img/icons/star.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
+                                </button>
+                                
                             </td>
                             <td>
-                                <a href="{{ route('quiz.id', ['id'=> $quiz->id]) }}">  
-                                    <button class=" btn rounded border border-secondary " >            
-                                        <img src="/img/icons/check2.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
-                                    </button>
-                                </a>
+                                <button id="button_finish" class=" btn rounded border border-secondary " >            
+                                    <img src="/img/icons/check2.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
+                                </button>
+                                
                             </td>
                         </tr>
                     </table>
@@ -130,19 +125,19 @@
 
                 </div>
 
-
-                <button class="btn bt-grey-silver float-left" id="button_back">
+<!--
+                <button class="btn bt-grey-silver float-left" >
                     @lang('app_strings.back')
                 </button>
 
-                <button class="btn bt-grey-silver float-right" id="button_next">
+                <button class="btn bt-grey-silver float-right" >
                     @lang('app_strings.next')
                 </button>
 
                 <button class="btn btn-success float-right d-none" id="button_finish">
                     @lang('app_strings.finish')
                 </button>
-
+-->
 
             </div>
         </div>
@@ -159,6 +154,7 @@
                         <th style="width: 30%" scope="col">Your translation</th>
                         <th style="width: 30%" scope="col">Correct translation</th>
                         <th style="width: 0%" scope="col" class="d-none"></th>
+                        <th style="width: 0%" scope="col" class="d-none"></th>
                     </tr>
                 </thead>
                 <tbody id="table_translates">
@@ -170,6 +166,7 @@
                         <td id="translate_word_user"></td>
                         <td id='translate_word_correct'>{{ $translate->word2->name }}</td>
                         <td id='translate_id' class="d-none">{{ $translate->id }}</td>
+                        <td id='translate_favorite' class="d-none">{{ is_null($translate->statistics) ? 0 : $translate->statistics->favorite }}</td>
                     </tr>
                     @endforeach
 
@@ -189,6 +186,7 @@
     var table_quiz_row_index = 0;
     var table_translates_rows_count = $('#table_translates tr').length;
 
+
     $(function ()
     {
 
@@ -207,7 +205,20 @@
 
         }
 
+        function update_img_favorite(){
+            
+            var index    = table_quiz_row_index;
+            var tr       = $('#index_' + index).parent();
+            var favorite = tr.find('#translate_favorite');
 
+            if(favorite.text() === "1"){
+                $('#but_favorite').find('img').attr("src","/img/icons/star-fill.svg");
+            }else{
+                $('#but_favorite').find('img').attr("src","/img/icons/star.svg");
+            }
+            
+        }
+        
         $(document).ready(function () {
             resize_elements();
 
@@ -216,6 +227,24 @@
 
         $(window).resize(function () {
             resize_elements();
+        });
+
+        $('#but_favorite').click(function(e){
+            
+            var index    = table_quiz_row_index;
+            var tr       = $('#index_' + index).parent();
+            var favorite = tr.find('#translate_favorite');
+
+            if(favorite.text() === "0"){
+                favorite.text(1);
+//                $(this).find('img').attr("src","/img/icons/star-fill.svg");
+            }else{
+                favorite.text(0);
+//                $(this).find('img').attr("src","/img/icons/star.svg");
+            }
+            
+            update_img_favorite();
+            
         });
 
         $('#button_finish').click(function (e) {
@@ -227,18 +256,20 @@
             var quiz_id = $('#quiz_id').text();
             var data = [];
             $("#table_translates tr").each(function (index) {
-                var correct = $(this).find('#translate_word_correct').text().replace(/\n/g, "");
-                var user = $(this).find('#translate_word_user').text().replace(/\n/g, "");
-                var id = $(this).find("#translate_id").text();
+                var correct     = $(this).find('#translate_word_correct').text().replace(/\n/g, "");
+                var user        = $(this).find('#translate_word_user').text().replace(/\n/g, "");
+                var id          = $(this).find("#translate_id").text();
+                var favorite    = $(this).find("#translate_favorite").text();
 
                 var row_data = new Object();
-                row_data.quiz_id = quiz_id;
+                row_data.quiz_id        = quiz_id;
                 row_data.translation_id = id;
                 row_data.correct_answer = (correct == user);
-                row_data.answer = user;
+                row_data.answer         = user;
+                row_data.favorite       = favorite;
                 data.push(row_data);
             });
-//                console.log(JSON.stringify(data));
+                console.log(JSON.stringify(data));
 
             $.ajax({
                 type: 'POST',
@@ -271,11 +302,11 @@
 
 
 
-            var index = table_quiz_row_index;
-            var tr = $('#index_' + index).parent();
-            var word = tr.find('#word');
-            var translate_correct = tr.find('#translate_word_correct');
-            var translate_user = tr.find('#translate_word_user');
+            var index               = table_quiz_row_index;
+            var tr                  = $('#index_' + index).parent();
+            var word                = tr.find('#word');
+            var translate_correct   = tr.find('#translate_word_correct');
+            var translate_user      = tr.find('#translate_word_user');
 
             translate_user.text($('#translate_box').val());
             if (translate_user.text().replace(/\n/g, "") == translate_correct.text().replace(/\n/g, "")) {
@@ -298,11 +329,10 @@
             $('#p_word_box').text(word.text());
             $('#translate_box').val(translate_user.text().replace(/\n/g, ""));
 
-            if (table_translates_rows_count == table_quiz_row_index) {
-//                $(this).text('Finish').removeClass('btn-primary').addClass('btn-success');
-                $('#button_finish').removeClass('d-none');
-                $('#button_next').addClass('d-none');
-            }
+//            if (table_translates_rows_count == table_quiz_row_index) {
+//                $('#button_finish').removeClass('d-none');
+//                $('#button_next').addClass('d-none');
+//            }
 
 
 
@@ -329,7 +359,7 @@
             $('#result').text("RESULT " + result_persant + "%");
 
             resize_elements();
-
+            update_img_favorite();
 
         });
 
@@ -337,11 +367,11 @@
 
 
 
-            var index = table_quiz_row_index;
-            var tr = $('#index_' + index).parent();
-            var word = tr.find('#word');
-            var translate_correct = tr.find('#translate_word_correct');
-            var translate_user = tr.find('#translate_word_user');
+            var index               = table_quiz_row_index;
+            var tr                  = $('#index_' + index).parent();
+            var word                = tr.find('#word');
+            var translate_correct   = tr.find('#translate_word_correct');
+            var translate_user      = tr.find('#translate_word_user');
 
             translate_user.text($('#translate_box').val());
             if (translate_user.text() == translate_correct.text()) {
@@ -354,22 +384,23 @@
                 table_quiz_row_index--;
             }
 
-            console.log(table_quiz_row_index);
+//            console.log(table_quiz_row_index);
 
-            var index = table_quiz_row_index;
-            var tr = $('#index_' + index).parent();
-            var word = tr.find('#word');
-            var translate_user = tr.find('#translate_word_user');
-            console.log(translate_user.text());
+            var index           = table_quiz_row_index;
+            var tr              = $('#index_' + index).parent();
+            var word            = tr.find('#word');
+            var translate_user  = tr.find('#translate_word_user');
+//            console.log(translate_user.text());
             $('#p_word_box').text(word.text());
             $('#translate_box').val(translate_user.text());
 
-            $('#button_next').text('Next').removeClass('btn-success').addClass('btn-primary');
+//            $('#button_next').text('Next').removeClass('btn-success').addClass('btn-primary');
 
-            $('#button_finish').addClass('d-none');
-            $('#button_next').removeClass('d-none');
+//            $('#button_finish').addClass('d-none');
+//            $('#button_next').removeClass('d-none');
 
             resize_elements();
+            update_img_favorite();
 
         });
 

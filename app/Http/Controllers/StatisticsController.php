@@ -43,6 +43,8 @@ class StatisticsController extends Controller {
                 $translation_statistics->count_error++;
             }
             
+            $translation_statistics->favorite = $data_row->favorite;
+            
             $translation_statistics->save();
         }
         
@@ -50,11 +52,11 @@ class StatisticsController extends Controller {
         ////////////////////////////////////////
         foreach (json_decode($data) as $data_row) {
 
-            $quiz = Quiz::find($data_row->quiz_id);
-            $translation = Translation::find($data_row->translation_id);
-            $quiz_history = QuizHistory::where('translation_id', $translation->id)
-                            ->where('quiz_id', $quiz->id)
-                            ->get();
+            $quiz           = Quiz::find($data_row->quiz_id);
+            $translation    = Translation::find($data_row->translation_id);
+            $quiz_history   = QuizHistory::where('translation_id', $translation->id)
+                                ->where('quiz_id', $quiz->id)
+                                ->get();
 
             if ($quiz_history->isEmpty()) {
                 $quiz_history = new QuizHistory;

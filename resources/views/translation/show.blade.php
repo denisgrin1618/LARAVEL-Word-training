@@ -447,13 +447,13 @@
             });
         });
 
-        $("button")
-            .mouseover(function() {
-              $( this ).removeClass('bt-light-white').addClass('bt-grey-silver');
-            })
-            .mouseout(function() {
-              $( this ).removeClass('bt-grey-silver').addClass('bt-light-white');
-        });
+//        $("button")
+//            .mouseover(function() {
+//              $( this ).removeClass('bt-light-white').addClass('bt-grey-silver');
+//            })
+//            .mouseout(function() {
+//              $( this ).removeClass('bt-grey-silver').addClass('bt-light-white');
+//        });
   
   
         
