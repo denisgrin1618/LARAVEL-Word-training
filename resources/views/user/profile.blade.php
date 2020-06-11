@@ -10,16 +10,16 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header font-weight-bold">
-                    PROFILE
+                    <h2>{{ $user->name }}</h2>
                 </div>
 
 
                 <div class="card-body">
 
                     <img id="imgavatar" src="/img/avatars/{{ $user->avatar }}" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;">
-                    <h2>{{ $user->name }}'s Profile</h2>
+                    
                     <form enctype="multipart/form-data" action="/profile" method="POST">
-                        <label>Update Profile Image</label>
+                        <label>@lang('app_strings.update_profile_image')</label>
                         
                         <input type="file" name="avatar">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">

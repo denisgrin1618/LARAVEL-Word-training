@@ -6,6 +6,7 @@ use App\TranslationStatistics;
 use App\Translation;
 use App\Quiz;
 use App\QuizHistory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class StatisticsController extends Controller {
@@ -75,7 +76,8 @@ class StatisticsController extends Controller {
     
     public function show(Request $request){
         
-        return view('statistics.show')->with('statistics', 0);
+//        dd(Auth::user()->toJson(JSON_PRETTY_PRINT));
+        return view('statistics.show');
     }
 
 }

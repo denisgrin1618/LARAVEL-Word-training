@@ -21,7 +21,7 @@ class QuizController extends Controller {
     public function store(Request $request) {
 
         
-        //dd($request);
+//        dd($request->post());
         
         $validatedData = $request->validate([
             'word_language' => ['required', 'string', 'max:2', 'min:2'],
@@ -44,21 +44,27 @@ class QuizController extends Controller {
                 ->select('translations.id')
                 
                 
-                ->when($request->post('select_most_complicated_words') == 'on', 
+                ->when($request->post('filter') == 'select_wrong_answered_words', 
                         
                     function ($query)  {
 
                         return $query->join('translation_statistics as translation_statistics', 'translations.id', '=', 'translation_statistics.translation_id')
-                            ->orderBy('translation_statistics.count_error', 'desc');
-                    }, 
-                            
-                    function ($query) {
-                        return $query->inRandomOrder();
+                            ->where('translation_statistics.count_error', '>', 0);
                 })
+                
+                ->when($request->post('filter') == 'select_unanswered_words', 
+                        
+                    function ($query)  {
 
+                        return $query->leftJoin('translation_statistics as translation_statistics', 'translations.id', '=', 'translation_statistics.translation_id')
+//                            ->where('translation_statistics.id','null')
+                            ->whereNull('translation_statistics.id');
+                })
+                        
+//                ->toSql();
+//                dd($translates);
                 
-                
-//                ->inRandomOrder()
+                ->inRandomOrder()
                 ->take($request->post('quantity_of_words'))
                 ->get();
 

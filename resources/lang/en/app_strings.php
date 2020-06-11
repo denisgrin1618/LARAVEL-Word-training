@@ -11,7 +11,6 @@ return [
     'language_word'                     => 'Language word',
     'language_translation'              => 'Language translation',
     'quantity_of_words'                 => 'Quantity of words',
-    'select_most_complicated_words'     => 'Select most complicated words',
     'start'                             => 'Start',
     'start_new_quiz'                    => 'Start new quiz',
     'profile'                           => 'Profile',
@@ -41,6 +40,27 @@ return [
     'back'                              => 'Back',
     'next'                              => 'Next',
     'finish'                            => 'Finish',
+    
+    'success_rate'                      => 'Success rate (%)',
+    'total_words'                       => 'Total words',
+    'total_wrong_answers'               => 'Total wrong answers',
+    'total_correct_answers'             => 'Total correct answers',
+    'total_unanswered'                  => 'Total unanswered words',
+    'total_favorites'                   => 'Total favorites',
+    'total_time_spent'                  => 'Total time spent (hour)',
+    'total_languages'                   => 'Total languages',
+    
+    'profile'                           => 'Profile',
+    'update_profile_image'              => 'Update profile image',
+    'submit'                            => 'Submit',
+    
+    'select_wrong_answered_words'       => 'Select wrong answered words',
+    'select_unanswered_words'           => 'Select unanswered words',
+    'filter'                            => 'Filter',
+    'any_words'                         => 'Any words',
+    
+    
+    
     
 ];
 

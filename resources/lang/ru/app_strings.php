@@ -11,7 +11,6 @@ return [
     'language_word'                     => 'Язык слова',
     'language_translation'              => 'Язык перевода',
     'quantity_of_words'                 => 'Количество слов',
-    'select_most_complicated_words'     => 'Выбрать слова с высоким процентом ошибок',
     'start'                             => 'Начать',
     'start_new_quiz'                    => 'Начать новое тестирование',
     'profile'                           => 'Профиль',
@@ -41,6 +40,25 @@ return [
     'back'                              => 'Назад',
     'next'                              => 'Далее',
     'finish'                            => 'Финиш',
+    
+    'success_rate'                      => 'Процент успеха',
+    'total_words'                       => 'Количество слов',
+    'total_wrong_answers'               => 'Количество не верных ответов',
+    'total_correct_answers'             => 'Количество верных ответов',
+    'total_unanswered'                  => 'Количество не отвеченых слов',
+    'total_favorites'                   => 'Количество избраных',
+    'total_time_spent'                  => 'Количество потраченного времени (часы)',
+    'total_languages'                   => 'Количество языков',
+    
+    'profile'                           => 'Профиль',
+    'update_profile_image'              => 'Обновить картинку профиля',
+    'submit'                            => 'Подтвердить',
+    
+    'select_wrong_answered_words'       => 'Выбрать слова по которым были ошибки',
+    'select_unanswered_words'           => 'Выбрать не отвеченные слова',
+    'filter'                            => 'Фильтр',
+    'any_words'                         => 'Любые слова',
+    
     
 ];
 

@@ -65,13 +65,18 @@
             
                         </li>-->
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('translation.show') }}" style="color: rgb(255,255,255)">@lang('app_strings.vocabulary')</a>
+                            <a class="nav-link text-white" href="{{ route('translation.show') }}">@lang('app_strings.vocabulary')</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('translation.import') }}" style="color: rgb(255,255,255)">@lang('app_strings.import')</a>
+                            <a class="nav-link text-white" href="{{ route('translation.import') }}" >@lang('app_strings.import')</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('quiz.show_all') }}" style="color: rgb(255,255,255)">@lang('app_strings.quiz')</a>
+                            <a class="nav-link text-white" href="{{ route('quiz.show_all') }}" >@lang('app_strings.quiz')</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link text-white" href="{{ route('statistics.show') }}">
+                                    @lang('app_strings.statistic')
+                                </a>
                         </li>
                     </ul>
 
@@ -101,9 +106,9 @@
                                     @lang('app_strings.profile')
                                 </a>
                                 
-                                <a class="dropdown-item" href="{{ route('statistics.show') }}">
+<!--                                <a class="dropdown-item" href="{{ route('statistics.show') }}">
                                     @lang('app_strings.statistic')
-                                </a>
+                                </a>-->
                                 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

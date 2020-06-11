@@ -9,11 +9,99 @@
 
 <div class="container">
 
-    <h1>Statistics</h1>
+    
+
+   
+<div class="container">
 
     <main role="main" class="container" >
 
+        <h1>@lang('app_strings.statistic')</h1>
+        <table class="table-responsive w-100 d-block d-md-table">
+<!--            <thead>
+                <tr>
+                    <th  scope="col">Показатели:</th>
+                    <th  scope="col"></th>
+
+
+                </tr>
+            </thead>-->
+            <tbody id="table_translates">
+
+               
+
+                <tr>
+                    <td>@lang('app_strings.success_rate'):</td>
+                    <td>
+<!--                        <span class="text-danger">23</span>-->
+                        {{Auth::user()->success_rate}}
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>@lang('app_strings.total_words'):</td>
+                    <td>
+                        {{Auth::user()->total_words}}
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>@lang('app_strings.total_wrong_answers'):</td>
+                    <td>
+                        {{Auth::user()->total_wrong_answers}}
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>@lang('app_strings.total_correct_answers'):</td>
+                    <td>
+                        {{Auth::user()->total_correct_answers}}
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>@lang('app_strings.total_unanswered'):</td>
+                    <td>
+                        {{Auth::user()->total_words - Auth::user()->total_correct_answers - Auth::user()->total_wrong_answers }}
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>@lang('app_strings.total_favorites'):</td>
+                    <td>
+                        0
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>@lang('app_strings.total_time_spent'):</td>
+                    <td>
+                        0
+                    </td>
+                </tr>
+                
+<!--                <tr>
+                    <td>@lang('app_strings.total_languages')</td>
+                    <td>
+                        0
+                    </td>
+                </tr>-->
+               
+            </tbody>
+        </table>
+
+       
+
+
     </main>
+
+
+
+
+
+
+</div>
+
 
 </div>
 
