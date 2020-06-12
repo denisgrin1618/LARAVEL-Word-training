@@ -69,7 +69,7 @@
                 <tr>
                     <td>@lang('app_strings.total_favorites'):</td>
                     <td>
-                        0
+                        {{Auth::user()->total_favorites}}
                     </td>
                 </tr>
                 

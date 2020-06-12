@@ -16,7 +16,7 @@
                     <th style="width: 30%" scope="col">@lang('app_strings.word')</th>
                     <th style="width: 10%" scope="col"></th>
                     <th style="width: 30%" scope="col">@lang('app_strings.translation')</th>
-                    <th style="width: 10%" scope="col"><img class="mx-auto" src="/img/icons/graph-up.svg" alt="" width="20" height="20" title="statistics"></th>
+                    <th style="width: 10%" scope="col"></th>
                     <th style="width: 50px" scope="col"></th>
                     <th style="width: 50px" scope="col"></th>
                     <th style="width: 0%"  scope="col" class="d-none"></th>
@@ -36,9 +36,9 @@
 
                             @foreach ($languages as $language)
                             @if ($language->name ===  ($search_input['language1'] ?? ""))
-                            <option selected>{{ $language->name }}</option>
+                                <option selected>{{ $language->name }}</option>
                             @else
-                            <option>{{ $language->name }}</option>
+                                <option>{{ $language->name }}</option>
                             @endif
                             @endforeach
                         </select>
@@ -51,9 +51,9 @@
 
                             @foreach ($languages as $language) 
                             @if ($language->name ===  ($search_input['language2'] ?? ""))
-                            <option selected>{{ $language->name }}</option>
+                                <option selected>{{ $language->name }}</option>
                             @else
-                            <option>{{ $language->name }}</option>
+                                <option>{{ $language->name }}</option>
                             @endif
                             @endforeach
 
@@ -62,7 +62,11 @@
                     <td>
                         <input class="form-control" type="text" placeholder="{{__('app_strings.search')}}" name="word2" value="{{$search_input['word2'] ?? ''}}">
                     </td>
-                    <td></td>
+                    <td class="d-flex justify-content-center" >
+                        <div type="button" class="but_favorite d-flex btn p-6 m-0">
+                            <img class="mx-auto" src="/img/icons/star.svg" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
+                        </div>
+                    </td>
                     <td></td>
                     <td align="right"> 
                         <!-- <button type="button" class="btn btn-secondary  ml-1 mt-1" >Search</button>  -->
@@ -87,7 +91,13 @@
                     <td id="translate_word1_name"></td>
                     <td id='translate_word2_language_name'></td>
                     <td id="translate_word2_name" ></td>
-                    <td id="translate_statistics"> </td>
+                    <td id="translate_statistics"> 
+<!--                        <img class="mx-auto" src="/img/icons/star.svg" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
+                    -->
+                        <div type="button" class="but_favorite d-flex btn p-6 m-0">
+                            <img class="mx-auto" src="/img/icons/star.svg" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
+                        </div>
+                    </td>
                     <td align="right" >
                         <button id="bt_edit" type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bt-light-white bt_edit" >
                             <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="{{__('app_strings.edit')}}">
@@ -111,7 +121,11 @@
                     <td id="translate_word1_name"></td>
                     <td id='translate_word2_language_name'></td>
                     <td id="translate_word2_name" ></td>
-                    <td id="translate_statistics"> </td>
+                    <td id="translate_statistics" class="d-flex justify-content-center" > 
+                        <button type="button" class="d-flex btn p-6 m-0">
+                            <img class="mx-auto" src="/img/icons/star.svg" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
+                        </button>
+                    </td>
                     <td align="right" >
                         <button id="bt_edit" type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bt-light-white bt_edit" >
                             <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="{{__('app_strings.edit')}}">
@@ -138,8 +152,17 @@
                     <td id="translate_word1_name"           >{{ $translate->word1->name }}</td>
                     <td id='translate_word2_language_name'  >{{ $translate->word2->language->name }}</td>
                     <td id="translate_word2_name"           >{{ $translate->word2->name }}</td>
-                    <td id="translate_statistics"           >
-                        {!! !empty($translate->statistics) ? ''.$translate->statistics->count_success.'/'.($translate->statistics->count_error+$translate->statistics->count_success) : '0/0' !!} 
+                    <td id="translate_statistics"  class="d-flex justify-content-center"         >
+<!--                        {!! !empty($translate->statistics) ? ''.$translate->statistics->count_success.'/'.($translate->statistics->count_error+$translate->statistics->count_success) : '0/0' !!} -->
+                        @if(!empty($translate->statistics) && $translate->statistics->favorite)
+                            <div  type="button" class="star_fill but_favorite d-flex btn p-6 m-0" >
+                                <img class="mx-auto" src="/img/icons/star-fill.svg" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
+                            </div>
+                        @else
+                            <div  type="button" class="but_favorite d-flex btn p-6 m-0"  >
+                                <img class="mx-auto" src="/img/icons/star.svg" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
+                            </div>
+                        @endif
                     </td>
                     <td align="right" >
 
@@ -275,6 +298,54 @@
 
         $('#new_word1_name').autoResize();
         $('#new_word2_name').autoResize();
+
+        $('.but_favorite').on("click", function (event) {
+            
+            var button = $(event.target);
+            
+            if (button.prop("tagName") == "IMG") {
+                button = button.parent(); 
+            }
+            if (button.prop("tagName") == "IMG") {
+                button = button.parent(); 
+            }
+            console.log(button.prop("tagName"));
+
+            curent_table_tr     = button.parent().parent();
+            var translation_id  = curent_table_tr.find('#translate_id').text();
+//            console.log(curent_table_tr.find('translate_id').html());
+            var favorite        = 0;
+            
+            if(button.hasClass('star_fill')){
+                favorite = 0;
+                button.removeClass('star_fill').find('img').attr("src", "/img/icons/star.svg");
+            }else{
+                favorite = 1;
+                button.addClass('star_fill').find('img').attr("src", "/img/icons/star-fill.svg");
+            }
+            
+            
+            
+                
+            
+            $.ajax({
+                type: 'POST',
+                url: "/statistics/favorite",
+                data: {
+                    "_token": $('meta[name="csrf-token"]').attr('content'),
+                    "translation_id": translation_id,
+                    "favorite": favorite
+                },
+
+                success: function (data) {
+                     console.log(data);
+                },
+                error: function () {
+                    console.log('data');
+                }
+            });
+            
+        });
 
         $('.bt_edit').on("click", function (event) {
 

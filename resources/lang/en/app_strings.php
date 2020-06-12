@@ -58,6 +58,7 @@ return [
     'select_unanswered_words'           => 'Select unanswered words',
     'filter'                            => 'Filter',
     'any_words'                         => 'Any words',
+    'favorite'                          => 'Избранное',
     
     
     

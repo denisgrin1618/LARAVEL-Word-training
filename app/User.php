@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use DB;
 use App\Language;
 use App\Translation;
+use App\TranslationStatistics;
 
 class User extends Authenticatable
 {
@@ -45,6 +46,7 @@ class User extends Authenticatable
         "total_correct_answers", 
         "total_wrong_answers",
         "success_rate",
+        "total_favorites",
     ];
     
 //    protected $attributes = [
@@ -95,7 +97,7 @@ class User extends Authenticatable
                 ->where('translations.user_id', '=', $this->id)
                 ->count();
         
-        $correct_answers = \DB::table('quiz_history')
+        $correct_answers = DB::table('quiz_history')
                 ->join('translations', 'quiz_history.translation_id', '=', 'translations.id')
                 ->join("words", function($join) {
                     $join->on('translations.word2_id', '=', 'words.id')
@@ -106,4 +108,15 @@ class User extends Authenticatable
 
         return $all_words == 0 ? 0 : round($correct_answers * 100 / $all_words, 0);
     }
+   
+    public function getTotalFavoritesAttribute() {
+        
+        return DB::table('translations')
+                ->join('translation_statistics', 'translations.id', '=', 'translation_statistics.translation_id')
+                ->where('translations.user_id', $this->id)
+                ->where('translation_statistics.favorite', true)
+                ->count();
+
+    }
+    
 }

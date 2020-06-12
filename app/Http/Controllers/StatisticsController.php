@@ -82,4 +82,24 @@ class StatisticsController extends Controller {
         return view('statistics.show');
     }
 
+    public function favorite(Request $request){
+        
+//        $data = json_decode($request->post('data'));
+            
+        
+        $translation = Translation::find($request->post('translation_id'));
+        $translation_statistics = TranslationStatistics::where('translation_id', $translation->id)->get();
+
+        if ($translation_statistics->isEmpty()) {
+            $translation_statistics = new TranslationStatistics;
+            $translation_statistics->translation()->associate($translation);
+            $translation_statistics->count_success = 0;
+            $translation_statistics->count_error = 0;
+        } else {
+            $translation_statistics = $translation_statistics->first();
+        }
+
+        $translation_statistics->favorite = $request->post('favorite');
+        $translation_statistics->save();
+    }
 }

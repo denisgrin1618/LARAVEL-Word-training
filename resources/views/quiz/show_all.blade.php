@@ -7,6 +7,8 @@
 
     <main role="main" class="container" >
 
+
+        
         <table class="table-responsive  w-100 d-block d-md-table">
             <thead class="thead-light" >
                 <tr>
@@ -22,12 +24,17 @@
                 <tr>
                     <td colspan="3" > 
                     
-                        <a href="{{ route('quiz.start') }}" style="text-decoration: none;">
+<!--                        <a  class="d-flex align-content-end flex-wrap" href="{{ route('quiz.start') }}" style="text-decoration: none;">
                             <button class="font-weight-bold but_start_new_quiz  bt-light-green d-flex btn p-6 m-10 rounded border border-secondary mx-auto" >            
                                 @lang('app_strings.start_new_quiz')
                             </button>
-                        </a>
+                        </a>-->
                         
+                                    <a href="{{ route('quiz.start') }}" style="text-decoration: none;" 
+                               class="float-right mx-auto font-weight-bold but_start_new_quiz  bt-light-green btn p-6 m-10 rounded border border-secondary " >            
+                                @lang('app_strings.start_new_quiz')
+                            </a>
+                       
 <!--                        
                         <img class="mx-auto" src="/img/icons/file-earmark-plus.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
                     -->
@@ -65,28 +72,54 @@
                         
                          <div class="font-weight-bold div_quiz d-flex btn p-0 m-0 rounded border border-secondary bg-white" 
                              data-toggle="collapse" data-target="#div_quiz_details{{ $quiz->id }}" aria-expanded="false" aria-controls="div_quiz_details{{ $quiz->id }}"
-                             style="width:100%;  background: linear-gradient(90deg, #DCDCDC 0%, #DCDCDC {{$quiz->pass_percentage()}}%, white {{$quiz->pass_percentage()}}%, white {{100-$quiz->pass_percentage()}}%)">
+                             style="width:100%; background: linear-gradient(90deg, #DCDCDC 0%, #DCDCDC {{$quiz->pass_percentage()}}%, white {{$quiz->pass_percentage()}}%, white {{100-$quiz->pass_percentage()}}%)">  
                         
                             
-                            
+<!--                             
+                             @if ($quiz->pass_percentage() < 40)
+                                background: linear-gradient(90deg, #FFA07A 0%, #FFA07A {{$quiz->pass_percentage()}}%, white {{$quiz->pass_percentage()}}%, white {{100-$quiz->pass_percentage()}}%)"
+                             @elseif ($quiz->pass_percentage() > 40 && $quiz->pass_percentage() < 80 )
+                                background: linear-gradient(90deg, #fcf100 0%, #fcf100 {{$quiz->pass_percentage()}}%, white {{$quiz->pass_percentage()}}%, white {{100-$quiz->pass_percentage()}}%)"
+                             @else
+                                background: linear-gradient(90deg, #32CD32 0%, #32CD32 {{$quiz->pass_percentage()}}%, white {{$quiz->pass_percentage()}}%, white {{100-$quiz->pass_percentage()}}%)"
+                             @endif
+                              
+                             >
+                            -->
                             <div class="m-1" style="width:100%">
 
                                 
                                 <table style="width:100%">
                                     <tr>
-                                        <td class="text-left">@lang('app_strings.total_words'): {{ $quiz->translations()->count() }}</td> 
+                                        
+<!--                                        
+-->                                        <td class="text-left">@lang('app_strings.total_words'): {{ $quiz->translations()->count() }}</td> 
+                                        
+                                        
+                                        
+                                        
+<!--                                        @if ($quiz->pass_percentage() < 40)
+                                            <td class="text-left text-danger">
+                                        @elseif ($quiz->pass_percentage() > 40 && $quiz->pass_percentage() < 80 )
+                                            <td class="text-left text-warning">
+                                        @else
+                                            <td class="text-left text-success"> 
+                                        @endif 
+                                        
+                                        @lang('app_strings.total_words'): {{ $quiz->translations()->count() }}</td> 
+                                        -->
                                         <td class="text-right" id="td_pass_percentage">  
-                                                {{ $quiz->pass_percentage() }}%  
+<!--                                                {{ $quiz->pass_percentage() }}%  -->
 <!--                                                  
                                                   
-                                                @if ($quiz->pass_percentage() < 40)
+-->                                             @if ($quiz->pass_percentage() < 40)
                                                     <span class="badge badge-pill badge-danger">{{ $quiz->pass_percentage() }}%</span> 
                                                 @elseif ($quiz->pass_percentage() > 40 && $quiz->pass_percentage() < 80 )
                                                     <span class="badge badge-pill badge-warning">{{ $quiz->pass_percentage() }}%</span> 
                                                 @else
                                                     <span class="badge badge-pill badge-success">{{ $quiz->pass_percentage() }}%</span> 
                                                 @endif 
-                                                -->
+                                                
                                         </td>
                                     </tr>
                                 </table>
@@ -278,7 +311,7 @@
                target = target.parent(); 
             }
 
-            var pass_percentage  = target.find('#td_pass_percentage').text(); 
+            var pass_percentage  = target.find('#td_pass_percentage span').text(); 
             pass_percentage      = pass_percentage.replace("%", "");
             var div_quiz_details = target.find('[id*="div_quiz_details"] table');
             
