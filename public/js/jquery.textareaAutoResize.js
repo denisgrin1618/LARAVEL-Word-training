@@ -45,7 +45,7 @@
 			var newHeight1 = $copy.css('height');
 			
 			if(options.elCopyResize != undefined) {
-				var text2 = options.elCopyResize.text()
+				var text2 = options.elCopyResize.val()
 						.replace('<', '&lt;')
 						.replace('>', '&gt;')
 						.replace('!', '&excl;')
@@ -59,6 +59,7 @@
 
 				$copy.html(text2 + '<br />');
 				var newHeight2 = $copy.css('height');
+//                                console.log(options.elCopyResize.attr('id') + " - " + options.elCopyResize.val());
 			}
 			else{
 				var text2 = "";
@@ -76,7 +77,11 @@
 			$copy.html(''); // We do this because otherwise, a large void appears in the page if the textarea has a high height.
 
                         
-			newHeightI = parseInt(newHeight);
+                        newHeightI = parseInt(newHeight);
+
+                        
+
+
 			maxHeight = parseInt(options.maxHeight);
 			minHeight = parseInt(options.minHeight);
 

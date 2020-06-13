@@ -6,15 +6,12 @@
 
 <div class="container">
 
-    
+    <main role="main" class="container" >
 
-        <div class=" p-0 m-0" >
-            
-        
         <table class="table-responsive table-striped w-100 d-block d-md-table">
-<!--            <thead>
+            <thead>
                 <tr>
-                    <th style="width: 82%" scope="col">#</th> 
+                    <!-- <th style="width: 3%" scope="col">#</th> -->
                     <th style="width: 10%" scope="col"></th>
                     <th style="width: 30%" scope="col">@lang('app_strings.word')</th>
                     <th style="width: 10%" scope="col"></th>
@@ -22,9 +19,6 @@
                     <th style="width: 50px" scope="col"></th>
                     <th style="width: 50px" scope="col"></th>
                     <th style="width: 50px" scope="col"></th>
-                    <th style="width: 18%" scope="col"></th>
-               
-                    
                     <th style="width: 0%"  scope="col" class="d-none"></th>
                     <th style="width: 0%"  scope="col" class="d-none"></th>
                     <th style="width: 0%"  scope="col" class="d-none"></th>
@@ -32,70 +26,57 @@
                     <th style="width: 0%"  scope="col" class="d-none"></th>
 
                 </tr>
-            </thead>-->
+            </thead>
             <tbody id="table_translates">
 
                 {{ Form::open(array('route' => 'translation.search', 'method' => 'get')) }}
                 <tr>
                     <td>
+                        <select class="form-control" name="language1">
 
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-10 p-0">
-                                    <div class="container">
-                                        <div class="row">
+                            @foreach ($languages as $language)
+                            @if ($language->name ===  ($search_input['language1'] ?? ""))
+                                <option selected>{{ $language->name }}</option>
+                            @else
+                                <option>{{ $language->name }}</option>
+                            @endif
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" placeholder="{{__('app_strings.search')}}" name="word1" value="{{$search_input['word1'] ?? ''}}">
+                    </td>
+                    <td>
+                        <select class="form-control" name="language2">
 
-                                            <div class="col-6 col-md-1 p-0" >
-                                                <select class="form-control " name="language1">
+                            @foreach ($languages as $language) 
+                            @if ($language->name ===  ($search_input['language2'] ?? ""))
+                                <option selected>{{ $language->name }}</option>
+                            @else
+                                <option>{{ $language->name }}</option>
+                            @endif
+                            @endforeach
 
-                                                    @foreach ($languages as $language)
-                                                    @if ($language->name ===  ($search_input['language1'] ?? ""))
-                                                    <option selected>{{ $language->name }}</option>
-                                                    @else
-                                                    <option>{{ $language->name }}</option>
-                                                    @endif
-                                                    @endforeach
-                                                </select>
-                                            </div>    
-                                            <div class="col-6 col-md-5 p-0" >
-                                                <input class="form-control" type="text" placeholder="{{__('app_strings.search')}}" name="word1" value="{{$search_input['word1'] ?? ''}}">
-                                            </div>
+                        </select>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" placeholder="{{__('app_strings.search')}}" name="word2" value="{{$search_input['word2'] ?? ''}}">
+                    </td>
+                    <td class="d-flex justify-content-center" >
+<!--                        <div type="button" class="but_favorite d-flex btn p-6 m-0">
+                            <img class="mx-auto" src="/img/icons/star.svg" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
+                        </div>-->
+                    </td>
+                    <td></td>
+                    <td align="right"> 
+                        <!-- <button type="button" class="btn btn-secondary  ml-1 mt-1" >Search</button>  -->
+                        <!--                        {{ Form::submit('Search',['class'=>'btn btn-secondary  ml-1 mt-1']) }}-->
 
-
-                                            <div class="col-6 col-md-1 p-0" >
-                                                <select class="form-control" name="language2">
-
-                                                    @foreach ($languages as $language) 
-                                                    @if ($language->name ===  ($search_input['language2'] ?? ""))
-                                                    <option selected>{{ $language->name }}</option>
-                                                    @else
-                                                    <option>{{ $language->name }}</option>
-                                                    @endif
-                                                    @endforeach
-
-                                                </select>
-                                            </div>    
-                                            <div class="col-6 col-md-5 p-0" >
-                                                <input class="form-control" type="text" placeholder="{{__('app_strings.search')}}" name="word2" value="{{$search_input['word2'] ?? ''}}">
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-2 p-0 ">
-                                    <button type="submit" class="float-right d-flex btn p-6 m-0 rounded border border-secondary bt-light-white  " >            
-                                        <img class="mx-auto" src="/img/icons/search.svg" alt="" width="20" height="20" title="{{__('app_strings.search')}}">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-
+                        <button type="submit" class="d-flex btn p-6 m-0 rounded border border-secondary bt-light-white  " >            
+                            <img class="mx-auto" src="/img/icons/search.svg" alt="" width="20" height="20" title="{{__('app_strings.search')}}">
+                        </button>
 
                     </td>
-                  
-                    
-                    
                     <td class="d-none"></td>
                     <td class="d-none"></td>
                     <td class="d-none"></td>
@@ -105,12 +86,14 @@
                 </tr>
                 {{ Form::close() }}
 
-<!--                <tr id="tr_blank" class="d-none">                  
+                <tr id="tr_blank" class="d-none">                  
                     <td id='translate_word1_language_name'> </td>
                     <td id="translate_word1_name"></td>
                     <td id='translate_word2_language_name'></td>
                     <td id="translate_word2_name" ></td>
                     <td id="translate_statistics" align="right"> 
+<!--                        <img class="mx-auto" src="/img/icons/star.svg" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
+                    -->
                         <div type="button" class="but_favorite d-flex btn p-6 m-0">
                             <img class="mx-auto" src="/img/icons/star.svg" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
                         </div>
@@ -159,80 +142,42 @@
                     <td class="d-none" id="translate_word1_language_id"> </td>
                     <td class="d-none" id="translate_word2_language_id"> </td>
 
-                </tr>-->
+                </tr>
 
 
                 @foreach ($translates as $translate)
                 <tr>
-                    
-                    <td class="">
-
-                        <div class="container ">
-                            <div class="row justify-content-end">
-                                <div class="col-10 p-0">
-                                    <div class="container">
-                                        <div class="row">
-
-                                            <div id="translate_word1_language_name" class="col-6 col-md-1 p-0" >
-                                                {{ $translate->word1->language->name }}
-                                            </div>
-                                            <div id="translate_word1_name" class="col-6 col-md-5 p-0" >
-                                                {{ $translate->word1->name }}
-                                            </div>
-
-
-                                            <div id="translate_word2_language_name" class="col-6 col-md-1 p-0" >
-                                                {{ $translate->word2->language->name }}
-                                            </div>
-                                            <div id="translate_word2_name" class="col-6 col-md-5 p-0" >
-                                                {{ $translate->word2->name }}
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-2 p-0 ">
-                                    <div class="container p-0">
-                                        <div class="row justify-content-end no-gutters ">
-
-                                            <div class="col-12  col-md-auto   p-0" >
-                                                @if(!empty($translate->statistics) && $translate->statistics->favorite)
-                                                <div  type="button" class="float-right star_fill but_favorite d-flex btn " >
-                                                    <img class="mx-auto" src="/img/icons/star-fill.svg" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
-                                                </div>
-                                                @else
-                                                <div  type="button" class="float-right but_favorite d-flex btn "  >
-                                                    <img class="mx-auto" src="/img/icons/star.svg" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
-                                                </div>
-                                                @endif
-                                            </div>
-                                            <div class="col-12 col-md-auto   pl-1 " >
-                                                <button id="bt_edit" type="button" class="float-right d-flex btn  rounded border border-secondary bt-light-white bt_edit" >
-                                                    <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="{{__('app_strings.edit')}}">
-                                                </button>
-                                            </div>
-                                            <div class="col-12  col-md-auto   pl-1 " >
-                                                <button type="button" class="float-right d-flex btn  rounded border border-secondary bt-light-white but_delete" data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">
-                                                    <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="{{__('app_strings.delete')}}">
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                    <!--<th scope="row" >{{ $loop->iteration }}</th> -->
+                    <td id='translate_word1_language_name'  >{{ $translate->word1->language->name }} </td>
+                    <td id="translate_word1_name"           >{{ $translate->word1->name }}</td>
+                    <td id='translate_word2_language_name'  >{{ $translate->word2->language->name }}</td>
+                    <td id="translate_word2_name"           >{{ $translate->word2->name }}</td>
+                    <td id="translate_statistics"  align="right"        >
+<!--                        {!! !empty($translate->statistics) ? ''.$translate->statistics->count_success.'/'.($translate->statistics->count_error+$translate->statistics->count_success) : '0/0' !!} -->
+                        @if(!empty($translate->statistics) && $translate->statistics->favorite)
+                            <div  type="button" class=" star_fill but_favorite d-flex btn p-6 m-0" >
+                                <img class="mx-auto" src="/img/icons/star-fill.svg" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
                             </div>
-                        </div>
+                        @else
+                            <div  type="button" class=" but_favorite d-flex btn p-6 m-0"  >
+                                <img class="mx-auto" src="/img/icons/star.svg" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
+                            </div>
+                        @endif
+                    </td>
+                    <td align="right" >
 
-
+                        <button id="bt_edit" type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bt-light-white bt_edit" >
+                            <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="{{__('app_strings.edit')}}">
+                        </button>
 
                     </td>
-                    
-<!--                    <td id="translate_statistics"  align="right" class="d-flex align-items-start"       >
-    
-    
-    
-    
-</td>-->
-                    
+                    <td align="right" >
+
+                        <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bt-light-white but_delete" data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">
+                            <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="{{__('app_strings.delete')}}">
+                        </button>
+
+                    </td>
                     <td class="d-none" id="translate_word1_id">{{ $translate->word1->id }}</td>
                     <td class="d-none" id="translate_word2_id">{{ $translate->word2->id }}</td>
                     <td class="d-none" id="translate_id">{{ $translate->id }}</td>
@@ -249,7 +194,6 @@
             </tbody>
         </table>
 
-            </div>
         <br>
 
         <table class="table-responsive table-striped w-100 d-block d-md-table" id='table_translate_new'>
@@ -299,7 +243,7 @@
         </div>
 
 
-    
+    </main>
 
 
     <div >
@@ -367,11 +311,7 @@
             }
             console.log(button.prop("tagName"));
 
-            curent_table_tr = button.parent().parent();
-            while(curent_table_tr.prop("tagName") != "TR"){
-                curent_table_tr = curent_table_tr.parent();
-            }
-            
+            curent_table_tr     = button.parent().parent();
             var translation_id  = curent_table_tr.find('#translate_id').text();
 //            console.log(curent_table_tr.find('translate_id').html());
             var favorite        = 0;
@@ -416,10 +356,6 @@
             }
 
             curent_table_tr = button.parent().parent();
-            while(curent_table_tr.prop("tagName") != "TR"){
-                curent_table_tr = curent_table_tr.parent();
-            }
-//            console.log(curent_table_tr.html());
 
             var td_translate_word1_name = curent_table_tr.find('#translate_word1_name');
             var td_translate_word2_name = curent_table_tr.find('#translate_word2_name');
@@ -501,11 +437,6 @@
             }
 
             curent_table_tr = button.parent().parent();
-            while(curent_table_tr.prop("tagName") != "TR"){
-                curent_table_tr = curent_table_tr.parent();
-            }
-            
-            
             var translate_id = curent_table_tr.find('#translate_id').text();
 
             $('#modal_translate_id').val(translate_id);

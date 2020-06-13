@@ -54,6 +54,7 @@ return [
     'update_profile_image'              => 'Обновить картинку профиля',
     'submit'                            => 'Подтвердить',
     
+    'select_favorite_words'             => 'Выбрать избранные слова',
     'select_wrong_answered_words'       => 'Выбрать слова по которым были ошибки',
     'select_unanswered_words'           => 'Выбрать не отвеченные слова',
     'filter'                            => 'Фильтр',

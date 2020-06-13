@@ -54,11 +54,13 @@ return [
     'update_profile_image'              => 'Update profile image',
     'submit'                            => 'Submit',
     
+    'select_favorite_words'             => 'Select favorite words',
     'select_wrong_answered_words'       => 'Select wrong answered words',
     'select_unanswered_words'           => 'Select unanswered words',
     'filter'                            => 'Filter',
     'any_words'                         => 'Any words',
     'favorite'                          => 'Избранное',
+    
     
     
     

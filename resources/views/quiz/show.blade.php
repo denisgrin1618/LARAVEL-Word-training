@@ -64,15 +64,15 @@
                         <tr >
                             <td>
                                 <button id="button_back" class=" btn rounded border border-secondary " >            
-                                    <img  src="/img/icons/chevron-left.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
+                                    <img  src="/img/icons/chevron-left.svg" alt="" width="20" height="20" title="{{__('app_strings.back')}}">
                                 </button>
                             </td>
                             <td>
                                 <button id="button_next" class=" btn rounded border border-secondary " >            
-                                    <img src="/img/icons/chevron-right.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
+                                    <img src="/img/icons/chevron-right.svg" alt="" width="20" height="20" title="{{__('app_strings.next')}}">
                                 </button>
                             </td>
-                            <td>
+<!--                            <td>
                                 <a href="{{ route('quiz.id', ['id'=> $quiz->id]) }}">  
                                     <button class=" btn rounded border border-secondary" >            
                                         <img src="/img/icons/clock.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
@@ -85,16 +85,16 @@
                                         <img src="/img/icons/eye.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
                                     </button>
                                 </a>
-                            </td>
+                            </td>-->
                              <td>
                                 <button id="but_favorite" class="btn rounded border border-secondary" >            
-                                    <img src="/img/icons/star.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
+                                    <img src="/img/icons/star.svg" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
                                 </button>
                                 
                             </td>
                             <td>
                                 <button id="button_finish" class=" btn rounded border border-secondary " >            
-                                    <img src="/img/icons/check2.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
+                                    <img src="/img/icons/check2.svg" alt="" width="20" height="20" title="{{__('app_strings.finish')}}">
                                 </button>
                                 
                             </td>
@@ -120,7 +120,7 @@
                         <div class="input-group-prepend flex-wrap" id="word_box" >
                             <p class="input-group-text " id="p_word_box" style="word-break: break-word; white-space: normal;"></p>
                         </div>
-                        <textarea class="form-control" aria-label="With textarea" id="translate_box"  style="resize: none; overflow:hidden; "></textarea>
+                        <textarea class="form-control" aria-label="With textarea" id="translate_box"  style="resize: none; overflow:hidden; box-shadow: none!important;"></textarea>
                     </div>
 
                 </div>
@@ -231,19 +231,43 @@
 
         $('#but_favorite').click(function(e){
             
-            var index    = table_quiz_row_index;
-            var tr       = $('#index_' + index).parent();
-            var favorite = tr.find('#translate_favorite');
+            var index       = table_quiz_row_index;
+            var tr          = $('#index_' + index).parent();
+            var td_favorite = tr.find('#translate_favorite');
+            var favorite    = 0;
 
-            if(favorite.text() === "0"){
-                favorite.text(1);
-//                $(this).find('img').attr("src","/img/icons/star-fill.svg");
+            if(td_favorite.text() === "0"){
+                favorite = 1;
+                td_favorite.text(1);
             }else{
-                favorite.text(0);
-//                $(this).find('img').attr("src","/img/icons/star.svg");
+                favorite = 0;
+                td_favorite.text(0);
             }
             
             update_img_favorite();
+            
+            
+           
+             
+//             console.log('translation_id - ' + tr.find('#translate_id').text());
+            
+            $.ajax({
+                type: 'POST',
+                url: "/statistics/favorite",
+                data: {
+                    "_token": $('meta[name="csrf-token"]').attr('content'),
+                    "translation_id": tr.find('#translate_id').text(),
+                    "favorite": favorite
+                },
+
+                success: function (data) {
+                     console.log(data);
+                },
+                error: function () {
+                    console.log('data');
+                }
+            });
+//            
             
         });
 
@@ -321,10 +345,10 @@
 
 //            console.log(table_quiz_row_index);
 
-            var index = table_quiz_row_index;
-            var tr = $('#index_' + index).parent();
-            var word = tr.find('#word');
-            var translate_user = tr.find('#translate_word_user');
+            var index           = table_quiz_row_index;
+            var tr              = $('#index_' + index).parent();
+            var word            = tr.find('#word');
+            var translate_user  = tr.find('#translate_word_user');
 //            console.log(translate_user.text());
             $('#p_word_box').text(word.text());
             $('#translate_box').val(translate_user.text().replace(/\n/g, ""));
@@ -344,8 +368,8 @@
 
             $("#table_translates tr").each(function (index) {
                 var correct = $(this).find('#translate_word_correct').text().replace(/\n/g, "");
-                var user = $(this).find('#translate_word_user').text().replace(/\n/g, "");
-                var id = $(this).find("#translate_id").text();
+                var user    = $(this).find('#translate_word_user').text().replace(/\n/g, "");
+                var id      = $(this).find("#translate_id").text();
                 if (correct == user) {
                     count_correct++;
                 } else {

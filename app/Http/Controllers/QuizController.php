@@ -57,10 +57,18 @@ class QuizController extends Controller {
                     function ($query)  {
 
                         return $query->leftJoin('translation_statistics as translation_statistics', 'translations.id', '=', 'translation_statistics.translation_id')
-//                            ->where('translation_statistics.id','null')
                             ->whereNull('translation_statistics.id');
                 })
+                      
+                ->when($request->post('filter') == 'select_favorite_words', 
                         
+                    function ($query)  {
+
+                        return $query->join('translation_statistics as translation_statistics', 'translations.id', '=', 'translation_statistics.translation_id')
+                            ->where('translation_statistics.favorite', '=', 1);
+                })
+                
+                
 //                ->toSql();
 //                dd($translates);
                 

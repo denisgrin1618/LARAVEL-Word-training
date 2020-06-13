@@ -109,6 +109,7 @@
                                 <option value="any_words" selected>@lang('app_strings.any_words')</option>
                                 <option value="select_wrong_answered_words">@lang('app_strings.select_wrong_answered_words')</option>
                                 <option value="select_unanswered_words">@lang('app_strings.select_unanswered_words')</option>
+                                <option value="select_favorite_words">@lang('app_strings.select_favorite_words')</option>
                             </select>
                         </td>
                     </tr>   
