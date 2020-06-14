@@ -153,10 +153,10 @@
 
                 <ul class="list-unstyled">
                     <li>
-                        <span class="text-muted">Email: Denis.grin1618@gmail.com</span>
+                        <span class="text-muted">Email:  Denis.grin1618@gmail.com</span>
                     </li>
                     <li>
-                        <span class="text-muted">Phone: +38(093)909-22-45</span>
+                        <span class="text-muted">GitHub: <a class="text-muted" href="https://github.com/denisgrin1618/LARAVEL-Word-training">denisgrin1618/LARAVEL-Word-training</a></span>
                     </li>
                 </ul>
 

@@ -6,33 +6,11 @@
 
 <div class="container">
 
-    
+    <div class="row p-0 m-0" >
 
-        <div class=" p-0 m-0" >
-            
-        
+
         <table class="table-responsive table-striped w-100 d-block d-md-table">
-<!--            <thead>
-                <tr>
-                    <th style="width: 82%" scope="col">#</th> 
-                    <th style="width: 10%" scope="col"></th>
-                    <th style="width: 30%" scope="col">@lang('app_strings.word')</th>
-                    <th style="width: 10%" scope="col"></th>
-                    <th style="width: 30%" scope="col">@lang('app_strings.translation')</th>
-                    <th style="width: 50px" scope="col"></th>
-                    <th style="width: 50px" scope="col"></th>
-                    <th style="width: 50px" scope="col"></th>
-                    <th style="width: 18%" scope="col"></th>
-               
-                    
-                    <th style="width: 0%"  scope="col" class="d-none"></th>
-                    <th style="width: 0%"  scope="col" class="d-none"></th>
-                    <th style="width: 0%"  scope="col" class="d-none"></th>
-                    <th style="width: 0%"  scope="col" class="d-none"></th>
-                    <th style="width: 0%"  scope="col" class="d-none"></th>
 
-                </tr>
-            </thead>-->
             <tbody id="table_translates">
 
                 {{ Form::open(array('route' => 'translation.search', 'method' => 'get')) }}
@@ -45,7 +23,7 @@
                                     <div class="container">
                                         <div class="row">
 
-                                            <div class="col-6 col-md-1 p-0" >
+                                            <div class="col-3 col-md-2 col-lg-1  p-0" >
                                                 <select class="form-control " name="language1">
 
                                                     @foreach ($languages as $language)
@@ -57,12 +35,12 @@
                                                     @endforeach
                                                 </select>
                                             </div>    
-                                            <div class="col-6 col-md-5 p-0" >
-                                                <input class="form-control" type="text" placeholder="{{__('app_strings.search')}}" name="word1" value="{{$search_input['word1'] ?? ''}}">
+                                            <div class="col-9 col-md-4 col-lg-5 p-0" >
+                                                <input class="form-control p-0" type="text" placeholder="{{__('app_strings.search')}}" name="word1" value="{{$search_input['word1'] ?? ''}}">
                                             </div>
 
 
-                                            <div class="col-6 col-md-1 p-0" >
+                                            <div class="col-3 col-md-2 col-lg-1 p-0" >
                                                 <select class="form-control" name="language2">
 
                                                     @foreach ($languages as $language) 
@@ -75,8 +53,8 @@
 
                                                 </select>
                                             </div>    
-                                            <div class="col-6 col-md-5 p-0" >
-                                                <input class="form-control" type="text" placeholder="{{__('app_strings.search')}}" name="word2" value="{{$search_input['word2'] ?? ''}}">
+                                            <div class="col-9 col-md-4 col-lg-5 p-0" >
+                                                <input class="form-control p-0" type="text" placeholder="{{__('app_strings.search')}}" name="word2" value="{{$search_input['word2'] ?? ''}}">
                                             </div>
 
                                         </div>
@@ -90,103 +68,35 @@
                             </div>
                         </div>
 
-
-
                     </td>
-                  
-                    
-                    
+
+
                     <td class="d-none"></td>
                     <td class="d-none"></td>
                     <td class="d-none"></td>
                     <td class="d-none"></td>
                     <td class="d-none"></td>
-                    
+
                 </tr>
                 {{ Form::close() }}
-
-<!--                <tr id="tr_blank" class="d-none">                  
-                    <td id='translate_word1_language_name'> </td>
-                    <td id="translate_word1_name"></td>
-                    <td id='translate_word2_language_name'></td>
-                    <td id="translate_word2_name" ></td>
-                    <td id="translate_statistics" align="right"> 
-                        <div type="button" class="but_favorite d-flex btn p-6 m-0">
-                            <img class="mx-auto" src="/img/icons/star.svg" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
-                        </div>
-                    </td>
-                    <td align="right" >
-                        <button id="bt_edit" type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bt-light-white bt_edit" >
-                            <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="{{__('app_strings.edit')}}">
-                        </button>
-                    </td>
-                    <td align="right" >
-                        <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bt-light-white but_delete" data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">
-                            <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="{{__('app_strings.delete')}}">
-                        </button>
-                    </td>
-                    <td class="d-none" id="translate_word1_id"> </td>
-                    <td class="d-none" id="translate_word2_id"> </td>
-                    <td class="d-none" id="translate_id">test_id</td>
-                    <td class="d-none" id="translate_word1_language_id"> </td>
-                    <td class="d-none" id="translate_word2_language_id"> </td>
-
-                </tr>
-
-                <tr class="d-none">                  
-                    <td id='translate_word1_language_name'> </td>
-                    <td id="translate_word1_name"></td>
-                    <td id='translate_word2_language_name'></td>
-                    <td id="translate_word2_name" ></td>
-                    <td id="translate_statistics" align="right" > 
-                        <button type="button" class="d-flex btn p-6 m-0">
-                            <img class="mx-auto" src="/img/icons/star.svg" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
-                        </button>
-                    </td>
-                    <td align="right" >
-                        <button id="bt_edit" type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bt-light-white bt_edit" >
-                            <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="{{__('app_strings.edit')}}">
-                        </button>
-                    </td>
-                    <td align="right" >
-                        <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bt-light-white but_delete" data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">
-                            <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="{{__('app_strings.delete')}}">
-                        </button>
-                    </td>
-                    <td class="d-none" id="translate_word1_id"> </td>
-                    <td class="d-none" id="translate_word2_id"> </td>
-                    <td class="d-none" id="translate_id">test_id</td>
-                    <td class="d-none" id="translate_word1_language_id"> </td>
-                    <td class="d-none" id="translate_word2_language_id"> </td>
-
-                </tr>-->
 
 
                 @foreach ($translates as $translate)
                 <tr>
-                    
+
                     <td class="">
 
                         <div class="container ">
                             <div class="row justify-content-end">
-                                <div class="col-10 p-0">
+                                <div class="col-10  p-0">
                                     <div class="container">
                                         <div class="row">
 
-                                            <div id="translate_word1_language_name" class="col-6 col-md-1 p-0" >
-                                                {{ $translate->word1->language->name }}
-                                            </div>
-                                            <div id="translate_word1_name" class="col-6 col-md-5 p-0" >
-                                                {{ $translate->word1->name }}
-                                            </div>
+                                            <div id="translate_word1_language_name" class="col-3 col-md-2 col-lg-1 p-0 d-flex justify-content-center" >{{ $translate->word1->language->name }}</div>
+                                            <div id="translate_word1_name"          class="col-9 col-md-4 col-lg-5 p-0" >{{ $translate->word1->name }}</div>
 
-
-                                            <div id="translate_word2_language_name" class="col-6 col-md-1 p-0" >
-                                                {{ $translate->word2->language->name }}
-                                            </div>
-                                            <div id="translate_word2_name" class="col-6 col-md-5 p-0" >
-                                                {{ $translate->word2->name }}
-                                            </div>
+                                            <div id="translate_word2_language_name" class="col-3 col-md-2 col-lg-1 p-0 d-flex justify-content-center" >{{ $translate->word2->language->name }}</div>
+                                            <div id="translate_word2_name"          class="col-9 col-md-4 col-lg-5 p-0" >{{ $translate->word2->name }}</div>
 
                                         </div>
                                     </div>
@@ -225,14 +135,7 @@
 
 
                     </td>
-                    
-<!--                    <td id="translate_statistics"  align="right" class="d-flex align-items-start"       >
-    
-    
-    
-    
-</td>-->
-                    
+
                     <td class="d-none" id="translate_word1_id">{{ $translate->word1->id }}</td>
                     <td class="d-none" id="translate_word2_id">{{ $translate->word2->id }}</td>
                     <td class="d-none" id="translate_id">{{ $translate->id }}</td>
@@ -243,95 +146,153 @@
                 @endforeach
 
 
+                <tr id="tr_blank" class="d-none">
+
+                    <td class="">
+
+                        <div class="container ">
+                            <div class="row justify-content-end">
+                                <div class="col-10 p-0">
+                                    <div class="container">
+                                        <div class="row">
+
+                                            <div id="translate_word1_language_name" class="col-3 col-md-2 col-lg-1 p-0 d-flex justify-content-center" ></div>
+                                            <div id="translate_word1_name"          class="col-9 col-md-4 col-lg-5 p-0" ></div>
+
+                                            <div id="translate_word2_language_name" class="col-3 col-md-2 col-lg-1 p-0 d-flex justify-content-center" ></div>
+                                            <div id="translate_word2_name"          class="col-9 col-md-4 col-lg-5 p-0" ></div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2 p-0 ">
+                                    <div class="container p-0">
+                                        <div class="row justify-content-end no-gutters ">
+
+                                            <div class="col-12  col-md-auto   p-0" >
+                                                <div  type="button" class="float-right but_favorite d-flex btn "  >
+                                                    <img class="mx-auto" src="/img/icons/star.svg" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-auto   pl-1 " >
+                                                <button id="bt_edit" type="button" class="float-right d-flex btn  rounded border border-secondary bt-light-white bt_edit" >
+                                                    <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="{{__('app_strings.edit')}}">
+                                                </button>
+                                            </div>
+                                            <div class="col-12  col-md-auto   pl-1 " >
+                                                <button type="button" class="float-right d-flex btn  rounded border border-secondary bt-light-white but_delete" data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">
+                                                    <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="{{__('app_strings.delete')}}">
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+
+                    <td class="d-none" id="translate_word1_id"></td>
+                    <td class="d-none" id="translate_word2_id"></td>
+                    <td class="d-none" id="translate_id"></td>
+                    <td class="d-none" id="translate_word1_language_id"></td>
+                    <td class="d-none" id="translate_word2_language_id"></td>
+
+                </tr>
 
 
 
             </tbody>
         </table>
 
-            </div>
-        <br>
 
-        <table class="table-responsive table-striped w-100 d-block d-md-table" id='table_translate_new'>
+        
+    </div>
+    <br>
+    <div class="row p-0 m-0" >
+        
+        <table class=" table-responsive table-striped w-100 d-block d-md-table" id='table_translate_new'>
 
             <tbody>
 
                 <tr>
-                    <th scope="row" ></th>
-                    <td style="width: 10%">
-                        <select class="form-control" id="new_word1_language_name">
-                            @foreach ($languages as $language)
-                            <option>{{ $language->name }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td style="width: 30%">
-                        <textarea style="resize: none; " id="new_word1_name" class="form-control" type="text" placeholder="{{__('app_strings.word')}}" ></textarea>
-                    </td>
-                    <td style="width: 10%">
-                        <select class="form-control" id="new_word2_language_name">
-                            @foreach ($languages as $language)
-                            <option>{{ $language->name }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td style="width: 30%">
-                        <textarea style="resize: none; " id="new_word2_name" class="form-control" type="text" placeholder="{{__('app_strings.translation')}}"></textarea> 
-                    </td>
 
-                    <td style="width: 20%" align="right"> 
-                        <button type="button" class="d-flex btn p-6 m-0 rounded border border-secondary bt-light-white" id='button_translate_new'>
-                            <img class="mx-auto" src="/img/icons/plus.svg" alt="" width="20" height="20" title="{{__('app_strings.new')}}">
+                    <td>
+                        <div class="container ">
+                            <div class="row">
+                                <div class="col-10 p-0">
+                                    <div class="container">
+                                        <div class="row">
 
-                        </button>
-                    </td>
+                                            <div class="col-3 col-md-2 col-lg-1 p-0" >
+                                                <select class="form-control " id="new_word1_language_name">
+                                                    @foreach ($languages as $language)
+                                                    <option>{{ $language->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-9 col-md-4 col-lg-5 p-0" >
+                                                <textarea style="resize: none; " id="new_word1_name" class="form-control pb-2" type="text" placeholder="{{__('app_strings.word')}}" ></textarea>
+                                            </div>
+
+                                            <div class="col-3 col-md-2 col-lg-1 p-0 " >
+                                                <select class="form-control" id="new_word2_language_name">
+                                                    @foreach ($languages as $language)
+                                                    <option>{{ $language->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-9 col-md-4 col-lg-5 p-0" >
+                                                <textarea style="resize: none; " id="new_word2_name" class="form-control pb-2" type="text" placeholder="{{__('app_strings.translation')}}"></textarea> 
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-2 p-0 ">
+                                    <button type="button" class="float-right d-flex btn p-6 m-0 rounded border border-secondary bt-light-white" id='button_translate_new'>
+                                        <img class="mx-auto" src="/img/icons/plus.svg" alt="" width="20" height="20" title="{{__('app_strings.new')}}">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>  
 
                 </tr>
 
             </tbody>
         </table>
+    </div>
+    <br/>
 
-        <br/>
-
-        <div class="d-flex justify-content-center">
-            <!-- {{ $translates->links() }} -->     
-            {{ $translates->appends(request()->query())->links() }}
-        </div>
+    <div class="d-flex justify-content-center">
+        <!-- {{ $translates->links() }} -->     
+        {{ $translates->appends(request()->query())->links() }}
+    </div>
 
 
-    
+
 
 
     <div >
-
         <div class="modal fade" id="quiz_delete_modal" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content" id="modal-content-div">
-
-                    <!--
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="modal-label">New translate</h4>
-                    </div>
-                    -->
                     <div class="modal-body">
 
-                       <div class="form-group">
+                        <div class="form-group">
                             <label class="col-form-label">@lang('app_strings.worning_delete_traslation')</label>
                         </div>
 
                         <textarea class="form-control d-none" id="modal_translate_id" name="modal_quiz_id"></textarea>
-                        
+
                         <div class="text-right">
                             <button  class="btn btn-secondary" data-dismiss="modal" id="modal_dialog_button_delete">@lang('app_strings.yes')</button>                         
                             <button  class="btn btn-secondary" data-dismiss="modal" id="modal_dialog_button_cansel">@lang('app_strings.no')</button>
                         </div>
                     </div>
-                    <!--
-                    <div class="modal-footer">
-                        
-                    </div>
-                    -->
-
                 </div>
             </div>
         </div>
@@ -356,38 +317,38 @@
         $('#new_word2_name').autoResize();
 
         $('.but_favorite').on("click", function (event) {
-            
+
             var button = $(event.target);
-            
+
             if (button.prop("tagName") == "IMG") {
-                button = button.parent(); 
+                button = button.parent();
             }
             if (button.prop("tagName") == "IMG") {
-                button = button.parent(); 
+                button = button.parent();
             }
             console.log(button.prop("tagName"));
 
             curent_table_tr = button.parent().parent();
-            while(curent_table_tr.prop("tagName") != "TR"){
+            while (curent_table_tr.prop("tagName") != "TR") {
                 curent_table_tr = curent_table_tr.parent();
             }
-            
-            var translation_id  = curent_table_tr.find('#translate_id').text();
+
+            var translation_id = curent_table_tr.find('#translate_id').text();
 //            console.log(curent_table_tr.find('translate_id').html());
-            var favorite        = 0;
-            
-            if(button.hasClass('star_fill')){
+            var favorite = 0;
+
+            if (button.hasClass('star_fill')) {
                 favorite = 0;
                 button.removeClass('star_fill').find('img').attr("src", "/img/icons/star.svg");
-            }else{
+            } else {
                 favorite = 1;
                 button.addClass('star_fill').find('img').attr("src", "/img/icons/star-fill.svg");
             }
-            
-            
-            
-                
-            
+
+
+
+
+
             $.ajax({
                 type: 'POST',
                 url: "/statistics/favorite",
@@ -398,13 +359,13 @@
                 },
 
                 success: function (data) {
-                     console.log(data);
+                    console.log(data);
                 },
                 error: function () {
                     console.log('data');
                 }
             });
-            
+
         });
 
         $('.bt_edit').on("click", function (event) {
@@ -416,7 +377,7 @@
             }
 
             curent_table_tr = button.parent().parent();
-            while(curent_table_tr.prop("tagName") != "TR"){
+            while (curent_table_tr.prop("tagName") != "TR") {
                 curent_table_tr = curent_table_tr.parent();
             }
 //            console.log(curent_table_tr.html());
@@ -426,7 +387,7 @@
 
             if (button.attr('id') == 'bt_edit') {
 
-                
+
 
                 var translate_word1_name_text = td_translate_word1_name.text();
                 var translate_word2_name_text = td_translate_word2_name.text();
@@ -449,19 +410,19 @@
                 curent_table_tr.addClass('text-white border border-secondary bg-info');
 
 
-            }else if(button.attr('id') == 'bt_save'){
+            } else if (button.attr('id') == 'bt_save') {
 
 
                 curent_table_tr.removeClass('text-white border border-secondary bg-info');
                 button.find('img').attr("src", "/img/icons/pencil.svg");
                 button.attr('id', 'bt_edit');
-                
+
                 translate_word1_name_text = td_translate_word1_name.find('textarea').val();
                 td_translate_word1_name.empty().text(translate_word1_name_text);
-                
+
                 translate_word2_name_text = td_translate_word2_name.find('textarea').val();
                 td_translate_word2_name.empty().text(translate_word2_name_text);
-                
+
                 var id = curent_table_tr.find('#translate_id').text();
                 console.log('id = ' + id);
                 $.ajax({
@@ -469,11 +430,11 @@
                     url: "/translation/edit", //"{{ route('translation.edit') }}",
                     data: {
                         "_token": $('meta[name="csrf-token"]').attr('content'),
-                        "translate_word1_id":   curent_table_tr.find('#translate_word1_id').text(),
-                        "translate_word2_id":   curent_table_tr.find('#translate_word2_id').text(),
+                        "translate_word1_id": curent_table_tr.find('#translate_word1_id').text(),
+                        "translate_word2_id": curent_table_tr.find('#translate_word2_id').text(),
                         "translate_word1_name": curent_table_tr.find('#translate_word1_name').text(),
                         "translate_word2_name": curent_table_tr.find('#translate_word2_name').text(),
-                        "translate_id":         curent_table_tr.find('#translate_id').text()
+                        "translate_id": curent_table_tr.find('#translate_id').text()
 
                     },
                     success: function (data) {
@@ -483,10 +444,10 @@
                         console.log("ERROR");
                     }
                 });
-                
-                
-                
-            
+
+
+
+
             }
 
 
@@ -501,15 +462,15 @@
             }
 
             curent_table_tr = button.parent().parent();
-            while(curent_table_tr.prop("tagName") != "TR"){
+            while (curent_table_tr.prop("tagName") != "TR") {
                 curent_table_tr = curent_table_tr.parent();
             }
-            
-            
+
+
             var translate_id = curent_table_tr.find('#translate_id').text();
 
             $('#modal_translate_id').val(translate_id);
-  
+
         });
 
         $('#modal_dialog_button_delete').click(function (e) {
@@ -519,10 +480,10 @@
 //            console.log('click delete');
 
             var translate_id = $('#modal_translate_id').val();
-            
+
             $.ajax({
                 type: 'DELETE',
-                url: "/translation/delete/"+translate_id,
+                url: "/translation/delete/" + translate_id,
                 data: {
                     "_token": $('meta[name="csrf-token"]').attr('content')
                 },
@@ -594,9 +555,9 @@
 //            .mouseout(function() {
 //              $( this ).removeClass('bt-grey-silver').addClass('bt-light-white');
 //        });
-  
-  
-        
+
+
+
     });
 
 </script>

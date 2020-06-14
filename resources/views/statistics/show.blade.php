@@ -81,7 +81,7 @@
                             <tr>
                                 <td>@lang('app_strings.total_time_spent'):</td>
                                 <td>
-                                    0
+                                    {{Auth::user()->total_time_spent}}
                                 </td>
                             </tr>
 

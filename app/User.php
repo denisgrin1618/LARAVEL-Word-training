@@ -47,6 +47,7 @@ class User extends Authenticatable
         "total_wrong_answers",
         "success_rate",
         "total_favorites",
+        "total_time_spent"
     ];
     
 //    protected $attributes = [
@@ -119,4 +120,26 @@ class User extends Authenticatable
 
     }
     
+    public function getTotalTimeSpentAttribute(){
+        
+        $total_seconds = Quiz::where('user_id', $this->id)
+                ->groupBy('user_id')
+                ->selectRaw('sum(time_in_seconds) as total_spended_time')
+                ->first()
+                ->total_spended_time;
+        
+        
+        
+        $minutes = round($total_seconds / 60);
+        $seconds = $total_seconds % 60;
+        $hours   = round($minutes/60);
+        
+
+//        $minutes = $minutes < 10 ? "0" + $minutes : $minutes;
+//        $seconds = $seconds < 10 ? "0" + $seconds : $seconds;
+
+        return "".$hours."h ".$minutes."m ".$seconds."s";
+
+                
+    }
 }

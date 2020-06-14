@@ -19,8 +19,15 @@
 			$textarea.css('overflow', 'hidden');
 
 			// Copy textarea contents; browser will calculate correct height of copy.
-			var text = $textarea.val()
-					.replace('<', '&lt;')
+                        
+                        var text = "";
+                        if($textarea.prop("tagName") == "INPUT" || $textarea.prop("tagName") == "TEXTAREA"){
+                            text = $textarea.val();
+                        }else{
+                            text = $textarea.text();
+                        }
+                             
+                             text = text.replace('<', '&lt;')
 					.replace('>', '&gt;')
 					.replace('!', '&excl;')
 					.replace('"', '&quot;')
@@ -31,6 +38,7 @@
 					.replace('\'', '&apos;')
 
 					.replace(/\n/g, '<br />');
+
 
 			$copy.html(text + '<br />');
 

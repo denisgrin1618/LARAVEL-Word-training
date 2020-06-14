@@ -47,7 +47,7 @@ return [
     'total_correct_answers'             => 'Количество верных ответов',
     'total_unanswered'                  => 'Количество не отвеченых слов',
     'total_favorites'                   => 'Количество избраных',
-    'total_time_spent'                  => 'Количество потраченного времени (часы)',
+    'total_time_spent'                  => 'Количество потраченного времени',
     'total_languages'                   => 'Количество языков',
     
     'profile'                           => 'Профиль',

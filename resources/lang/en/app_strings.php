@@ -47,7 +47,7 @@ return [
     'total_correct_answers'             => 'Total correct answers',
     'total_unanswered'                  => 'Total unanswered words',
     'total_favorites'                   => 'Total favorites',
-    'total_time_spent'                  => 'Total time spent (hour)',
+    'total_time_spent'                  => 'Total time spent',
     'total_languages'                   => 'Total languages',
     
     'profile'                           => 'Profile',

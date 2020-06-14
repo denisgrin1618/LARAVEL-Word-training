@@ -69,7 +69,17 @@ class StatisticsController extends Controller {
                 $quiz_history->answer = $data_row->answer;
                 $quiz_history->save();
             }
+            
+            if($quiz->time_in_seconds != $data_row->time_in_seconds){
+                $quiz->time_in_seconds = $data_row->time_in_seconds;
+                $quiz->save();
+            }
+            
         }
+        
+        
+        
+        
         
         
         return true;
