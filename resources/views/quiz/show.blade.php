@@ -34,7 +34,7 @@
 
                     </td>
                     <td>
-                        <button id="button_finish" class=" btn rounded border border-secondary " >            
+                        <button  class=" btn rounded border border-secondary " data-toggle="modal" data-target="#quiz_finish_modal" data-whatever="@mdo">            
                             <img src="/img/icons/check2.svg" alt="" width="20" height="20" title="{{__('app_strings.finish')}}">
                         </button>
 
@@ -91,6 +91,26 @@
     </div>
 
 
+    <div class="modal fade" id="quiz_finish_modal" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" id="modal-content-div">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label class="col-form-label">@lang('app_strings.worning_finish_quiz')</label>
+                    </div>
+
+                    <textarea class="form-control d-none" id="modal_translate_id" name="modal_quiz_id"></textarea>
+
+                    <div class="text-right">
+                        <button  class="btn btn-secondary" data-dismiss="modal" id="button_finish">@lang('app_strings.yes')</button>                         
+                        <button  class="btn btn-secondary" data-dismiss="modal" >@lang('app_strings.no')</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </div>
 
@@ -107,7 +127,7 @@
     {
         function update_number_current_word() {
             var number_current_word_text = "" + table_quiz_row_index + "/" + table_translates_rows_count;
-            $('#number_current_word').text(number_current_word_text); 
+            $('#number_current_word').text(number_current_word_text);
         }
 
         function start_timer(display) {
@@ -137,7 +157,7 @@
             // при изменении размера textarea при наборе текста, будем менять размер зависимых елементов
             $('#translate_box').autoResize({elCopyResize: $("#p_word_box"), minHeight: min_height_input});
             $('#p_word_box').autoResize({elCopyResize: $("#translate_box"), minHeight: min_height_input});
-           
+
             // при ручном растягивании textarea, будем менять размер зависимых елементов
 //            $("#translate_box").ResizeSecondaryElement($("#p_word_box"), min_height_input);
 
@@ -157,19 +177,19 @@
 
         }
 
-        function update_current_words(){
-            
-            var index           = table_quiz_row_index;
-            var tr              = $('#index_' + index).parent();
-            var word            = tr.find('#word');
-            var translate_user  = tr.find('#translate_word_user');
+        function update_current_words() {
+
+            var index = table_quiz_row_index;
+            var tr = $('#index_' + index).parent();
+            var word = tr.find('#word');
+            var translate_user = tr.find('#translate_word_user');
 
             $('#p_word_box').text(word.text());
             $('#translate_box').val(translate_user.text().replace(/\n/g, ""));
             
         }
-        
-        
+
+
         $(document).ready(function () {
             resize_elements();
             start_timer($('#timer'));
@@ -235,17 +255,17 @@
             var quiz_id = $('#quiz_id').text();
             var data = [];
             $("#table_translates tr").each(function (index) {
-                var correct     = $(this).find('#translate_word_correct').text().replace(/\n/g, "");
-                var user        = $(this).find('#translate_word_user').text().replace(/\n/g, "");
-                var id          = $(this).find("#translate_id").text();
-                var favorite    = $(this).find("#translate_favorite").text();
+                var correct = $(this).find('#translate_word_correct').text().replace(/\n/g, "");
+                var user = $(this).find('#translate_word_user').text().replace(/\n/g, "");
+                var id = $(this).find("#translate_id").text();
+                var favorite = $(this).find("#translate_favorite").text();
 
                 var row_data = new Object();
-                row_data.quiz_id         = quiz_id;
-                row_data.translation_id  = id;
-                row_data.correct_answer  = (correct == user);
-                row_data.answer          = user;
-                row_data.favorite        = favorite;
+                row_data.quiz_id = quiz_id;
+                row_data.translation_id = id;
+                row_data.correct_answer = (correct == user);
+                row_data.answer = user;
+                row_data.favorite = favorite;
                 row_data.time_in_seconds = quiz_time_seconds;
                 data.push(row_data);
             });
@@ -273,11 +293,11 @@
 
         $('#button_next').click(function (e) {
 
-            var index               = table_quiz_row_index;
-            var tr                  = $('#index_' + index).parent();
-            var word                = tr.find('#word');
-            var translate_correct   = tr.find('#translate_word_correct');
-            var translate_user      = tr.find('#translate_word_user');
+            var index = table_quiz_row_index;
+            var tr = $('#index_' + index).parent();
+            var word = tr.find('#word');
+            var translate_correct = tr.find('#translate_word_correct');
+            var translate_user = tr.find('#translate_word_user');
 
             translate_user.text($('#translate_box').val());
             if (translate_user.text().replace(/\n/g, "") == translate_correct.text().replace(/\n/g, "")) {
@@ -297,14 +317,14 @@
 
 
             //подсчитаем результат
-            var result_persant  = 0;
-            var count_correct   = 0;
-            var count_error     = 0;
+            var result_persant = 0;
+            var count_correct = 0;
+            var count_error = 0;
 
             $("#table_translates tr").each(function (index) {
                 var correct = $(this).find('#translate_word_correct').text().replace(/\n/g, "");
-                var user    = $(this).find('#translate_word_user').text().replace(/\n/g, "");
-                var id      = $(this).find("#translate_id").text();
+                var user = $(this).find('#translate_word_user').text().replace(/\n/g, "");
+                var id = $(this).find("#translate_id").text();
                 if (correct == user) {
                     count_correct++;
                 } else {
@@ -325,11 +345,11 @@
 
         $('#button_back').click(function (e) {
 
-            var index               = table_quiz_row_index;
-            var tr                  = $('#index_' + index).parent();
-            var word                = tr.find('#word');
-            var translate_correct   = tr.find('#translate_word_correct');
-            var translate_user      = tr.find('#translate_word_user');
+            var index = table_quiz_row_index;
+            var tr = $('#index_' + index).parent();
+            var word = tr.find('#word');
+            var translate_correct = tr.find('#translate_word_correct');
+            var translate_user = tr.find('#translate_word_user');
 
             translate_user.text($('#translate_box').val());
             if (translate_user.text() == translate_correct.text()) {
@@ -341,7 +361,7 @@
             if (table_quiz_row_index > 1) {
                 table_quiz_row_index--;
             }
-            
+
             update_current_words();
             resize_elements();
             update_img_favorite();

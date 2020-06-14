@@ -21,6 +21,7 @@ return [
     'new'                               => 'New',
     'worning_delete_traslation'         => 'Delete this translation? Are you sure?',
     'worning_delete_quiz'               => 'Delete this quiz? Are you sure?',
+    'worning_finish_quiz'               => 'Finish testing and open the table with the results?',
     'yes'                               => 'Yes',
     'no'                                => 'No',
     'total_words'                       => 'Total words',

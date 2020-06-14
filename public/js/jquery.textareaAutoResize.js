@@ -26,7 +26,8 @@
                         }else{
                             text = $textarea.text();
                         }
-                             
+                        
+                        
                              text = text.replace('<', '&lt;')
 					.replace('>', '&gt;')
 					.replace('!', '&excl;')
@@ -53,8 +54,15 @@
 			var newHeight1 = $copy.css('height');
 			
 			if(options.elCopyResize != undefined) {
-				var text2 = options.elCopyResize.val()
-						.replace('<', '&lt;')
+                            
+                        var text2 = "";
+                        if(options.elCopyResize.prop("tagName") == "INPUT" || options.elCopyResize.prop("tagName") == "TEXTAREA"){
+                            text2 = options.elCopyResize.val();
+                        }else{
+                            text2 = options.elCopyResize.text();
+                        }
+                        
+				text2 = text2.replace('<', '&lt;')
 						.replace('>', '&gt;')
 						.replace('!', '&excl;')
 						.replace('"', '&quot;')
@@ -68,7 +76,8 @@
 				$copy.html(text2 + '<br />');
 				var newHeight2 = $copy.css('height');
 //                                console.log(options.elCopyResize.attr('id') + " - " + options.elCopyResize.val());
-			}
+
+                    }
 			else{
 				var text2 = "";
 				var newHeight2 = 0;

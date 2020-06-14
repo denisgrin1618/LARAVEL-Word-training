@@ -5,24 +5,20 @@
 
 <div class="container">
 
-    <main role="main" class="container" >
-
-   
-            
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 
 
-        <div >
-            <h1>@lang('app_strings.import_instruction_header')</h1>
-            <div class="input-group " >
+    <div >
+        <h1>@lang('app_strings.import_instruction_header')</h1>
+        <div class="input-group " >
             <input name="spreadsheetId" id="spreadsheetId" type="text" autocomplete="off"
                    class="form-control" placeholder="Spreadsheet ID" aria-label="Spreadsheet ID" aria-describedby="basic-addon2">
             <div class="input-group-append">
@@ -32,63 +28,26 @@
                 </button>
             </div>
         </div>
-        
-        <br>
-        
-            <p>1. @lang('app_strings.import_instruction_1') </p>
-            <p>2. @lang('app_strings.import_instruction_2') <img src="/img/Import_words_phrasebook_icon.jpg"> </p>
-            <p>3. @lang('app_strings.import_instruction_3') <img src="/img/Import_words_export_icon_2.jpg"></p>
-            <p>4. @lang('app_strings.import_instruction_4')</p>
-            <img src="/img/Import_words_export_icon_3.jpg">
-        </div>
-        
-        <br>
-        
-        
-        <br>
+
         <br>
 
-    </main>
+        <p>1. @lang('app_strings.import_instruction_1') </p>
+        <p>2. @lang('app_strings.import_instruction_2') <img src="/img/Import_words_phrasebook_icon.jpg"> </p>
+        <p>3. @lang('app_strings.import_instruction_3') <img src="/img/Import_words_export_icon_2.jpg"></p>
+        <p>4. @lang('app_strings.import_instruction_4')</p>
+        <img src="/img/Import_words_export_icon_3.jpg">
+    </div>
+
+    <br>
+    <br>
+    <br>
 
 </div>
 
-
-
-
-
 <script type="text/javascript" defer>
-
-
-
 
     $(function ()
     {
-
-//        $("#spreadsheetId").hover(     
-//            function(){$(this).css('background', "linear-gradient(90deg, #DCDCDC 0%, #DCDCDC 40%, white 40%, white 60%)!important");}, 
-//            function(){$(this).css('background', "linear-gradient(90deg, #DCDCDC 0%, #DCDCDC 40%, white 40%, white 60%)!important");}
-//        );
-////
-//        $( "#spreadsheetId" ).focus(function() {
-//            console.log('focus');
-//            $(this).css('background', "linear-gradient(90deg, #DCDCDC 0%, #DCDCDC 40%, white 40%, white 60%)!important");
-//        });
-//        
-//        $( "#spreadsheetId" ).change(function() {
-//            console.log('change');
-//            $(this).css('background', "linear-gradient(90deg, #DCDCDC 0%, #DCDCDC 40%, white 40%, white 60%)!important");
-//        });
-//        
-//        $( "#spreadsheetId" ).ready(function() {
-//            console.log('ready');
-//            $(this).css('background', "linear-gradient(90deg, #DCDCDC 0%, #DCDCDC 40%, white 40%, white 60%)!important");
-//        });
-
-//        $('html').bind('input', function() {
-//            console.log('auto');
-//            $("#spreadsheetId").css('background', "linear-gradient(90deg, #DCDCDC 0%, #DCDCDC 40%, white 40%, white 60%)!important");
-//        });
-
         $('#button_import').click(function (e) {
 
             e.preventDefault();
@@ -141,46 +100,14 @@
 
                 success: function (data) {
 
-                    console.log('FINISH data');
-                    console.log(data);
-//                    clearInterval(myInterval);
-
                 },
                 error: function () {
                     console.log("ERROR");
                 }
             });
-//            
-            
-            
-            
-//            $.post("/translation/importpost", 
-//                {
-//                    "_token": $('meta[name="csrf-token"]').attr('content'),
-//                    "spreadsheetId": $('#spreadsheetId').val()
-//                }, 
-//                function(result){ console.log(result); }
-//            );
-
 
         });
+    });
 
-
-
-  
-
-   
-
-
-//        $("button")
-//            .mouseover(function() {
-//              $( this ).removeClass('bt-white').addClass('bg-secondary');
-//            })
-//            .mouseout(function() {
-//              $( this ).removeClass('bg-secondary').addClass('bt-white');
-//        });
-//        
-//    });
-    
 </script>
 @endsection

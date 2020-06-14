@@ -27,11 +27,11 @@
                                                 <select class="form-control " name="language1">
 
                                                     @foreach ($languages as $language)
-                                                    @if ($language->name ===  ($search_input['language1'] ?? ""))
-                                                    <option selected>{{ $language->name }}</option>
-                                                    @else
-                                                    <option>{{ $language->name }}</option>
-                                                    @endif
+                                                        @if ($language->name ===  ($search_input['language1'] ?? ""))
+                                                            <option selected>{{ $language->name }}</option>
+                                                        @else
+                                                            <option>{{ $language->name }}</option>
+                                                        @endif
                                                     @endforeach
                                                 </select>
                                             </div>    
@@ -44,11 +44,11 @@
                                                 <select class="form-control" name="language2">
 
                                                     @foreach ($languages as $language) 
-                                                    @if ($language->name ===  ($search_input['language2'] ?? ""))
-                                                    <option selected>{{ $language->name }}</option>
-                                                    @else
-                                                    <option>{{ $language->name }}</option>
-                                                    @endif
+                                                        @if ($language->name ===  ($search_input['language2'] ?? ""))
+                                                            <option selected>{{ $language->name }}</option>
+                                                        @else
+                                                            <option>{{ $language->name }}</option>
+                                                        @endif
                                                     @endforeach
 
                                                 </select>
@@ -227,7 +227,13 @@
                                             <div class="col-3 col-md-2 col-lg-1 p-0" >
                                                 <select class="form-control " id="new_word1_language_name">
                                                     @foreach ($languages as $language)
-                                                    <option>{{ $language->name }}</option>
+                                                    
+                                                        @if ($language->name ===  ($search_input['language1'] ?? ""))
+                                                            <option selected>{{ $language->name }}</option>
+                                                        @else
+                                                            <option>{{ $language->name }}</option>
+                                                        @endif
+                                                    
                                                     @endforeach
                                                 </select>
                                             </div>

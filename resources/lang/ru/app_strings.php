@@ -21,6 +21,7 @@ return [
     'new'                               => 'Новый',
     'worning_delete_traslation'         => 'Удалить выбраный перевод? Вы уверены?',
     'worning_delete_quiz'               => 'Удалить выбраный тест? Вы уверены?',
+    'worning_finish_quiz'               => 'Закончить тестирование и открыть таблицу с результатами?',
     'yes'                               => 'Да',
     'no'                                => 'Нет',
     'total_words'                       => 'Всего слов',
@@ -32,7 +33,7 @@ return [
     'import_instruction_1'              => 'Откройте Google Translate',
     'import_instruction_2'              => 'Откройте сохраненные переводы',
     'import_instruction_3'              => 'Потом эскспортируйте их в Google Sheet',
-    'import_instruction_4'              => 'Скопируйте Spreadsheet ID из url и введите его input выше',
+    'import_instruction_4'              => 'Скопируйте Spreadsheet ID из url и введите его в input выше',
     'import_instruction_header'         => 'Импорт словаря из Google Translate',
     
     'start_new_quiz'                    => 'Начать новое тестирование',

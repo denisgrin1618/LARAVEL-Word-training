@@ -81,10 +81,9 @@ class User extends Authenticatable
         
         return DB::table('quiz_history')
                 ->join('translations', 'quiz_history.translation_id', '=', 'translations.id')
-                //->join('words', 'translations.word2_id', '=', 'words.id')
                 ->join("words", function($join) {
                     $join->on('translations.word2_id', '=', 'words.id')
-                    ->on('quiz_history.answer', '!=', 'words.name');
+                         ->on('quiz_history.answer', '!=', 'words.name');
                 })
                 ->where('translations.user_id', '=', $this->id)
                 ->count();
@@ -127,8 +126,6 @@ class User extends Authenticatable
                 ->selectRaw('sum(time_in_seconds) as total_spended_time')
                 ->first()
                 ->total_spended_time;
-        
-        
         
         $minutes = round($total_seconds / 60);
         $seconds = $total_seconds % 60;
