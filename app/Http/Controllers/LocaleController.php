@@ -8,6 +8,9 @@ use URL;
 
 class LocaleController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
     
     public function setLocale($locale)
     {

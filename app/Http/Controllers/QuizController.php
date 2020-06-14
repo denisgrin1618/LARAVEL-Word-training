@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class QuizController extends Controller {
 
@@ -67,24 +68,22 @@ class QuizController extends Controller {
                         return $query->join('translation_statistics as translation_statistics', 'translations.id', '=', 'translation_statistics.translation_id')
                             ->where('translation_statistics.favorite', '=', 1);
                 })
-                
-                
-//                ->toSql();
-//                dd($translates);
-                
                 ->inRandomOrder()
                 ->take($request->post('quantity_of_words'))
                 ->get();
 
-        
+                
+        if($translates->count() == 0){
+            $error = ValidationException::withMessages([
+                'field_name_1' => ['No matching words found'],
 
-        
-        //select_most_complicated_words
-
-
+             ]);
+             throw $error;
+        }
+                
         $quiz = new Quiz;
-        $quiz->name = $string_time_now;
-        $quiz->user_id = $user_id;
+        $quiz->name     = $string_time_now;
+        $quiz->user_id  = $user_id;
         $quiz->save();
 
         foreach ($translates as $translate) {
@@ -94,12 +93,10 @@ class QuizController extends Controller {
             $quizzes_translations->save();
         }
 
-
-//        dd($quiz->load('translations')->toJson(JSON_PRETTY_PRINT));
-//        $quiz->load('translations')->load('translations.word1')->load('translations.word2');
-
+       
+        
         return redirect()->route('quiz.id', ['id' => $quiz->id]);
-//        return view('quiz.show')->with('quiz', $quiz);
+
     }
 
     public function start() {
@@ -111,18 +108,6 @@ class QuizController extends Controller {
 
     public function show(Request $request, $id) {
 
-//        dd($request->only_wrong_translations == "Yes");
-//        $quiz = Quiz::with('translations')
-//                ->with('translations.word1')
-//                ->with('translations.word2')
-//                ->where('id', $id)
-//                ->where('user_id', Auth::user()->id)
-//                ->applyFilters($request->all(), $id)
-//                ->first();
-
-        
-       
-        
         $array_wrong_translations_id = [];
         if($request->only_wrong_translations == "yes"){
             $array_wrong_translations_id = \DB::table('quiz_history')
@@ -155,19 +140,11 @@ class QuizController extends Controller {
 
     public function show_all() {
 
-//         dd(\App::getLocale());
-        
-//        \App::setLocale('ru');
-//        dd(\Session::get('locale'));
-         
         $quizes = Quiz::with('translations')
                 ->with('translations.word1')
                 ->with('translations.word2')
                 ->where('user_id', Auth::user()->id)
                 ->paginate(config('app.paginate_max'));
-
-
-//        dd($quiz->toJson(JSON_PRETTY_PRINT));
 
         return view('quiz.show_all')->with('quizes', $quizes);
     }

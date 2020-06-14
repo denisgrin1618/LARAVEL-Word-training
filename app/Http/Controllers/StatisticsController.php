@@ -11,6 +11,9 @@ use Illuminate\Http\Request;
 
 class StatisticsController extends Controller {
 
+    public function __construct() {
+        $this->middleware('auth');
+    }
     
 //    https://drivemarketing.ca/en/blog/connecting-laravel-to-a-google-sheet/
 //    https://developers.google.com/sheets/api/quickstart/php

@@ -9,7 +9,7 @@
             <h1>@lang('app_strings.start_new_quiz')
             </h1>
 
-<!--            @if ($errors->any())
+            @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -17,7 +17,9 @@
                     @endforeach
                 </ul>
             </div>
-            @endif-->
+            @endif
+
+           
 
 
             {{ Form::open(array('route' => 'quiz.store', 'method' => 'post')) }}
