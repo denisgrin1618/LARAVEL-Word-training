@@ -28,6 +28,8 @@ Route::get('/profile', 'UserController@profile')->name('profile');
 Route::post('/profile', 'UserController@update_avatar');
 
 
+
+
 Route::get('/translation', 'TranslationController@show')->name('translation.show');
 Route::get('/translation/import/{spreadsheet_id?}', 'TranslationController@import')->name('translation.import');
 Route::post('/translation/importprogress', 'TranslationController@importProgess')->name('translation.importprogress');

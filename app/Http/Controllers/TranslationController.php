@@ -32,6 +32,7 @@ class TranslationController extends Controller {
                         ->with('search_input', ['language1' => 'en']);
     }
 
+     
     public function add(Request $request) {
 
         $user = Auth::user();
@@ -237,7 +238,9 @@ class TranslationController extends Controller {
         $import_progress->save();
         
 //        ImportVacabularyFromGoogleTranslate::dispatch($request->post('spreadsheetId'), $user);
+        
         ImportVacabularyFromGoogleTranslate::dispatch($request->post('spreadsheetId'), $user);
+         
         return response()->json('DONE');
         
     }

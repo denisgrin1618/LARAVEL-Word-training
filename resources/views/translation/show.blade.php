@@ -200,6 +200,59 @@
 
                 </tr>
 
+                <tr  class="d-none">
+
+                    <td class="">
+
+                        <div class="container ">
+                            <div class="row justify-content-end">
+                                <div class="col-10 p-0">
+                                    <div class="container">
+                                        <div class="row">
+
+                                            <div id="translate_word1_language_name" class="col-3 col-md-2 col-lg-1 p-0 d-flex justify-content-center" ></div>
+                                            <div id="translate_word1_name"          class="col-9 col-md-4 col-lg-5 p-0" ></div>
+
+                                            <div id="translate_word2_language_name" class="col-3 col-md-2 col-lg-1 p-0 d-flex justify-content-center" ></div>
+                                            <div id="translate_word2_name"          class="col-9 col-md-4 col-lg-5 p-0" ></div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2 p-0 ">
+                                    <div class="container p-0">
+                                        <div class="row justify-content-end no-gutters ">
+
+                                            <div class="col-12  col-md-auto   p-0" >
+                                                <div  type="button" class="float-right but_favorite d-flex btn "  >
+                                                    <img class="mx-auto" src="/img/icons/star.svg" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-auto   pl-1 " >
+                                                <button id="bt_edit" type="button" class="float-right d-flex btn  rounded border border-secondary bt-light-white bt_edit" >
+                                                    <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="{{__('app_strings.edit')}}">
+                                                </button>
+                                            </div>
+                                            <div class="col-12  col-md-auto   pl-1 " >
+                                                <button type="button" class="float-right d-flex btn  rounded border border-secondary bt-light-white but_delete" data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">
+                                                    <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="{{__('app_strings.delete')}}">
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+
+                    <td class="d-none" id="translate_word1_id"></td>
+                    <td class="d-none" id="translate_word2_id"></td>
+                    <td class="d-none" id="translate_id"></td>
+                    <td class="d-none" id="translate_word1_language_id"></td>
+                    <td class="d-none" id="translate_word2_language_id"></td>
+
+                </tr>
 
 
             </tbody>
@@ -525,7 +578,7 @@
 
                 success: function (data) {
 
-//                    console.log(data);
+                    console.log(data);
                     var obj = $.parseJSON(data);
 
                     var tr = $("#tr_blank").clone(true);
@@ -553,15 +606,6 @@
                 }
             });
         });
-
-//        $("button")
-//            .mouseover(function() {
-//              $( this ).removeClass('bt-light-white').addClass('bt-grey-silver');
-//            })
-//            .mouseout(function() {
-//              $( this ).removeClass('bt-grey-silver').addClass('bt-light-white');
-//        });
-
 
 
     });

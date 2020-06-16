@@ -19,8 +19,6 @@
             </div>
             @endif
 
-           
-
 
             {{ Form::open(array('route' => 'quiz.store', 'method' => 'post')) }}
 
@@ -81,27 +79,7 @@
                             <input class="form-control   @error('quantity_of_words') border-danger @enderror" type="number" name="quantity_of_words">
                         </td>
                     </tr>    
-<!--
-                    <tr>
-                        <td colspan="2">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="select_most_complicated_words" name="select_most_complicated_words">
-                                <label class="custom-control-label" for="select_most_complicated_words">@lang('app_strings.select_most_complicated_words')</label>
-                            </div>
-                        </td>
 
-                    </tr>  
-
-                    <tr>
-                        <td colspan="2">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="select_unanswered_words" name="select_unanswered_words">
-                                <label class="custom-control-label" for="select_unanswered_words">@lang('app_strings.select_unanswered_words')</label>
-                            </div>
-                        </td>
-
-                    </tr>    
--->
                     <tr>
                         <td>
                             <p>@lang('app_strings.filter')</p>
@@ -116,43 +94,12 @@
                         </td>
                     </tr>   
 
-<!--                    <tr>
-                        <td colspan="2">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" id="select_most_complicated_words" name="quiz_filter" class="custom-control-input">
-                                <label class="custom-control-label" for="select_most_complicated_words">@lang('app_strings.select_most_complicated_words')</label>
-                            </div>
-                            <div class="custom-control custom-radio">
-                                <input type="radio" id="select_unanswered_words" name="quiz_filter" class="custom-control-input">
-                                <label class="custom-control-label" for="select_unanswered_words">@lang('app_strings.select_unanswered_words')</label>
-                            </div>
-                        </td>
-                    </tr>-->
-                    
                 </tbody>
             </table>
 
             {{ Form::submit( __('app_strings.start') ,['class'=>'btn btn-success  ml-1 mt-1 float-right']) }}
 
             {{ Form::close() }}
-
-
-
-
-
-
-            <!--            <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <a class="btn btn-outline-secondary" >RU</a>
-                                <a class="btn btn-outline-secondary" >EN</a>
-                            </div>
-                            
-                            <div class="input-group-prepend">
-                                <a class="btn btn-outline-secondary rounded-right" >UK</a>
-                            </div>   
-                        </div>-->
-
-
 
 
         </div>

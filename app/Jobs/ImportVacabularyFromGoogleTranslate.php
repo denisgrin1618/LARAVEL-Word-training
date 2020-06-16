@@ -36,125 +36,7 @@ class ImportVacabularyFromGoogleTranslate implements ShouldQueue {
         $this->user = $user;
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
-    public function DELETE_handle() {
-
-        $user = $this->user;
-        $language1 = Language::find(2);
-        $language2 = Language::find(1);
-
-
-        $import_progress = ImportProgress::where('user_id', $user->id)->get();
-        if ($import_progress->isEmpty()) {
-            $import_progress = new ImportProgress;
-            $import_progress->user()->associate($user);
-            $import_progress->percent_progress = 0;
-            $import_progress->save();
-        } else {
-            $import_progress = $import_progress->first();
-        }
-
-
-        $import_progress->percent_progress = 0;
-        $import_progress->save();
-
-
-
-
-
-        $client = $this->getClient();
-        $service = new Google_Service_Sheets($client);
-        $spreadsheetId = $this->spreadsheetId;
-        $range = 'Сохраненные переводы!A1:D';
-
-        $response = $service->spreadsheets_values->get($spreadsheetId, $range);
-        $values = $response->getValues();
-        $rezalt = "";
-
-
-
-
-
-
-
-        if (empty($values)) {
-            $rezalt = "No data found";
-        } else {
-
-
-
-//            session(['import_progress' => '0']);
-
-            $count_uploaded_words = 0;
-            $count_all_words = count($values);
-            foreach ($values as $row) {
-                $count_uploaded_words++;
-                $progress = round($count_uploaded_words * 100 / $count_all_words);
-                $import_progress->percent_progress = $progress;
-                $import_progress->save();
-
-
-                $word1_name = $row[2];
-                $word2_name = $row[3];
-
-                $word1 = Word::where('name', $word1_name)
-                        ->where('language_id', $language1->id)
-                        ->where('user_id', $user->id)
-                        ->get();
-
-                if ($word1->isEmpty()) {
-                    $word1 = new Word;
-                    $word1->name = $word1_name;
-                    $word1->language()->associate($language1);
-                    $word1->user()->associate($user);
-                    $word1->save();
-                } else {
-                    $word1 = $word1->first();
-                }
-
-                $word2 = Word::where('name', $word2_name)
-                        ->where('language_id', $language2->id)
-                        ->where('user_id', $user->id)
-                        ->get();
-
-                if ($word2->isEmpty()) {
-                    $word2 = new Word;
-                    $word2->name = $word2_name;
-                    $word2->language()->associate($language2);
-                    $word2->user()->associate($user);
-                    $word2->save();
-                } else {
-                    $word2 = $word2->first();
-                }
-
-
-                $translate = Translation::where('word1_id', $word1->id)
-                        ->where('word2_id', $word2->id)
-                        ->where('user_id', $user->id)
-                        ->get();
-
-                if ($translate->isEmpty()) {
-                    $translate = new Translation;
-                    $translate->word1_id = $word1->id;
-                    $translate->word2_id = $word2->id;
-                    $translate->user()->associate($user);
-                    $translate->save();
-                }
-            }
-            $rezalt = "Was uploaded " . $count_uploaded_words . " words";
-        }
-
-
-//        session(['import_progress' => 100]);
-//        
-        $import_progress->percent_progress = 100;
-        $import_progress->save();
-    }
-
+   
     public function handle() {
 
         $user = $this->user;
@@ -187,14 +69,14 @@ class ImportVacabularyFromGoogleTranslate implements ShouldQueue {
             ImportProgress::create_new($user, $progress);
 
             
-            $language1  = Language::get_language(strtolower($row[0]));
-            $language2  = Language::get_language(strtolower($row[1]));
+            $language1  = Language::get_language($row[0]);
+            $language2  = Language::get_language($row[1]);
             
             if($language1 == null || $language2 == null){
                 continue;
             }
             $word1      = Word::get_word($user, $language1, $row[2]);
-            $word2      = Word::get_word($user, $language1, $row[3]); 
+            $word2      = Word::get_word($user, $language2, $row[3]); 
             $translate  = Translation::get_translation($word1, $word2, $user); 
 
             

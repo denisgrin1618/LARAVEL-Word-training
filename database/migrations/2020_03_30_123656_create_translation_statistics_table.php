@@ -20,7 +20,8 @@ class CreateTranslationStatisticsTable extends Migration
             $table->foreign('translation_id')->references('id')->on('translations')->onDelete('cascade');
             
             $table->integer('count_success')->default(0);
-            $table->integer('count_error')->default(0);
+            $table->integer('count_error')->default(0);           
+            $table->boolean('favorite')->default(false);
             
             $table->timestamps();
         });

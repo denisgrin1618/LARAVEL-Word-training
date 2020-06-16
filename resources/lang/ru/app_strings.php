@@ -33,7 +33,8 @@ return [
     'import_instruction_1'              => 'Откройте Google Translate',
     'import_instruction_2'              => 'Откройте сохраненные переводы',
     'import_instruction_3'              => 'Потом эскспортируйте их в Google Sheet',
-    'import_instruction_4'              => 'Скопируйте Spreadsheet ID из url и введите его в input выше',
+    'import_instruction_4'              => 'Дайте документу публичный доступ',
+    'import_instruction_5'              => 'Скопируйте Spreadsheet ID из url и введите его в input выше',
     'import_instruction_header'         => 'Импорт словаря из Google Translate',
     
     'start_new_quiz'                    => 'Начать новое тестирование',

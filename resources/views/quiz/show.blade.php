@@ -24,7 +24,6 @@
                         </button>
                     </td>
                     <td>
-
                         <button id="button_timer" class=" btn rounded border border-secondary pt-1 pl-1 pr-1" ><h4 id="timer" class="p-0 m-0">00:00</h4></button>
                     </td>
                     <td>
@@ -121,7 +120,8 @@
     var table_quiz_row_index = 0;
     var table_translates_rows_count = $('#table_translates tr').length;
     var timer;
-    var quiz_time_seconds;
+    var timer_started = true;
+    var quiz_time_seconds = 0;
 
     $(function ()
     {
@@ -131,8 +131,10 @@
         }
 
         function start_timer(display) {
-            quiz_time_seconds = 0;
+            
+            timer_started = true;
             var minutes, seconds;
+            
             timer = setInterval(function () {
                 minutes = parseInt(quiz_time_seconds / 60, 10)
                 seconds = parseInt(quiz_time_seconds % 60, 10);
@@ -201,6 +203,16 @@
             resize_elements();
         });
 
+        $('#button_timer').click(function (e){
+            if(timer_started){
+                timer_started = false;
+                clearTimeout(timer);
+            }else{
+                timer_started = true;
+                start_timer($('#timer'));
+            }
+        });
+            
         $('#but_favorite').click(function (e) {
 
             var index = table_quiz_row_index;
@@ -245,6 +257,7 @@
 
         $('#button_finish').click(function (e) {
 
+            timer_started = false;
             clearTimeout(timer);
 
             $("#button_next").trigger("click");

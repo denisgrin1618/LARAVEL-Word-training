@@ -121,11 +121,19 @@ class User extends Authenticatable
     
     public function getTotalTimeSpentAttribute(){
         
-        $total_seconds = Quiz::where('user_id', $this->id)
+//        $total_seconds = Quiz::where('user_id', $this->id)
+//                ->groupBy('user_id')
+//                ->selectRaw('sum(time_in_seconds) as total_spended_time')
+//                ->first()
+//                ->total_spended_time;
+        
+        $quiz = Quiz::where('user_id', $this->id)
                 ->groupBy('user_id')
                 ->selectRaw('sum(time_in_seconds) as total_spended_time')
-                ->first()
-                ->total_spended_time;
+                ->first();
+
+        $total_seconds =  is_null($quiz) ? 0 : $quiz->total_spended_time;
+        
         
         $minutes = round($total_seconds / 60);
         $seconds = $total_seconds % 60;

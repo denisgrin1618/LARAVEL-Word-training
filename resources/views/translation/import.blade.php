@@ -35,6 +35,7 @@
         <p>2. @lang('app_strings.import_instruction_2') <img src="/img/Import_words_phrasebook_icon.jpg"> </p>
         <p>3. @lang('app_strings.import_instruction_3') <img src="/img/Import_words_export_icon_2.jpg"></p>
         <p>4. @lang('app_strings.import_instruction_4')</p>
+        <p>5. @lang('app_strings.import_instruction_5')</p>
         <img src="/img/Import_words_export_icon_3.jpg">
     </div>
 
@@ -99,10 +100,11 @@
                 },
 
                 success: function (data) {
-
+                    console.log(data);
                 },
                 error: function () {
                     console.log("ERROR");
+                    clearInterval(myInterval);
                 }
             });
 
