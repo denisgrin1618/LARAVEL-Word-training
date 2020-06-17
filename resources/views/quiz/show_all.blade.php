@@ -76,7 +76,7 @@
                         
                             
 <!--                             
-                             @if ($quiz->pass_percentage() < 40)
+                             @if ($quiz->pass_percentage() <= 40)
                                 background: linear-gradient(90deg, #FFA07A 0%, #FFA07A {{$quiz->pass_percentage()}}%, white {{$quiz->pass_percentage()}}%, white {{100-$quiz->pass_percentage()}}%)"
                              @elseif ($quiz->pass_percentage() > 40 && $quiz->pass_percentage() < 80 )
                                 background: linear-gradient(90deg, #fcf100 0%, #fcf100 {{$quiz->pass_percentage()}}%, white {{$quiz->pass_percentage()}}%, white {{100-$quiz->pass_percentage()}}%)"
@@ -98,7 +98,7 @@
                                         
                                         
                                         
-<!--                                        @if ($quiz->pass_percentage() < 40)
+<!--                                        @if ($quiz->pass_percentage() <= 40)
                                             <td class="text-left text-danger">
                                         @elseif ($quiz->pass_percentage() > 40 && $quiz->pass_percentage() < 80 )
                                             <td class="text-left text-warning">
@@ -112,7 +112,7 @@
 <!--                                                {{ $quiz->pass_percentage() }}%  -->
 <!--                                                  
                                                   
--->                                             @if ($quiz->pass_percentage() < 40)
+-->                                             @if ($quiz->pass_percentage() <= 40)
                                                     <span class="badge badge-pill badge-danger">{{ $quiz->pass_percentage() }}%</span> 
                                                 @elseif ($quiz->pass_percentage() > 40 && $quiz->pass_percentage() < 80 )
                                                     <span class="badge badge-pill badge-warning">{{ $quiz->pass_percentage() }}%</span> 
@@ -206,7 +206,7 @@
 
     
     
-    
+     
      <div >
 
         <div class="modal fade" id="quiz_delete_modal" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">

@@ -147,16 +147,18 @@
         </div>
 
         <br>
+        <br>
+        <br>
         <footer class="footer mt-10">
             <div class="container">
                 <h5 class="text-muted mt-2">Word training</h5>
 
                 <ul class="list-unstyled">
                     <li>
-                        <span class="text-muted">Email:  Denis.grin1618@gmail.com</span>
+                        <span class="text-muted">Denis.grin1618@gmail.com</span>
                     </li>
                     <li>
-                        <span class="text-muted">GitHub: <a class="text-muted" href="https://github.com/denisgrin1618/LARAVEL-Word-training">denisgrin1618/LARAVEL-Word-training</a></span>
+                        <span class="text-muted"><a class="text-muted" href="https://github.com/denisgrin1618/LARAVEL-Word-training">Github.com/denisgrin1618/LARAVEL-Word-training</a></span>
                     </li>
                 </ul>
 
