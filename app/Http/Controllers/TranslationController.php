@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 use App\Jobs\ImportVacabularyFromGoogleTranslate;
+use GoogleSheet;
+
 
 class TranslationController extends Controller {
 
@@ -184,8 +186,11 @@ class TranslationController extends Controller {
             return view('translation.import');
         }else{
             
-            ImportVacabularyFromGoogleTranslate::dispatchNow($spreadsheet_id, Auth::user());
-            return response()->json('DONE');
+//            ImportVacabularyFromGoogleTranslate::dispatchNow($spreadsheet_id, Auth::user());
+//            return response()->json('DONE');
+          
+            $data = GoogleSheet::importVocabulary($spreadsheet_id, Auth::user());
+            return response()->json($data);
         }
         
     }
@@ -219,30 +224,28 @@ class TranslationController extends Controller {
         $validatedData = $request->validate([
             'spreadsheetId' => ['required'],
         ]);
-
-//        session(['import_progress' => '20']);
-//        
-//        return response()->json(session('import_progress'));
      
-        $user = Auth::user();
+//        $user = Auth::user();
         
-        $import_progress = ImportProgress::where('user_id', $user->id)->get();
-        if ($import_progress->isEmpty()) {
-            $import_progress = new ImportProgress;
-            $import_progress->user()->associate($user);
-            
-        } else {
-            $import_progress = $import_progress->first();
-        }
-        $import_progress->percent_progress = 0;
-        $import_progress->save();
+//        $import_progress = ImportProgress::where('user_id', $user->id)->get();
+//        if ($import_progress->isEmpty()) {
+//            $import_progress = new ImportProgress;
+//            $import_progress->user()->associate($user);
+//            
+//        } else {
+//            $import_progress = $import_progress->first();
+//        }
+//        $import_progress->percent_progress = 0;
+//        $import_progress->save();
         
 //        ImportVacabularyFromGoogleTranslate::dispatch($request->post('spreadsheetId'), $user);
         
-        ImportVacabularyFromGoogleTranslate::dispatch($request->post('spreadsheetId'), $user);
+//        ImportVacabularyFromGoogleTranslate::dispatchNow($request->post('spreadsheetId'), $user);
          
-        return response()->json('DONE');
-        
+     
+        $data = GoogleSheet::importVocabulary($request->post('spreadsheetId'), Auth::user());
+        return response()->json($data);
+              
     }
 
   

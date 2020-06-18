@@ -1,12 +1,7 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Services;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 use Google_Service_Sheets;
 use Google_Client;
 use App\Language;
@@ -16,37 +11,30 @@ use App\TranslationStatistics;
 use App\ImportProgress;
 use App\ISOLanguage;
 
-class ImportVacabularyFromGoogleTranslate implements ShouldQueue {
 
-    use Dispatchable,
-        InteractsWithQueue,
-        Queueable,
-        SerializesModels;
-
-    protected $spreadsheetId;
-    protected $user;
-
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct($spreadsheetId, $user) {
-        $this->spreadsheetId = $spreadsheetId;
-        $this->user = $user;
-    }
-
-   
-    public function handle() {
-
-        $user = $this->user;
-
+class GoogleSheet {
+    
+//    protected $spreadsheetId;
+//    protected $user;
+//
+//    /**
+//     * Create a new job instance.
+//     *
+//     * @return void
+//     */
+//    public function __construct($spreadsheetId, $user) {
+//        $this->spreadsheetId    = $spreadsheetId;
+//        $this->user             = $user;
+//    }
+    
+    
+    public function importVocabulary($spreadsheetId, $user){
+        
         ImportProgress::create_new($user, 0);
-
 
         $client             = $this->getClient();
         $service            = new Google_Service_Sheets($client);
-        $spreadsheetId      = $this->spreadsheetId;
+        $spreadsheetId      = $spreadsheetId;
         $spreadSheet        = $service->spreadsheets->get($spreadsheetId);
         $sheets             = $spreadSheet->getSheets();
         $name_first_sheet   = reset($sheets)->properties->title;
@@ -56,42 +44,45 @@ class ImportVacabularyFromGoogleTranslate implements ShouldQueue {
             
         }
 
-        $range                  = $name_first_sheet . '!A1:D';
-        $response               = $service->spreadsheets_values->get($spreadsheetId, $range);
-        $values                 = $response->getValues();
-        $count_uploaded_words   = 0;
-        $count_all_words        = count($values);
+        $range     = $name_first_sheet . '!A1:D';
+        $response  = $service->spreadsheets_values->get($spreadsheetId, $range);
+        $values    = $response->getValues();
+        
+        $count_uploaded_translations    = 0;
+        $count_all_translations         = count($values);
+        
         
         foreach ($values as $row) {
-            $count_uploaded_words++;
-
-            $progress = round($count_uploaded_words * 100 / $count_all_words);
+           
+            $count_uploaded_translations++;
+            $progress = round($count_uploaded_translations * 100 / $count_all_translations);
             ImportProgress::create_new($user, $progress);
-
             
+
             $language1  = Language::get_language($row[0]);
             $language2  = Language::get_language($row[1]);
             
             if($language1 == null || $language2 == null){
                 continue;
             }
+            
+            
+            
             $word1      = Word::get_word($user, $language1, $row[2]);
             $word2      = Word::get_word($user, $language2, $row[3]); 
             $translate  = Translation::get_translation($word1, $word2, $user); 
-
-            
+              
         }
         
+     
 
         ImportProgress::create_new($user, 100);
         
-    
+        
+        return $count_uploaded_translations;
+        
     }
-
-    /**
-     * Returns an authorized API client.
-     * @return Google_Client the authorized client object
-     */
+    
     function getClient() {
         $client = new Google_Client();
         $client->setApplicationName('Google Sheets API PHP Quickstart');
@@ -139,5 +130,6 @@ class ImportVacabularyFromGoogleTranslate implements ShouldQueue {
         }
         return $client;
     }
-
+    
+    
 }

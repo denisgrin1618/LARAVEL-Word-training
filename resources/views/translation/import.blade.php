@@ -20,7 +20,9 @@
         <h1>@lang('app_strings.import_instruction_header')</h1>
         <div class="input-group " >
             <input name="spreadsheetId" id="spreadsheetId" type="text" autocomplete="off"
-                   class="form-control" placeholder="Spreadsheet ID" aria-label="Spreadsheet ID" aria-describedby="basic-addon2">
+                   placeholder="Spreadsheet ID" aria-label="Spreadsheet ID" aria-describedby="basic-addon2"
+                   class="form-control "
+                   >
             <div class="input-group-append">
 
                 <button class="d-flex btn p-6 m-0 rounded-right border border-secondary bt-light-white" type="button" id="button_import">
@@ -29,6 +31,10 @@
             </div>
         </div>
 
+        <div id="div_count_downloaded_translations" class="alert alert-success invisible">
+            
+        </div>
+        
         <br>
 
         <p>1. @lang('app_strings.import_instruction_1') </p>
@@ -53,41 +59,59 @@
 
             e.preventDefault();
 
-            var myInterval = setInterval(function () {
+//            var myInterval = setInterval(function () {
+//
+//                $.ajax({
+//                    type: 'POST',
+//                    url: "/translation/importprogress",
+//                    async: true,
+//                    cache: false,
+//                    data: {
+//                        "_token": $('meta[name="csrf-token"]').attr('content'),
+//                        "spreadsheetId": $('#spreadsheetId').val()
+//                    },
+//
+//                    success: function (data) {
+//                        console.log(data);
+////                        var bar = $('#import_progress_bar');
+////                        bar.text(data+"%").attr("aria-valuenow",data).css('width', data+'%');
+//
+//
+//                        $('#spreadsheetId').css('background', "linear-gradient(90deg, #DCDCDC 0%, #DCDCDC " + data + "%, white " + data + "%, white " + (100 - data) + "%)");
+//
+//
+//
+////                        if (data == 100) {
+////                            clearInterval(myInterval);
+////                        }
+//
+//                    },
+//                    error: function () {
+//                        console.log("ERROR");
+//                        clearInterval(myInterval);
+//                    }
+//
+//                });
+//
+//            }, 1000);
 
-                $.ajax({
-                    type: 'POST',
-                    url: "/translation/importprogress",
-                    async: true,
-                    cache: false,
-                    data: {
-                        "_token": $('meta[name="csrf-token"]').attr('content'),
-                        "spreadsheetId": $('#spreadsheetId').val()
-                    },
-
-                    success: function (data) {
-                        console.log(data);
-//                        var bar = $('#import_progress_bar');
-//                        bar.text(data+"%").attr("aria-valuenow",data).css('width', data+'%');
-
-
-                        $('#spreadsheetId').css('background', "linear-gradient(90deg, #DCDCDC 0%, #DCDCDC " + data + "%, white " + data + "%, white " + (100 - data) + "%)");
-
-
-
-                        if (data == 100) {
-                            clearInterval(myInterval);
-                        }
-
-                    },
-                    error: function () {
-                        console.log("ERROR");
-                        clearInterval(myInterval);
-                    }
-
-                });
-
-            }, 1000);
+            
+//                class="form-control progress-bar progress-bar-striped progress-bar-animated" 
+//                role="progressbar" 
+//                aria-valuenow="100" 
+//                aria-valuemin="0" 
+//                aria-valuemax="100" 
+//                style="width: 100%"
+              
+              $('#spreadsheetId')
+                      .removeAttr("placeholder")
+                      .attr("role","progressbar")
+                      .attr("aria-valuenow","100")
+                      .attr("aria-valuemin","0")
+                      .attr("aria-valuemax","100")
+                      .css("width", "100%")
+                      .addClass("progress-bar progress-bar-striped progress-bar-animated");
+     
 
             $.ajax({
                 type: 'POST',
@@ -101,10 +125,26 @@
 
                 success: function (data) {
                     console.log(data);
+//                    clearInterval(myInterval);
+                    $('#div_count_downloaded_translations')
+                            .removeClass('invisible')
+                            .text("downloaded translations:" + data);
+                            
+                    $('#spreadsheetId')
+                      .attr("placeholder", "Spreadsheet ID")
+                      .removeAttr("role")
+                      .removeAttr("aria-valuenow")
+                      .removeAttr("aria-valuemin")
+                      .removeAttr("aria-valuemax")
+                      .css("width", "100%")
+                      .removeClass("progress-bar progress-bar-striped progress-bar-animated");
+          
+                         
+                    
                 },
                 error: function () {
                     console.log("ERROR");
-                    clearInterval(myInterval);
+//                    clearInterval(myInterval);
                 }
             });
 

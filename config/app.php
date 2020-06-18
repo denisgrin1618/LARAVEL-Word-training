@@ -178,6 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         
         Intervention\Image\ImageServiceProvider::class,
+        App\Providers\GoogleSheetServiceProvider::class,
 
     ],
 
@@ -233,6 +234,7 @@ return [
         
         'Form'=> Collective\Html\FormFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'GoogleSheet' => App\Facades\GoogleSheetService::class,
         
 
     ],
