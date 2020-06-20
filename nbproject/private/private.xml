@@ -5,7 +5,7 @@
         <group>
             <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/public/css/word-training.css</file>
             <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/resources/views/layouts/app.blade.php</file>
-            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/resources/views/translation/import.blade.php</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/resources/views/quiz/show_all.blade.php</file>
         </group>
     </open-files>
 </project-private>

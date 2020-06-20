@@ -15,7 +15,7 @@
         <script src="{{ asset('js/jquery.textareaAutoResize.js') }}" ></script>
 
 
-        <link rel="shortcut icon" href="{{ asset('img/logo_page.png') }}" type="image/png">
+        <link rel="shortcut icon" href="{{ asset('/img/logo_page.png') }}" type="image/png">
 
         <!-- Fonts 
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -29,13 +29,15 @@
     <body >
         <div id="app">
 
-            <nav class="navbar navbar-expand-md navbar-light  " style="background: #4ebdad" >
+            <nav class="shadow  navbar navbar-expand-md navbar-light  " style="background: #4ebdad" >
                 <button  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <a class="navbar-brand mt-1" href="{{ route('quiz.start') }}"><img src="{{ URL::to('/img/logo_sm.png') }}" ></a>
 
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                    
+                    
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
                         <li class="nav-item li-local d-none invisible">
@@ -51,18 +53,20 @@
                         </li>
                         
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('translation.show') }}">@lang('app_strings.vocabulary')</a>
+                            <a class="nav-link text-white" href="{{ route('translation.show') }}"><img class='mr-2 img-icon d-none invisible' src="{{ URL::to('/img/icons/book.svg') }}" width="20" height="20">@lang('app_strings.vocabulary')</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('translation.import') }}" >@lang('app_strings.import')</a>
+                            <a class="nav-link text-white" href="{{ route('translation.import') }}" ><img class='mr-2 img-icon d-none invisible' src="{{ URL::to('/img/icons/download.svg') }}" width="20" height="20">@lang('app_strings.import')</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('quiz.show_all') }}" >@lang('app_strings.quiz')</a>
+                            <a class="nav-link text-white" href="{{ route('quiz.show_all') }}" ><img class='mr-2 img-icon d-none invisible' src="{{ URL::to('/img/icons/clock.svg') }}" width="20" height="20">@lang('app_strings.quiz')</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link text-white" href="{{ route('statistics.show') }}">@lang('app_strings.statistic')</a>
+                            <a class="nav-link text-white" href="{{ route('statistics.show') }}"><img class='mr-2 img-icon d-none invisible' src="{{ URL::to('/img/icons/graph-up.svg') }}" width="20" height="20">@lang('app_strings.statistic')</a>
                         </li>
                     </ul>
+                    
+                    
 
 
                     <ul class="navbar-nav ml-auto">
@@ -91,9 +95,9 @@
                                     @lang('app_strings.profile')
                                 </a>
 
-                                <a class="dropdown-item" href="{{ route('statistics.show') }}">
+<!--                                <a class="dropdown-item" href="{{ route('statistics.show') }}">
                                     @lang('app_strings.statistic')
-                                </a>
+                                </a>-->
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -173,6 +177,7 @@
 //                    $('.div-local').addClass('p-0').appendTo(".li-local");
                     $(".li-local").removeClass('d-none invisible');
                     $('.div-local').addClass('d-none invisible');
+                    $('.img-icon').removeClass('d-none invisible');
                 }
 
 
@@ -188,7 +193,7 @@
 //                $('.div-local').removeClass('p-0').appendTo(".dropdown-menu-right");
                 $(".div-local").removeClass('d-none invisible');
                 $('.li-local').addClass('d-none invisible');
-
+                $('.img-icon').addClass('d-none invisible');
             });
 
 

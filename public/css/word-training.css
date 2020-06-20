@@ -22,6 +22,10 @@ table tr td {
     word-break: break-all;
 }
 
+.bt-nav{
+   background-color: #4ebdad; 
+}
+
 .bt-grey-silver {
     background-color: #C0C0C0;
 }
@@ -122,3 +126,4 @@ button:not(#but_favorite):not(.navbar-toggler):hover{
     top: 0;
     z-index: 49;
 }
+
