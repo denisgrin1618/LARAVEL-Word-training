@@ -32,17 +32,13 @@ class GoogleSheet {
         
         ImportProgress::create_new($user, 0);
 
+        
         $client             = $this->getClient();
         $service            = new Google_Service_Sheets($client);
         $spreadsheetId      = $spreadsheetId;
         $spreadSheet        = $service->spreadsheets->get($spreadsheetId);
         $sheets             = $spreadSheet->getSheets();
         $name_first_sheet   = reset($sheets)->properties->title;
-
-      
-        if (empty($name_first_sheet)) {
-            
-        }
 
         $range     = $name_first_sheet . '!A1:D';
         $response  = $service->spreadsheets_values->get($spreadsheetId, $range);

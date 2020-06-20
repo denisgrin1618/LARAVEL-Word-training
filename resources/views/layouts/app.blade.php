@@ -16,7 +16,7 @@
 
 
         <link rel="shortcut icon" href="{{ asset('img/logo_page.png') }}" type="image/png">
-        
+
         <!-- Fonts 
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -29,41 +29,27 @@
     <body >
         <div id="app">
 
-            <nav class="navbar navbar-expand-lg navbar-light  " style="background: #4ebdad" >
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <nav class="navbar navbar-expand-md navbar-light  " style="background: #4ebdad" >
+                <button  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand" href="{{ route('quiz.start') }}"><img src="{{ URL::to('/img/logo_sm.png') }}" ></a>
+                <a class="navbar-brand mt-1" href="{{ route('quiz.start') }}"><img src="{{ URL::to('/img/logo_sm.png') }}" ></a>
 
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-<!--                        
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{ route('home') }}" style="color: rgb(255,255,255)">Home <span class="sr-only">(current)</span></a>
+
+                        <li class="nav-item li-local d-none invisible">
+
+                            <div class="input-group mb-3 dropdown-item  m-0 p-0 ">
+                                    <div class="input-group-prepend " >
+                                        <a class="a-local btn bt-grey-silver-hover border border-secondary {{ Cookie::get('locale') == 'ru' ? 'bt-grey-silver text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'ru']) }}">RU</a>
+                                        <a class="a-local btn bt-grey-silver-hover border border-secondary {{ Cookie::get('locale') == 'en' || Cookie::get('locale') == null ? 'bt-grey-silver text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'en']) }}">EN</a>
+                                        <a class="a-local btn bt-grey-silver-hover border border-secondary rounded-right {{ Cookie::get('locale') == 'uk' ? 'bt-grey-silver text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'uk']) }}">UK</a>
+                                    </div>
+                                </div>
+                            
                         </li>
--->
-<!--                        <li class="nav-item">
-                            <div class="btn-group">
-  
-                                <div class="btn-group" role="group" aria-label="...">
-                                    <a class="btn btn-outline-secondary {{ Cookie::get('locale') == 'ru' ? 'bg-secondary text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'ru']) }}">RU</a>
-                                    
-                                </div>
-                                <div class="btn-group" role="group" aria-label="...">
-                                     <a class="btn btn-outline-secondary {{ Cookie::get('locale') == 'en' || Cookie::get('locale') == null ? 'bg-secondary text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'en']) }}">EN</a>
-                                        
-                                </div>
-                                <div class="btn-group" role="group" aria-label="...">
-                                    <a class="btn btn-outline-secondary  {{ Cookie::get('locale') == 'uk' ? 'bg-secondary text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'uk']) }}">UK</a>
-                                   
-                                </div>
-                                       
-                            </div>
-                            
-                            
-                            
-            
-                        </li>-->
+                        
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{ route('translation.show') }}">@lang('app_strings.vocabulary')</a>
                         </li>
@@ -74,61 +60,58 @@
                             <a class="nav-link text-white" href="{{ route('quiz.show_all') }}" >@lang('app_strings.quiz')</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link text-white" href="{{ route('statistics.show') }}">
-                                    @lang('app_strings.statistic')
-                                </a>
+                            <a class="nav-link text-white" href="{{ route('statistics.show') }}">@lang('app_strings.statistic')</a>
                         </li>
                     </ul>
 
-                    <!-- Right Side Of Navbar -->
+
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
+
+
                         @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                         @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link text-white" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                         @endif
                         @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"   style="position:relative; padding-left:50px;">
-                                    <img class="align-middle" src="/img/avatars/{{ Auth::user()->avatar }}" style="width:32px; height:32px; position:absolute; top:3px; left:10px; border-radius:50%">
-                                    {{ Auth::user()->name }}<span class="caret"></span>
+                                <img class="align-middle" src="/img/avatars/{{ Auth::user()->avatar }}" style="width:32px; height:32px; position:absolute; top:3px; left:10px; border-radius:50%">
+                                {{ Auth::user()->name }}<span class="caret"></span>
 
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                
+
                                 <a class="dropdown-item" href="{{ route('profile') }}">
                                     @lang('app_strings.profile')
                                 </a>
-                                
-<!--                                <a class="dropdown-item" href="{{ route('statistics.show') }}">
+
+                                <a class="dropdown-item" href="{{ route('statistics.show') }}">
                                     @lang('app_strings.statistic')
-                                </a>-->
-                                
+                                </a>
+
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
 <!--                                    {{ __('Logout') }}-->
                                     @lang('app_strings.logout')
                                 </a>
 
-                                
-                                <div class="input-group mb-3 dropdown-item">
-                                    <div class="input-group-prepend">
-                                        <a class="btn bt-grey-silver-hover border border-secondary {{ Cookie::get('locale') == 'ru' ? 'bt-grey-silver text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'ru']) }}">RU</a>
-                                        <a class="btn bt-grey-silver-hover border border-secondary {{ Cookie::get('locale') == 'en' || Cookie::get('locale') == null ? 'bt-grey-silver text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'en']) }}">EN</a>
-                                        <a class="btn bt-grey-silver-hover border border-secondary rounded-right {{ Cookie::get('locale') == 'uk' ? 'bt-grey-silver text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'uk']) }}">UK</a>
-                                    </div>
 
-                                      
+                                <div class="input-group mb-3 dropdown-item div-local m-0 ">
+                                    <div class="input-group-prepend ">
+                                        <a class="a-local btn bt-grey-silver-hover border border-secondary {{ Cookie::get('locale') == 'ru' ? 'bt-grey-silver text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'ru']) }}">RU</a>
+                                        <a class="a-local btn bt-grey-silver-hover border border-secondary {{ Cookie::get('locale') == 'en' || Cookie::get('locale') == null ? 'bt-grey-silver text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'en']) }}">EN</a>
+                                        <a class="a-local btn bt-grey-silver-hover border border-secondary rounded-right {{ Cookie::get('locale') == 'uk' ? 'bt-grey-silver text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'uk']) }}">UK</a>
+                                    </div>
                                 </div>
-                                
-                                
-                                
+
+
+
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
@@ -138,7 +121,10 @@
                     </ul>
 
                 </div>
+
+
             </nav>
+            <div class="menu-overlay"></div>
 
 
             <main class="py-4">
@@ -164,6 +150,52 @@
 
             </div>
         </footer>
+
+
+        <script type="text/javascript" defer>
+//        
+            $('[data-toggle="collapse"]').on('click', function () {
+                $navMenuCont = $($(this).data('target'));
+
+                if ($navMenuCont.attr('id') == 'navbarTogglerDemo03') {
+                    $navMenuCont.animate({
+                        'width': 'toggle'
+                    }, 350);
+                    $(".menu-overlay").fadeIn(500);
+
+                    $navMenuCont.find('.nav-link')
+                            .not('.a-local')
+                            .removeClass('text-white')
+                            .addClass('text-black');
+//                    console.log($navMenuCont.attr('id'));
+
+                    
+//                    $('.div-local').addClass('p-0').appendTo(".li-local");
+                    $(".li-local").removeClass('d-none invisible');
+                    $('.div-local').addClass('d-none invisible');
+                }
+
+
+            });
+            $(".menu-overlay").click(function (event) {
+                $(".navbar-toggler").trigger("click");
+                $(".menu-overlay").fadeOut(500);
+                $("#navbarTogglerDemo03")
+                        .find('.nav-link')
+                        .not('.a-local')
+                        .removeClass('text-black')
+                        .addClass('text-white');
+//                $('.div-local').removeClass('p-0').appendTo(".dropdown-menu-right");
+                $(".div-local").removeClass('d-none invisible');
+                $('.li-local').addClass('d-none invisible');
+
+            });
+
+
+
+
+        </script>
+
 
     </body>
 </html>

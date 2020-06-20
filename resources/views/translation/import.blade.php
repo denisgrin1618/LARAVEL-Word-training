@@ -145,6 +145,20 @@
                 error: function () {
                     console.log("ERROR");
 //                    clearInterval(myInterval);
+
+                    $('#div_count_downloaded_translations')
+                            .removeClass('invisible')
+                            .text("ERROR downloaded translations:" + 0);
+                            
+                    $('#spreadsheetId')
+                      .attr("placeholder", "Spreadsheet ID")
+                      .removeAttr("role")
+                      .removeAttr("aria-valuenow")
+                      .removeAttr("aria-valuemin")
+                      .removeAttr("aria-valuemax")
+                      .css("width", "100%")
+                      .removeClass("progress-bar progress-bar-striped progress-bar-animated");
+          
                 }
             });
 

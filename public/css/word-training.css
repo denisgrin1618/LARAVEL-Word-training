@@ -23,45 +23,102 @@ table tr td {
 }
 
 .bt-grey-silver {
-  background-color: #C0C0C0;
+    background-color: #C0C0C0;
 }
 
 .bt-grey-silver-hover:hover {
-  background-color: #C0C0C0;
-   color: white;
+    background-color: #C0C0C0;
+    color: white;
 }
 
 .bt-light-white {
-  background-color: white;
+    background-color: white;
 }
 
-button:not(#but_favorite):hover{
+button:not(#but_favorite):not(.navbar-toggler):hover{
     background-color: #C0C0C0;
     color: white;
 }
 
 .bt-light-green:hover {
-  background-color: #04d041;
-  color: white;
+    background-color: #04d041;
+    color: white;
 }
 
 
 .bt-red:hover {
-  background-color: red;
-  color: white;
+    background-color: red;
+    color: white;
 }
 
 .bt-light-yellow {
-  background-color: #fcf100;
+    background-color: #fcf100;
 }
 
 
 
 .bt-light-blue:hover {
-  background-color: #00a6f2;
-  color: white;
+    background-color: #00a6f2;
+    color: white;
 }
 
 .bt-light-red {
-  background-color: #fc7e1f;
+    background-color: #fc7e1f;
+}
+
+
+
+
+
+
+
+
+
+
+.dropdown-item:hover{
+    background-color: transparent;
+}
+
+@media (max-width: 768px) {
+    .navbar-collapse {
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 15px;
+        width: 75%;
+        height: 100%;
+        background-color: #ddd;
+        z-index: 100;
+    }
+
+    .navbar-collapse.collapsing {
+        left: -75%;
+        transition: height 0s ease;
+    }
+
+    .navbar-collapse.show {
+        left: 0;
+        transition: left 500ms ease-in-out;
+    }
+
+    .navbar-toggler.collapsed ~ .navbar-collapse {
+        transition: left 500ms ease-in-out;
+    }
+}
+
+
+.menu-overlay {
+    display: none;
+    background-color: #000;
+    bottom: 0;
+    left: 0;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    /* IE7 & 8 */
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 49;
 }
