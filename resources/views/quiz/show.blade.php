@@ -131,10 +131,10 @@
         }
 
         function start_timer(display) {
-            
+
             timer_started = true;
             var minutes, seconds;
-            
+
             timer = setInterval(function () {
                 minutes = parseInt(quiz_time_seconds / 60, 10)
                 seconds = parseInt(quiz_time_seconds % 60, 10);
@@ -188,7 +188,7 @@
 
             $('#p_word_box').text(word.text());
             $('#translate_box').val(translate_user.text().replace(/\n/g, ""));
-            
+
         }
 
 
@@ -203,16 +203,16 @@
             resize_elements();
         });
 
-        $('#button_timer').click(function (e){
-            if(timer_started){
+        $('#button_timer').click(function (e) {
+            if (timer_started) {
                 timer_started = false;
                 clearTimeout(timer);
-            }else{
+            } else {
                 timer_started = true;
                 start_timer($('#timer'));
             }
         });
-            
+
         $('#but_favorite').click(function (e) {
 
             var index = table_quiz_row_index;
@@ -230,11 +230,6 @@
 
             update_img_favorite();
 
-
-
-
-//             console.log('translation_id - ' + tr.find('#translate_id').text());
-
             $.ajax({
                 type: 'POST',
                 url: "/statistics/favorite",
@@ -251,8 +246,6 @@
                     console.log('data');
                 }
             });
-//            
-
         });
 
         $('#button_finish').click(function (e) {

@@ -95,10 +95,6 @@
                                     @lang('app_strings.profile')
                                 </a>
 
-<!--                                <a class="dropdown-item" href="{{ route('statistics.show') }}">
-                                    @lang('app_strings.statistic')
-                                </a>-->
-
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
 <!--                                    {{ __('Logout') }}-->
@@ -113,8 +109,6 @@
                                         <a class="a-local btn bt-grey-silver-hover border border-secondary rounded-right {{ Cookie::get('locale') == 'uk' ? 'bt-grey-silver text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'uk']) }}">UK</a>
                                     </div>
                                 </div>
-
-
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
@@ -171,10 +165,7 @@
                             .not('.a-local')
                             .removeClass('text-white')
                             .addClass('text-black');
-//                    console.log($navMenuCont.attr('id'));
 
-                    
-//                    $('.div-local').addClass('p-0').appendTo(".li-local");
                     $(".li-local").removeClass('d-none invisible');
                     $('.div-local').addClass('d-none invisible');
                     $('.img-icon').removeClass('d-none invisible');
@@ -190,17 +181,14 @@
                         .not('.a-local')
                         .removeClass('text-black')
                         .addClass('text-white');
-//                $('.div-local').removeClass('p-0').appendTo(".dropdown-menu-right");
+
                 $(".div-local").removeClass('d-none invisible');
                 $('.li-local').addClass('d-none invisible');
                 $('.img-icon').addClass('d-none invisible');
             });
 
 
-
-
         </script>
-
 
     </body>
 </html>

@@ -177,8 +177,6 @@
             console.log("quiz_id " + quiz_id);
 
             curent_table_tr = button.parent().parent().parent();
-//            console.log(curent_table_tr.html());
-
             $('#modal_quiz_id').val(quiz_id);
 
         });
@@ -186,8 +184,6 @@
         $('#modal_dialog_button_delete').click(function (e) {
 
             e.preventDefault();
-
-//            console.log('click delete');
 
             var quiz_id = $('#modal_quiz_id').val();
             console.log(quiz_id);
@@ -199,12 +195,10 @@
                 },
 
                 success: function (data) {
-                    console.log(data);
-//                    $('#table_translates').find('#translate_id').eq(translate_id).remove();
                     curent_table_tr.remove();
                 },
                 error: function () {
-                    console.log("ERROR");
+//                    console.log("ERROR");
                 }
             });
         });
@@ -215,8 +209,6 @@
             while (!target.hasClass('div_quiz')) {
                 target = target.parent();
             }
-
-
 
             var tr = target;
             while (tr.prop("tagName") != "TR") {
@@ -244,11 +236,7 @@
                 tr.find('.but_delete_quiz_copy').remove();
             }
 
-
-
         });
-
-
     });
 
 </script>

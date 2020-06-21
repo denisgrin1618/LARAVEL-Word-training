@@ -22,7 +22,6 @@
                     <tr>
                         <td>@lang('app_strings.success_rate'):</td>
                         <td>
-    <!--                        <span class="text-danger">23</span>-->
                             {{Auth::user()->success_rate}}
                         </td>
                     </tr>

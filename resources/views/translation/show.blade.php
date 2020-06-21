@@ -358,10 +358,6 @@
     </div>
 
 
-
-
-
-
 </div>
 
 
@@ -393,7 +389,6 @@
             }
 
             var translation_id = curent_table_tr.find('#translate_id').text();
-//            console.log(curent_table_tr.find('translate_id').html());
             var favorite = 0;
 
             if (button.hasClass('star_fill')) {
@@ -403,9 +398,6 @@
                 favorite = 1;
                 button.addClass('star_fill').find('img').attr("src", "/img/icons/star-fill.svg");
             }
-
-
-
 
 
             $.ajax({
@@ -429,7 +421,6 @@
 
         $('.bt_edit').on("click", function (event) {
 
-
             var button = $(event.target);
             if (button.prop("tagName") == "IMG") {
                 button = button.parent();
@@ -439,14 +430,11 @@
             while (curent_table_tr.prop("tagName") != "TR") {
                 curent_table_tr = curent_table_tr.parent();
             }
-//            console.log(curent_table_tr.html());
 
             var td_translate_word1_name = curent_table_tr.find('#translate_word1_name');
             var td_translate_word2_name = curent_table_tr.find('#translate_word2_name');
 
             if (button.attr('id') == 'bt_edit') {
-
-
 
                 var translate_word1_name_text = td_translate_word1_name.text();
                 var translate_word2_name_text = td_translate_word2_name.text();
@@ -454,15 +442,11 @@
                 var textarea_word1 = $('<textarea/>', {text: translate_word1_name_text, class: 'form-control text-primary', id: 'textarea_word1', style: "resize: none; overflow:hidden; box-shadow: none!important;"});
                 var textarea_word2 = $('<textarea/>', {text: translate_word2_name_text, class: 'form-control text-primary', id: 'textarea_word2', style: "resize: none; overflow:hidden; box-shadow: none!important;"});
 
-
                 td_translate_word1_name.text("").append(textarea_word1);
                 td_translate_word2_name.text("").append(textarea_word2);
 
                 textarea_word1.autoResize({elCopyResize: $("#textarea_word2")});
                 textarea_word2.autoResize({elCopyResize: $("#textarea_word1")});
-
-//                textarea_word1.ResizeSecondaryElement($("#textarea_word2"));
-//                textarea_word2.ResizeSecondaryElement($("#textarea_word1"));
 
                 button.attr('id', 'bt_save');
                 button.find('img').attr("src", "/img/icons/file-earmark-check.svg");
@@ -504,12 +488,7 @@
                     }
                 });
 
-
-
-
             }
-
-
 
         });
 
@@ -536,8 +515,6 @@
 
             e.preventDefault();
 
-//            console.log('click delete');
-
             var translate_id = $('#modal_translate_id').val();
 
             $.ajax({
@@ -548,12 +525,10 @@
                 },
 
                 success: function (data) {
-                    console.log(data);
-//                    $('#table_translates').find('#translate_id').eq(translate_id).remove();
                     curent_table_tr.remove();
                 },
                 error: function () {
-                    console.log("ERROR");
+//                    console.log("ERROR");
                 }
             });
         });
