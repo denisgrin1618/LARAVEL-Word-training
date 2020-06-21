@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="col-2 p-0 ">
                                     <button type="submit" class="float-right d-flex btn p-6 m-0 rounded border border-secondary bt-light-white  " >            
-                                        <img class="mx-auto" src="/img/icons/search.svg" alt="" width="20" height="20" title="{{__('app_strings.search')}}">
+                                        <img class="mx-auto" src="{{ asset('/img/icons/search.svg') }}" alt="" width="20" height="20" title="{{__('app_strings.search')}}">
                                     </button>
                                 </div>
                             </div>
@@ -108,22 +108,22 @@
                                             <div class="col-12  col-md-auto   p-0" >
                                                 @if(!empty($translate->statistics) && $translate->statistics->favorite)
                                                 <div  type="button" class="float-right star_fill but_favorite d-flex btn " >
-                                                    <img class="mx-auto" src="/img/icons/star-fill.svg" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
+                                                    <img class="mx-auto" src="{{ asset('/img/icons/star-fill.svg') }}" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
                                                 </div>
                                                 @else
                                                 <div  type="button" class="float-right but_favorite d-flex btn "  >
-                                                    <img class="mx-auto" src="/img/icons/star.svg" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
+                                                    <img class="mx-auto" src="{{ asset('/img/icons/star.svg') }}" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
                                                 </div>
                                                 @endif
                                             </div>
                                             <div class="col-12 col-md-auto   pl-1 " >
                                                 <button id="bt_edit" type="button" class="float-right d-flex btn  rounded border border-secondary bt-light-white bt_edit" >
-                                                    <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="{{__('app_strings.edit')}}">
+                                                    <img class="mx-auto" src="{{ asset('/img/icons/pencil.svg') }}" alt="" width="20" height="20" title="{{__('app_strings.edit')}}">
                                                 </button>
                                             </div>
                                             <div class="col-12  col-md-auto   pl-1 " >
                                                 <button type="button" class="float-right d-flex btn  rounded border border-secondary bt-light-white but_delete" data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">
-                                                    <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="{{__('app_strings.delete')}}">
+                                                    <img class="mx-auto" src="{{ asset('/img/icons/trash.svg') }}" alt="" width="20" height="20" title="{{__('app_strings.delete')}}">
                                                 </button>
                                             </div>
                                         </div>
@@ -171,17 +171,17 @@
 
                                             <div class="col-12  col-md-auto   p-0" >
                                                 <div  type="button" class="float-right but_favorite d-flex btn "  >
-                                                    <img class="mx-auto" src="/img/icons/star.svg" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
+                                                    <img class="mx-auto" src="{{ asset('/img/icons/star.svg') }}" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-auto   pl-1 " >
                                                 <button id="bt_edit" type="button" class="float-right d-flex btn  rounded border border-secondary bt-light-white bt_edit" >
-                                                    <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="{{__('app_strings.edit')}}">
+                                                    <img class="mx-auto" src="{{ asset('/img/icons/pencil.svg') }}" alt="" width="20" height="20" title="{{__('app_strings.edit')}}">
                                                 </button>
                                             </div>
                                             <div class="col-12  col-md-auto   pl-1 " >
                                                 <button type="button" class="float-right d-flex btn  rounded border border-secondary bt-light-white but_delete" data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">
-                                                    <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="{{__('app_strings.delete')}}">
+                                                    <img class="mx-auto" src="{{ asset('/img/icons/trash.svg') }}" alt="" width="20" height="20" title="{{__('app_strings.delete')}}">
                                                 </button>
                                             </div>
                                         </div>
@@ -225,17 +225,17 @@
 
                                             <div class="col-12  col-md-auto   p-0" >
                                                 <div  type="button" class="float-right but_favorite d-flex btn "  >
-                                                    <img class="mx-auto" src="/img/icons/star.svg" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
+                                                    <img class="mx-auto" src="{{ asset('/img/icons/star.svg') }}" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-auto   pl-1 " >
                                                 <button id="bt_edit" type="button" class="float-right d-flex btn  rounded border border-secondary bt-light-white bt_edit" >
-                                                    <img class="mx-auto" src="/img/icons/pencil.svg" alt="" width="20" height="20" title="{{__('app_strings.edit')}}">
+                                                    <img class="mx-auto" src="{{ asset('/img/icons/pencil.svg') }}" alt="" width="20" height="20" title="{{__('app_strings.edit')}}">
                                                 </button>
                                             </div>
                                             <div class="col-12  col-md-auto   pl-1 " >
                                                 <button type="button" class="float-right d-flex btn  rounded border border-secondary bt-light-white but_delete" data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">
-                                                    <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="{{__('app_strings.delete')}}">
+                                                    <img class="mx-auto" src="{{ asset('/img/icons/trash.svg') }}" alt="" width="20" height="20" title="{{__('app_strings.delete')}}">
                                                 </button>
                                             </div>
                                         </div>
@@ -311,7 +311,7 @@
                                 
                                 <div class="col-2 p-0 ">
                                     <button type="button" class="float-right d-flex btn p-6 m-0 rounded border border-secondary bt-light-white" id='button_translate_new'>
-                                        <img class="mx-auto" src="/img/icons/plus.svg" alt="" width="20" height="20" title="{{__('app_strings.new')}}">
+                                        <img class="mx-auto" src="{{ asset('/img/icons/plus.svg') }}" alt="" width="20" height="20" title="{{__('app_strings.new')}}">
                                     </button>
                                 </div>
                             </div>
@@ -393,10 +393,10 @@
 
             if (button.hasClass('star_fill')) {
                 favorite = 0;
-                button.removeClass('star_fill').find('img').attr("src", "/img/icons/star.svg");
+                button.removeClass('star_fill').find('img').attr("src", "{{ asset('/img/icons/star.svg') }}");
             } else {
                 favorite = 1;
-                button.addClass('star_fill').find('img').attr("src", "/img/icons/star-fill.svg");
+                button.addClass('star_fill').find('img').attr("src", "{{ asset('/img/icons/star-fill.svg') }}");
             }
 
 
@@ -449,7 +449,7 @@
                 textarea_word2.autoResize({elCopyResize: $("#textarea_word1")});
 
                 button.attr('id', 'bt_save');
-                button.find('img').attr("src", "/img/icons/file-earmark-check.svg");
+                button.find('img').attr("src", "{{ asset('/img/icons/file-earmark-check.svg') }}");
                 curent_table_tr.addClass('text-white border border-secondary bg-info');
 
 
@@ -457,7 +457,7 @@
 
 
                 curent_table_tr.removeClass('text-white border border-secondary bg-info');
-                button.find('img').attr("src", "/img/icons/pencil.svg");
+                button.find('img').attr("src", "{{ asset('/img/icons/pencil.svg') }}");
                 button.attr('id', 'bt_edit');
 
                 translate_word1_name_text = td_translate_word1_name.find('textarea').val();

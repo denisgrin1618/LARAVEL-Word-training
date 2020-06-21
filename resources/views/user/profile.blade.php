@@ -15,7 +15,7 @@
                     <div class="container p-0 m-0">
                         <div class="row">
 
-                            <img id="imgavatar col-12 col-md-4 col-lg-4" src="/img/avatars/{{ $user->avatar }}" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;">
+                            <img id="imgavatar col-12 col-md-4 col-lg-4" src="{{ asset('/img/avatars') }}/{{ $user->avatar }}" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;">
 
                             <form class="col-12 col-md-8 col-lg-8" enctype="multipart/form-data" action="/profile" method="POST">
                                 

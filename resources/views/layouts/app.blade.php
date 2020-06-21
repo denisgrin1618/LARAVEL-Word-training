@@ -33,7 +33,7 @@
                 <button  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand mt-1" href="{{ route('quiz.start') }}"><img src="{{ URL::to('/img/logo_sm.png') }}" ></a>
+                <a class="navbar-brand mt-1" href="{{ route('quiz.start') }}"><img src="{{ asset('/img/logo_sm.png') }}" ></a>
 
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                     
@@ -53,16 +53,16 @@
                         </li>
                         
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('translation.show') }}"><img class='mr-2 img-icon d-none invisible' src="{{ URL::to('/img/icons/book.svg') }}" width="20" height="20">@lang('app_strings.vocabulary')</a>
+                            <a class="nav-link text-white" href="{{ route('translation.show') }}"><img class='mr-2 img-icon d-none invisible' src="{{ asset('/img/icons/book.svg') }}" width="20" height="20">@lang('app_strings.vocabulary')</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('translation.import') }}" ><img class='mr-2 img-icon d-none invisible' src="{{ URL::to('/img/icons/download.svg') }}" width="20" height="20">@lang('app_strings.import')</a>
+                            <a class="nav-link text-white" href="{{ route('translation.import') }}" ><img class='mr-2 img-icon d-none invisible' src="{{ asset('/img/icons/download.svg') }}" width="20" height="20">@lang('app_strings.import')</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('quiz.show_all') }}" ><img class='mr-2 img-icon d-none invisible' src="{{ URL::to('/img/icons/clock.svg') }}" width="20" height="20">@lang('app_strings.quiz')</a>
+                            <a class="nav-link text-white" href="{{ route('quiz.show_all') }}" ><img class='mr-2 img-icon d-none invisible' src="{{ asset('/img/icons/clock.svg') }}" width="20" height="20">@lang('app_strings.quiz')</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link text-white" href="{{ route('statistics.show') }}"><img class='mr-2 img-icon d-none invisible' src="{{ URL::to('/img/icons/graph-up.svg') }}" width="20" height="20">@lang('app_strings.statistic')</a>
+                            <a class="nav-link text-white" href="{{ route('statistics.show') }}"><img class='mr-2 img-icon d-none invisible' src="{{ asset('/img/icons/graph-up.svg') }}" width="20" height="20">@lang('app_strings.statistic')</a>
                         </li>
                     </ul>
                     
@@ -84,7 +84,7 @@
                         @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"   style="position:relative; padding-left:50px;">
-                                <img class="align-middle" src="/img/avatars/{{ Auth::user()->avatar }}" style="width:32px; height:32px; position:absolute; top:3px; left:10px; border-radius:50%">
+                                <img class="align-middle" src="{{ asset('/img/avatars') }}/{{ Auth::user()->avatar }}" style="width:32px; height:32px; position:absolute; top:3px; left:10px; border-radius:50%">
                                 {{ Auth::user()->name }}<span class="caret"></span>
 
                             </a>

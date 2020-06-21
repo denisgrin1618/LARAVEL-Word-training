@@ -15,12 +15,12 @@
                 <tr >
                     <td>
                         <button id="button_back" class=" btn rounded border border-secondary " >            
-                            <img  src="/img/icons/chevron-left.svg" alt="" width="20" height="20" title="{{__('app_strings.back')}}">
+                            <img  src="{{ asset('/img/icons/chevron-left.svg') }}" alt="" width="20" height="20" title="{{__('app_strings.back')}}">
                         </button>
                     </td>
                     <td>
                         <button id="button_next" class=" btn rounded border border-secondary " >            
-                            <img src="/img/icons/chevron-right.svg" alt="" width="20" height="20" title="{{__('app_strings.next')}}">
+                            <img src="{{ asset('/img/icons/chevron-right.svg') }}" alt="" width="20" height="20" title="{{__('app_strings.next')}}">
                         </button>
                     </td>
                     <td>
@@ -28,13 +28,13 @@
                     </td>
                     <td>
                         <button id="but_favorite" class="btn rounded border border-secondary" >            
-                            <img src="/img/icons/star.svg" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
+                            <img src="{{ asset('/img/icons/star.svg') }}" alt="" width="20" height="20" title="{{__('app_strings.favorite')}}">
                         </button>
 
                     </td>
                     <td>
                         <button  class=" btn rounded border border-secondary " data-toggle="modal" data-target="#quiz_finish_modal" data-whatever="@mdo">            
-                            <img src="/img/icons/check2.svg" alt="" width="20" height="20" title="{{__('app_strings.finish')}}">
+                            <img src="{{ asset('/img/icons/check2.svg') }}" alt="" width="20" height="20" title="{{__('app_strings.finish')}}">
                         </button>
 
                     </td>
@@ -172,9 +172,9 @@
             var favorite = tr.find('#translate_favorite');
 
             if (favorite.text() === "1") {
-                $('#but_favorite').find('img').attr("src", "/img/icons/star-fill.svg");
+                $('#but_favorite').find('img').attr("src", "{{ asset('/img/icons/star-fill.svg') }}");
             } else {
-                $('#but_favorite').find('img').attr("src", "/img/icons/star.svg");
+                $('#but_favorite').find('img').attr("src", "{{ asset('/img/icons/star.svg') }}");
             }
 
         }

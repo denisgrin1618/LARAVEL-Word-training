@@ -35,7 +35,7 @@
             <tr>
                 <td class="float-right align-top d-none">
                     <button class="but_delete_quiz d-flex btn p-6 m-1 rounded border border-secondary mx-auto float-right"  data-toggle="modal" data-target="#quiz_delete_modal" data-whatever="@mdo">            
-                        <img class="mx-auto" src="/img/icons/trash.svg" alt="" width="20" height="20" title="{{__('app_strings.delete')}}">
+                        <img class="mx-auto" src="{{ asset('/img/icons/trash.svg') }}" alt="" width="20" height="20" title="{{__('app_strings.delete')}}">
                         <p id="quiz_id" class="d-none">{{$quiz->id}}</p>
                     </button>
                 </td>
@@ -106,7 +106,7 @@
 
                     <a  href="{{ route('quiz.id', ['id'=> $quiz->id]) }}">  
                         <button class="but_start_new_quiz d-flex btn p-6 m-0 rounded border border-secondary mx-auto float-right" >            
-                            <img class="mx-auto" src="/img/icons/play-fill.svg" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
+                            <img class="mx-auto" src="{{ asset('/img/icons/play-fill.svg') }}" alt="" width="20" height="20" title="{{__('app_strings.start')}}">
                         </button>
                     </a>
 

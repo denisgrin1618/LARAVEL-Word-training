@@ -26,7 +26,7 @@
             <div class="input-group-append">
 
                 <button class="d-flex btn p-6 m-0 rounded-right border border-secondary bt-light-white" type="button" id="button_import">
-                    <img class="mx-auto" src="/img/icons/download.svg" alt="" width="20" height="20" title="start">
+                    <img class="mx-auto" src="{{ asset('/img/icons/download.svg') }}" alt="" width="20" height="20" title="start">
                 </button>
             </div>
         </div>
@@ -38,11 +38,11 @@
         <br>
 
         <p>1. @lang('app_strings.import_instruction_1') </p>
-        <p>2. @lang('app_strings.import_instruction_2') <img src="/img/Import_words_phrasebook_icon.jpg"> </p>
-        <p>3. @lang('app_strings.import_instruction_3') <img src="/img/Import_words_export_icon_2.jpg"></p>
+        <p>2. @lang('app_strings.import_instruction_2') <img src="{{ asset('/img/Import_words_phrasebook_icon.jpg') }}"> </p>
+        <p>3. @lang('app_strings.import_instruction_3') <img src="{{ asset('/img/Import_words_export_icon_2.jpg') }}"></p>
         <p>4. @lang('app_strings.import_instruction_4')</p>
         <p>5. @lang('app_strings.import_instruction_5')</p>
-        <img src="/img/Import_words_export_icon_3.jpg">
+        <img src="{{ asset('/img/Import_words_export_icon_3.jpg') }}">
     </div>
 
     <br>
