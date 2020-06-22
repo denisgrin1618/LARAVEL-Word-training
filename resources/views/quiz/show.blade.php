@@ -125,6 +125,8 @@
 
     $(function ()
     {
+        
+        
         function update_number_current_word() {
             var number_current_word_text = "" + table_quiz_row_index + "/" + table_translates_rows_count;
             $('#number_current_word').text(number_current_word_text);
@@ -193,14 +195,24 @@
 
 
         $(document).ready(function () {
+            
             resize_elements();
             start_timer($('#timer'));
             update_number_current_word();
 //            console.log("ready " + $('#time').html());
+//            Cookies.set('screen_size', $(window).width());
+//            $.cookie('screen_size', $(window).width());
+//            document.cookie = "screen_size="+$(window).width();
+            
         });
 
         $(window).resize(function () {
+            
             resize_elements();
+//            Cookies.set('screen_size', $(window).width());
+//            $.cookie('screen_size', $(window).width());
+
+//            document.cookie = "screen_size="+$(window).width();         
         });
 
         $('#button_timer').click(function (e) {
@@ -275,7 +287,7 @@
                 row_data.time_in_seconds = quiz_time_seconds;
                 data.push(row_data);
             });
-            console.log(JSON.stringify(data));
+//            console.log(JSON.stringify(data));
 
             $.ajax({
                 type: 'POST',

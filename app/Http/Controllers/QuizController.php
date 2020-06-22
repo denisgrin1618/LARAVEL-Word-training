@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Crypt;
 
 class QuizController extends Controller {
 
@@ -108,6 +110,9 @@ class QuizController extends Controller {
 
     public function show(Request $request, $id) {
 
+        
+        
+        
         $array_wrong_translations_id = [];
         if($request->only_wrong_translations == "yes"){
             $array_wrong_translations_id = \DB::table('quiz_history')

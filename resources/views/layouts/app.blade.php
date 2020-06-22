@@ -188,6 +188,11 @@
             });
 
 
+            $(document).ready(function () {
+                document.cookie = "screen_size="+$(window).width();
+            });
+            
+
         </script>
 
     </body>

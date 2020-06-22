@@ -81,10 +81,6 @@ class StatisticsController extends Controller {
         }
         
         
-        
-        
-        
-        
         return true;
     }
      

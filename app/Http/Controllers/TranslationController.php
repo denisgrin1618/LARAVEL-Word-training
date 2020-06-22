@@ -22,10 +22,13 @@ class TranslationController extends Controller {
         $this->middleware('auth');
     }
 
-    public function show() {
+    public function show(Request $request) {
         $languages = Language::all();
 
-        $translates = Translation::where('user_id', Auth::user()->id)->paginate(25);
+        $screen_size    = $request->cookie('screen_size');
+        $paginate_side  = $screen_size > 510 ? 2 : 0;
+                
+        $translates = Translation::where('user_id', Auth::user()->id)->paginate(25)->onEachSide($paginate_side);
 
 //        dd($translates);
         return view('translation.show')
@@ -33,8 +36,7 @@ class TranslationController extends Controller {
                         ->with('translates', $translates)
                         ->with('search_input', ['language1' => 'en']);
     }
-
-     
+ 
     public function add(Request $request) {
 
         $user = Auth::user();
@@ -89,7 +91,6 @@ class TranslationController extends Controller {
 
     public function edit(Request $request) {
 
-
         try {
 
             $word1 = Word::findOrFail($request->post('translate_word1_id'));
@@ -133,7 +134,6 @@ class TranslationController extends Controller {
     }
 
     public function search(Request $request) {
-
 
         $word1 = $request->word1;
         $word2 = $request->word2;
@@ -180,6 +180,9 @@ class TranslationController extends Controller {
                         ->with('search_input', $request->input());
     }
 
+    
+    
+    
     public function import(Request $request, $spreadsheet_id=0) {
         
         if(empty($spreadsheet_id)){
@@ -195,8 +198,6 @@ class TranslationController extends Controller {
         
     }
     
-
-    
     public function importProgess() {
 //        $import_progress = session('import_progress', 100); 
         
@@ -209,7 +210,6 @@ class TranslationController extends Controller {
         
         return response()->json($percent_progress);
     }
-
 
     public function importPost(Request $request) {
 //        dd($request);
