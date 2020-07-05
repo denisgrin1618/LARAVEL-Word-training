@@ -4,9 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/resources/views/layouts/app.blade.php</file>
-            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/.env</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/resources/js/app.js</file>
             <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/resources/views/translation/import.blade.php</file>
-            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/app/Http/Controllers/TranslationController.php</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/resources/js/components/ExampleComponent.vue</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/webpack.mix.js</file>
+            <file>file:/home/denis/Documents/Projects/LARAVEL-Word-training/resources/js/components/Navbar.vue</file>
         </group>
     </open-files>
 </project-private>

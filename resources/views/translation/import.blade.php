@@ -48,10 +48,14 @@
     <br>
     <br>
     <br>
+    
+    
 
 </div>
 
-<script type="text/javascript" defer>
+<example-component></example-component>
+
+<!--<script type="text/javascript" defer>
 
     $(function ()
     {
@@ -165,5 +169,5 @@
         });
     });
 
-</script>
+</script>-->
 @endsection

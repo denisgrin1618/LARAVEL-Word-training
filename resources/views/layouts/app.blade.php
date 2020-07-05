@@ -10,14 +10,14 @@
         <title>{{ config('app.name', 'Word training') }}</title>
 
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" ></script>
+        <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="{{ asset('js/jquery-3.3.1.js') }}" ></script>
         <script src="{{ asset('js/jquery.textareaAutoResize.js') }}" ></script>
 
 
         <link rel="shortcut icon" href="{{ asset('/img/logo_page.png') }}" type="image/png">
 
-        <!-- Fonts 
+        <!-- Fonts
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
         -->
@@ -29,15 +29,16 @@
     <body >
         <div id="app">
 
-            <nav class="shadow  navbar navbar-expand-md navbar-light  " style="background: #4ebdad" >
+
+<!--            <nav class="shadow  navbar navbar-expand-md navbar-light  " style="background: #4ebdad" >
                 <button  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <a class="navbar-brand mt-1" href="{{ route('quiz.start') }}"><img src="{{ asset('/img/logo_sm.png') }}" ></a>
 
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                    
-                    
+
+
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
                         <li class="nav-item li-local d-none invisible">
@@ -49,9 +50,9 @@
                                         <a class="a-local btn bt-grey-silver-hover border border-secondary rounded-right {{ Cookie::get('locale') == 'uk' ? 'bt-grey-silver text-white' : '' }} " href="{{ route('locale.setlocale', ['locale' => 'uk']) }}">UK</a>
                                     </div>
                                 </div>
-                            
+
                         </li>
-                        
+
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{ route('translation.show') }}"><img class='mr-2 img-icon d-none invisible' src="{{ asset('/img/icons/book.svg') }}" width="20" height="20">@lang('app_strings.vocabulary')</a>
                         </li>
@@ -65,8 +66,8 @@
                             <a class="nav-link text-white" href="{{ route('statistics.show') }}"><img class='mr-2 img-icon d-none invisible' src="{{ asset('/img/icons/graph-up.svg') }}" width="20" height="20">@lang('app_strings.statistic')</a>
                         </li>
                     </ul>
-                    
-                    
+
+
 
 
                     <ul class="navbar-nav ml-auto">
@@ -97,7 +98,7 @@
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-<!--                                    {{ __('Logout') }}-->
+
                                     @lang('app_strings.logout')
                                 </a>
 
@@ -118,16 +119,44 @@
                         @endguest
                     </ul>
 
+
+
                 </div>
 
 
-            </nav>
+            </nav>-->
+
+<nav-bar
+    quiz_start  = "{{route('quiz.start')}}"
+    img_logo_sm = "{{asset('/img/logo_sm.png')}}"
+    locale = "{{Cookie::get('locale')}}"
+    translation_show = "{{route('translation.show')}}"
+    translation_import = "{{ route('translation.import') }}"
+    quiz_show_all = "{{ route('quiz.show_all') }}"
+    statistics_show = "{{ route('statistics.show') }}"
+    img_icons_book = "{{ asset('/img/icons/book.svg') }}"
+    img_icons_download = "{{ asset('/img/icons/download.svg') }}"
+    img_icons_clock = "{{ asset('/img/icons/clock.svg') }}"
+    img_icons_graph_up = "{{ asset('/img/icons/graph-up.svg') }}"
+    app_strings_vocabulary = "@lang('app_strings.vocabulary')"
+    app_strings_import = "@lang('app_strings.import')"
+    app_strings_quiz = "@lang('app_strings.quiz')"
+    app_strings_statistic = "@lang('app_strings.statistic')"
+    locale_setlocale_ru = "{{ route('locale.setlocale', ['locale' => 'ru']) }}"
+    locale_setlocale_en = "{{ route('locale.setlocale', ['locale' => 'en']) }}"
+    locale_setlocale_uk = "{{ route('locale.setlocale', ['locale' => 'uk']) }}"
+
+>
+
+</nav-bar>
             <div class="menu-overlay"></div>
 
 
             <main class="py-4">
-                @yield('content')   
+                @yield('content')
             </main>
+
+
         </div>
 
         <br>
@@ -150,8 +179,8 @@
         </footer>
 
 
-        <script type="text/javascript" defer>
-//        
+        <!-- <script type="text/javascript" defer>
+
             $('[data-toggle="collapse"]').on('click', function () {
                 $navMenuCont = $($(this).data('target'));
 
@@ -191,9 +220,9 @@
             $(document).ready(function () {
                 document.cookie = "screen_size="+$(window).width();
             });
-            
 
-        </script>
+
+        </script> -->
 
     </body>
 </html>
