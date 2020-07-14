@@ -19,9 +19,9 @@
 
             <div class="input-group mb-3 dropdown-item  m-0 p-0 ">
               <div class="input-group-prepend " >
-                <a :class="[a-local, btn, bt-grey-silver-hover, border, border-secondary ,  locale == 'ru' ? 'bt-grey-silver text-white' : ''   ]"                   :href="locale_setlocale_ru">RU</a>
-                <a :class="[a-local, btn, bt-grey-silver-hover, border, border-secondary ,  locale == 'en' || locale == null ? 'bt-grey-silver text-white' : ''   ]" :href="locale_setlocale_en">EN</a>
-                <a :class="[a-local, btn, bt-grey-silver-hover, border, border-secondary, rounded-right ,  locale == 'uk' ? 'bt-grey-silver text-white' : ''   ]"     :href="locale_setlocale_uk">UK</a>
+                <a :class="['a-local btn bt-grey-silver-hover border border-secondary' ,  locale == 'ru' ? 'bt-grey-silver text-white' : ''   ]"                   :href="locale_setlocale_ru">RU</a>
+                <a :class="['a-local btn bt-grey-silver-hover border border-secondary' ,  locale == 'en' || locale == null ? 'bt-grey-silver text-white' : ''   ]" :href="locale_setlocale_en">EN</a>
+                <a :class="['a-local btn bt-grey-silver-hover border border-secondary rounded-right' ,  locale == 'uk' ? 'bt-grey-silver text-white' : ''   ]"     :href="locale_setlocale_uk">UK</a>
               </div>
             </div>
 
@@ -58,6 +58,8 @@
 </template>
 
 <script>
+
+import $ from 'jquery'
 export default {
 
   props: ['quiz_start',
@@ -87,14 +89,20 @@ export default {
 
   methods:{
     data_toggle_click: function (event) {
-      // navMenuCont = $($(this).data('target'));
+      // var navMenuCont = $($(this).data('target'));
 
-      navMenuCont = event.target.data('target');
+      // console.log( event.target);
+
+      // $navMenuCont = event.target.data('target');
+
+
+      var navMenuCont = $('#navbarTogglerDemo03');
         if (navMenuCont.attr('id') == 'navbarTogglerDemo03') {
             navMenuCont.animate({
                 'width': 'toggle'
             }, 350);
             $(".menu-overlay").fadeIn(500);
+              console.log('menu-overlay -> ' +  $(".menu-overlay").html());
 
             navMenuCont.find('.nav-link')
                     .not('.a-local')
@@ -134,7 +142,7 @@ export default {
 
   </script>
 
-<style >
+<style scoped>
   .menu-overlay {
       display: none;
       background-color: #000;
@@ -146,6 +154,6 @@ export default {
       position: fixed;
       right: 0;
       top: 0;
-      z-index: 49;
+      z-index: 59;
   }
 </style>
